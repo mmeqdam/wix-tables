@@ -13,6 +13,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
+import {MultiSelectModule} from 'primeng/multiselect'
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ButtonModule } from 'primeng/button';
     ProgressSpinnerModule,
     InputTextareaModule,
     TooltipModule,
-    ButtonModule
+    ButtonModule,
+    MultiSelectModule
 
   ],
   providers: [],

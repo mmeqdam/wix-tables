@@ -3,6 +3,11 @@ import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { ApiService } from 'src/services/api.service';
 
+interface column{
+  value:string,
+  header:string
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +16,43 @@ import { ApiService } from 'src/services/api.service';
 export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = false;
-  projects:Project[] = [];
+  projects:Project[] = [{}];
+  selectedColumns:column[] =
+  [
+    {value:'title',header:'اسم المشروع'},
+    {value:'title1',header:'رقم المشروع'},
+    {value:'teacher',header:'المعلم'},
+    {value:'class',header:'الصف'},
+    {value:'startDate',header:'تاريخ البدء'},
+    {value:'endDate',header:'تاريخ الأنتهاء'},
+    {value:'date',header:'تاريخ العرض'},
+    {value:'time',header:'وقت العرض'},
+    {value:'progression_percentage',header:'نسبة الأنجاز'},
+    {value:'notes',header:'ملاحظات'},
+    {value:'presentation_clarity',header:'وضوح العرض'},
+    {value:'work_quality',header:'جوده العمل'},
+    {value:'companionship',header:'الشراكة والتعاون'},
+    {value:'rating',header:'العلامة النهائية'},
+  ]
+  allColumns:column[] =
+  [
+    {value:'title',header:'اسم المشروع'},
+    {value:'title1',header:'رقم المشروع'},
+    {value:'summary',header:'ملخص المشروع'},
+    {value:'school',header:'المدرسة'},
+    {value:'teacher',header:'المعلم'},
+    {value:'class',header:'الصف'},
+    {value:'startDate',header:'تاريه البدء'},
+    {value:'endDate',header:'تاريخ الأنتهاء'},
+    {value:'date',header:'تاريخ العرض'},
+    {value:'time',header:'وقت العرض'},
+    {value:'progression_percentage',header:'نسبة الأنجاز'},
+    {value:'notes',header:'ملاحظات'},
+    {value:'presentation_clarity',header:'وضوح العرض'},
+    {value:'work_quality',header:'جودة العمل'},
+    {value:'companionship',header:'الشراكة والتعاون'},
+    {value:'rating',header:'العلامة النهائية'}
+  ]
   roles:any = "Preview User";
   constructor(private api:ApiService){}
   public Log = console.log;
@@ -21,7 +62,9 @@ export class AppComponent implements OnInit{
     this.postMessage({action:'getprojects'});
     this.postMessage({action:'getroles'})
   }
-
+  IsSelected(col:string):boolean{
+    return this.selectedColumns.some(x => x.value == col);
+  }
   filter(text:Event,table:Table){
     let inp = text.target as HTMLInputElement;
     table.filterGlobal(inp.value , 'contains')

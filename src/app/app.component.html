@@ -8,132 +8,136 @@
     <p-table
     #dt
     [value]="projects"
+    [columns]="selectedColumns"
     [globalFilterFields]="['title','title1','summary','school','teacher','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
     dataKey="title1"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
     [scrollable]="true"
+    scrollHeight="400px"
     [rowHover]="true"
     [rows]="5"
     class="bg-transparent"
     [tableStyle]="{'min-width':'50rem','background-color':'transparent'}"
+    [styleClass]="'p-datatable-sm p-datatable-striped'"
     [paginator]="true"
+    [columnResizeMode]="''"
     (onEditComplete)="Edited($event)"
     [filterLocale]="'ar'"
     >
     <ng-template pTemplate="caption">
-      <div class="d-flex align-items-center gap-2 justify-content-end">
-        <!-- <h4 class="px-3 me-5">{{roles | json}}</h4> -->
-         <div class="d-flex justify-content-center align-items-center gap-2">
-           <p-button severity="success" [icon]="'pi pi-save'" [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
-           <p-button  [icon]="'pi pi-plus'" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
-         </div>
+      <div class="d-flex align-items-center gap-2 justify-content-between">
+        <p-multiSelect [options]="allColumns" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0} اعمده محدده" [style]="{'min-width': '300px'}" [minlength]="3"  placeholder="اختيار الأعمدة"></p-multiSelect>
+        <div class="d-flex justify-content-center align-items-center gap-2">
+        <p-button styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
           </span>
+        </div>
       </div>
     </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pFrozenColumn>
+          <th *ngIf="IsSelected('title')" pFrozenColumn>
             <div class="flex align-items-center">
               أسم المشروع
                 <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th>
+          <th *ngIf="IsSelected('title1')">
             <div class="flex align-items-center">
               رقم المشروع
                 <p-columnFilter type="text" field="title1" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th>
+          <th *ngIf="IsSelected('summary')">
             <div class="flex align-items-center">
               تلخيص المشروع
               <p-columnFilter type="text" field="summary" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th>
+          <th *ngIf="IsSelected('school')">
             <div class="flex align-items-center">
               المدرسه
               <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th>
+          <th *ngIf="IsSelected('teacher')">
             <div class="flex align-items-center">
               المشرف
                 <p-columnFilter type="text" field="teacher" display="menu"></p-columnFilter>
             </div>
         </th>
-        <th>
+        <th *ngIf="IsSelected('class')">
           <div class="flex align-items-center">
             الصف
               <p-columnFilter type="numeric" field="class" display="menu"></p-columnFilter>
           </div>
       </th>
-        <th>
+        <th *ngIf="IsSelected('startDate')">
           <div class="flex align-items-center">
             تاريخ البدء
               <p-columnFilter type="text" field="startDate" display="menu"></p-columnFilter>
           </div>
       </th>
-      <th>
+      <th *ngIf="IsSelected('endDate')">
         <div class="flex align-items-center">
           تاريخ النهايه
             <p-columnFilter type="text" field="endDate" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('date')">
         <div class="flex align-items-center">
           تاريخ العرض
             <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('time')">
         <div class="flex align-items-center">
           وقت العرض
             <p-columnFilter type="text" field="time" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('progression_percentage')">
         <div class="flex align-items-center">
           نسبة الأنجاز
           <p-columnFilter type="text" field="progression_percentage" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('notes')">
         <div class="flex align-items-center">
           ملاحظات
           <p-columnFilter type="numeric" field="notes" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('presentation_clarity')">
         <div class="flex align-items-center">
           وضوح العرض
           <p-columnFilter type="numeric" field="presentation_clarity" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('work_quality')">
         <div class="flex align-items-center">
           جودة العمل
           <p-columnFilter type="numeric" field="work_quality" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('companionship')">
         <div class="flex align-items-center">
           الشراكة والتعاون
           <p-columnFilter type="numeric" field="companionship" display="menu"></p-columnFilter>
         </div>
     </th>
-      <th>
+      <th *ngIf="IsSelected('rating')">
         <div class="flex align-items-center">
           العلامة النهائية
           <p-columnFilter type="numeric" field="rating" display="menu"></p-columnFilter>
         </div>
     </th>
     <th>
-      <div class="d-flex justify-content-center">
+      <div *ngIf="selectedColumns.length != 0" class="d-flex justify-content-center px-1" style="width: fit-content;">
         الأوامر
       </div>
     </th>
@@ -142,7 +146,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-product let-editing="editing">
         <tr>
-          <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title"  pEditableColumnField="title">
+          <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title" *ngIf="IsSelected('title')"  pEditableColumnField="title">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.title" />
@@ -152,7 +156,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title1" pEditableColumnField="title1">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title1" *ngIf="IsSelected('title1')" pEditableColumnField="title1">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.title1" required />
@@ -162,7 +166,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.summary" pEditableColumnField="summary">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.summary" *ngIf="IsSelected('summary')" pEditableColumnField="summary">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <textarea pInputTextarea [autoResize]="false"  [(ngModel)]="product.summary" required ></textarea>
@@ -175,7 +179,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" pEditableColumnField="school">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" *ngIf="IsSelected('school')" pEditableColumnField="school">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.school" required />
@@ -185,7 +189,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacher" pEditableColumnField="teacher">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacher" *ngIf="IsSelected('teacher')" pEditableColumnField="teacher">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.teacher" required />
@@ -195,7 +199,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" pEditableColumnField="class">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input type="number" pInputText [(ngModel)]="product.class" />
@@ -205,7 +209,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" pEditableColumnField="startDate">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" *ngIf="IsSelected('startDate')" pEditableColumnField="startDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.startDate" />
@@ -216,7 +220,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" pEditableColumnField="endDate">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" *ngIf="IsSelected('endDate')" pEditableColumnField="endDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.endDate" />
@@ -227,7 +231,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" pEditableColumnField="date">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" *ngIf="IsSelected('date')" pEditableColumnField="date">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="text" [(ngModel)]="product.date" />
@@ -238,7 +242,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.time" pEditableColumnField="time">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.time" *ngIf="IsSelected('time')" pEditableColumnField="time">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="time" [(ngModel)]="product.time" />
@@ -248,7 +252,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" pEditableColumnField="progression_percentage">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" *ngIf="IsSelected('progression_percentage')" pEditableColumnField="progression_percentage">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.progression_percentage" />
@@ -258,7 +262,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" pEditableColumnField="notes">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.notes" />
@@ -268,7 +272,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" pEditableColumnField="presentation_clarity">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" *ngIf="IsSelected('presentation_clarity')" pEditableColumnField="presentation_clarity">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.presentation_clarity" />
@@ -278,7 +282,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" pEditableColumnField="work_quality">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" *ngIf="IsSelected('work_quality')" pEditableColumnField="work_quality">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.work_quality" />
@@ -288,7 +292,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" pEditableColumnField="companionship">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" *ngIf="IsSelected('companionship')" pEditableColumnField="companionship">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.companionship" />
@@ -298,7 +302,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" pEditableColumnField="rating">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" *ngIf="IsSelected('rating')" pEditableColumnField="rating">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input pInputText type="number" [(ngModel)]="product.rating" />
@@ -308,12 +312,18 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td>
-            <div class="d-flex justify-content-center"></div>
-            <p-button severity="danger" [icon]="'pi pi-trash'" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
+          <td *ngIf="selectedColumns.length != 0" >
+            <div class="d-flex justify-content-center px-1" style="width: fit-content;"></div>
+            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
           </td>
         </tr>
       </ng-template>
+      <ng-template pTemplate="paginatorright">
+          <p-button styleClass="rounded rounded-4" size="small" [icon]="'pi pi-plus'" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
+    </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <div class="mx-auto"></div>
+    </ng-template>
     </p-table>
   </div>
 </ng-template>
