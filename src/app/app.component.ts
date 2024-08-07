@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Table } from 'primeng/table';
+import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { ApiService } from 'src/services/api.service';
 
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   constructor(private api:ApiService){}
   public Log = console.log;
 
-
+  editedTitles:number[] = [];
   async ngOnInit() {
     this.postMessage({action:'getprojects'});
     this.postMessage({action:'getroles'})
@@ -26,6 +26,20 @@ export class AppComponent implements OnInit{
     let inp = text.target as HTMLInputElement;
     table.filterGlobal(inp.value , 'contains')
 
+  }
+  Delete(title1:number){
+    this.postMessage({action:'delete',data:title1})
+  }
+  Save(){
+    this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
+  }
+  Edited(event:TableEditCompleteEvent){
+    if(event?.index){
+      this.editedTitles.push(event.index);
+    }
+  }
+  AddEntry(){
+   this.postMessage({action:'add'})
   }
   postMessage(message:any){
     window.parent.postMessage(message,'*')
@@ -38,8 +52,6 @@ export class AppComponent implements OnInit{
       this.roles = message.roles;
     }
     if(message?.projects){
-      console.log(message.projects)
-      console.log('this project',this.projects)
       this.projects = message.projects;
       this.isLoading = false;
     }

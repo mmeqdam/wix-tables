@@ -8,7 +8,7 @@
     <p-table
     #dt
     [value]="projects"
-    [globalFilterFields]="['title','newField','class','startDate','endDate','date']"
+    [globalFilterFields]="['title','title1','summary','school','teacher','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
     dataKey="title1"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
@@ -18,12 +18,16 @@
     class="bg-transparent"
     [tableStyle]="{'min-width':'50rem','background-color':'transparent'}"
     [paginator]="true"
-    (onEditComplete)="Log($event)"
+    (onEditComplete)="Edited($event)"
     [filterLocale]="'ar'"
     >
     <ng-template pTemplate="caption">
       <div class="d-flex align-items-center justify-content-end">
-        <h4 class="px-3 me-5">{{roles | json}}</h4>
+        <!-- <h4 class="px-3 me-5">{{roles | json}}</h4> -->
+         <div class="d-flex justify-content-center align-items-center gap-2">
+           <p-button severity="success" icon="pi pi-save" [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
+           <p-button  icon="pi pi-plus" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
+         </div>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
@@ -38,10 +42,29 @@
                 <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
             </div>
         </th>
+        <tr>
           <th>
             <div class="flex align-items-center">
-              المعلم
-                <p-columnFilter type="text" field="newField" display="menu"></p-columnFilter>
+              رقم المشروع
+                <p-columnFilter type="text" field="title1" display="menu"></p-columnFilter>
+            </div>
+        </th>
+          <th>
+            <div class="flex align-items-center">
+              تلخيص المشروع
+              <p-columnFilter type="text" field="summary" display="menu"></p-columnFilter>
+            </div>
+        </th>
+          <th>
+            <div class="flex align-items-center">
+              المدرسه
+              <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
+            </div>
+        </th>
+          <th>
+            <div class="flex align-items-center">
+              المشرف
+                <p-columnFilter type="text" field="teacher" display="menu"></p-columnFilter>
             </div>
         </th>
         <th>
@@ -68,6 +91,48 @@
             <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
         </div>
     </th>
+      <th>
+        <div class="flex align-items-center">
+          وقت العرض
+            <p-columnFilter type="text" field="time" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          نسبة الأنجاز
+          <p-columnFilter type="text" field="progression_percentage" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          ملاحظات
+          <p-columnFilter type="numeric" field="notes" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          وضوح العرض
+          <p-columnFilter type="numeric" field="presentation_clarity" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          جودة العمل
+          <p-columnFilter type="numeric" field="work_quality" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          الشراكة والتعاون
+          <p-columnFilter type="numeric" field="companionship" display="menu"></p-columnFilter>
+        </div>
+    </th>
+      <th>
+        <div class="flex align-items-center">
+          العلامة النهائية
+          <p-columnFilter type="numeric" field="rating" display="menu"></p-columnFilter>
+        </div>
+    </th>
 
         </tr>
       </ng-template>
@@ -83,13 +148,43 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.newField" pEditableColumnField="newField">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title1" pEditableColumnField="title1">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="product.newField" required />
+                <input pInputText type="number" [(ngModel)]="product.title1" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.newField }}
+                {{ product.title1 }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.summary" pEditableColumnField="summary">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <textarea pInputTextarea  [(ngModel)]="product.summary" required ></textarea>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.summary }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" pEditableColumnField="school">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="product.school" required />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.school }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacher" pEditableColumnField="teacher">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="product.teacher" required />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.teacher }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -135,6 +230,79 @@
                 {{ product.date }}
               </ng-template>
             </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.time" pEditableColumnField="time">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="time" [(ngModel)]="product.time" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.time }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" pEditableColumnField="progression_percentage">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.progression_percentage" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.progression_percentage + '%' }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" pEditableColumnField="notes">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.notes" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.notes }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" pEditableColumnField="presentation_clarity">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.presentation_clarity" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.presentation_clarity + '%' }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" pEditableColumnField="work_quality">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.work_quality" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.work_quality + '%' }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" pEditableColumnField="companionship">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.companionship" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.companionship + '%' }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" pEditableColumnField="rating">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="product.rating" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.rating + '%' }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-button severity="error" icon="pi pi-trash" (onClick)="Delete(product.title1)"></p-button>
           </td>
         </tr>
       </ng-template>
