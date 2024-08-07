@@ -35,12 +35,8 @@ export class AppComponent implements OnInit{
     window.parent.postMessage({name:'test',age:25})
     window.postMessage({name:'test2',age:29})
   }
-  @HostListener('window:onmessage',['$event'])
-  RecievedMessage(event:MessageEvent){
-    console.log('RecievedMessage',event.data)
-  }
   @HostListener('window:message',['$event'])
   RecievedMessagetwo(event:MessageEvent){
-    console.log('RecievedMessagetwo',event.data)
+    console.log(event.data)
   }
 }
