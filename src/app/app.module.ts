@@ -12,6 +12,8 @@ import { CalendarModule } from 'primeng/calendar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
+import { ButtonModule } from 'primeng/button';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { TooltipModule } from 'primeng/tooltip';
     CalendarModule,
     ProgressSpinnerModule,
     InputTextareaModule,
-    TooltipModule
+    TooltipModule,
+    ButtonModule
 
   ],
   providers: [],
