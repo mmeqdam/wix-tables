@@ -18,11 +18,8 @@ export class AppComponent implements OnInit{
 
 
   async ngOnInit() {
-    this.api.GetProjects().subscribe(projects =>{
-      this.projects = projects;
-      this.isLoading = false;
-      this.postMessage({action:'getroles'})
-    })
+    this.postMessage({action:'getprojects'});
+    this.postMessage({action:'getroles'})
   }
 
   filter(text:Event,table:Table){
@@ -39,6 +36,11 @@ export class AppComponent implements OnInit{
 
     if(message.roles){
       this.roles = message.roles;
+    }
+    if(message?.projects){
+      console.log(message.projects)
+      this.projects = message.project;
+      this.isLoading = false;
     }
   }
 }
