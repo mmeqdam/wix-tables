@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {InputTextModule} from 'primeng/inputtext'
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import {ProgressSpinnerModule} from 'primeng/progressspinner'
 @NgModule({
   declarations: [
     AppComponent
@@ -23,6 +24,8 @@ import { CalendarModule } from 'primeng/calendar';
     InputTextModule,
     DropdownModule,
     CalendarModule,
+    ProgressSpinnerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

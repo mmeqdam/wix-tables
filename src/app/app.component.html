@@ -1,131 +1,138 @@
-<div class="">
-  <p-table
-  #dt
-  [value]="projects"
-  [globalFilterFields]="['title','newField','class','startDate','endDate','date']"
-  dataKey="title1"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [showCurrentPageReport]="true"
-  [scrollable]="true"
-  [rowHover]="true"
-  [rows]="5"
-  [tableStyle]="{'min-width':'50rem'}"
-  [paginator]="true"
-  (onEditComplete)="Log($event)"
-  [filterLocale]="'ar'"
-  >
-  <ng-template pTemplate="caption">
-    <div class="d-flex align-items-center justify-content-end">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
-        </span>
-    </div>
-  </ng-template>
-    <ng-template pTemplate="header">
-      <tr>
-        <th pFrozenColumn>
+<div *ngIf="isLoading;else mainContent" class="d-flex justify-content-center w-100 " style="margin-top: 30vh;">
+  <div class="card" style="background-color: unset !important; border: unset !important;">
+       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration="1s"></p-progressSpinner>
+   </div>
+</div>
+<ng-template #mainContent>
+  <div class="bg-transparent">
+    <p-table
+    #dt
+    [value]="projects"
+    [globalFilterFields]="['title','newField','class','startDate','endDate','date']"
+    dataKey="title1"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [scrollable]="true"
+    [rowHover]="true"
+    [rows]="5"
+    [tableStyle]="{'width':'100dvh','height':'100dvh'}"
+    [paginator]="true"
+    (onEditComplete)="Log($event)"
+    [filterLocale]="'ar'"
+    >
+    <ng-template pTemplate="caption">
+      <div class="d-flex align-items-center justify-content-end">
+          <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
+          </span>
+      </div>
+    </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pFrozenColumn>
+            <div class="flex align-items-center">
+              أسم المشروع
+                <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+            </div>
+        </th>
+          <th>
+            <div class="flex align-items-center">
+              المعلم
+                <p-columnFilter type="text" field="newField" display="menu"></p-columnFilter>
+            </div>
+        </th>
+        <th>
           <div class="flex align-items-center">
-            أسم المشروع
-              <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+            الصف
+              <p-columnFilter type="numeric" field="class" display="menu"></p-columnFilter>
           </div>
       </th>
         <th>
           <div class="flex align-items-center">
-            المعلم
-              <p-columnFilter type="text" field="newField" display="menu"></p-columnFilter>
+            تاريخ البدء
+              <p-columnFilter type="date" field="startDate" display="menu"></p-columnFilter>
           </div>
       </th>
       <th>
         <div class="flex align-items-center">
-          الصف
-            <p-columnFilter type="numeric" field="class" display="menu"></p-columnFilter>
+          تاريخ النهايه
+            <p-columnFilter type="date" field="endDate" display="menu"></p-columnFilter>
         </div>
     </th>
       <th>
         <div class="flex align-items-center">
-          تاريخ البدء
-            <p-columnFilter type="date" field="startDate" display="menu"></p-columnFilter>
+          تاريخ العرض
+            <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
         </div>
     </th>
-    <th>
-      <div class="flex align-items-center">
-        تاريخ النهايه
-          <p-columnFilter type="date" field="endDate" display="menu"></p-columnFilter>
-      </div>
-  </th>
-    <th>
-      <div class="flex align-items-center">
-        تاريخ العرض
-          <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
-      </div>
-  </th>
 
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product let-editing="editing">
-      <tr>
-        <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title"  pEditableColumnField="title">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.title" />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.title }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.newField" pEditableColumnField="newField">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.newField" required />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.newField }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" pEditableColumnField="class">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input type="number" pInputText [(ngModel)]="product.class" />
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.class }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" pEditableColumnField="startDate">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.startDate | date: 'yyyy-MM-dd'}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" pEditableColumnField="endDate">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.endDate | date: 'yyyy-MM-dd'}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" pEditableColumnField="date">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{ product.date | date: 'yyyy-MM-dd'}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product let-editing="editing">
+        <tr>
+          <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title"  pEditableColumnField="title">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="product.title" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.title }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.newField" pEditableColumnField="newField">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="product.newField" required />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.newField }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" pEditableColumnField="class">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="number" pInputText [(ngModel)]="product.class" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.class }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" pEditableColumnField="startDate">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.startDate | date: 'yyyy-MM-dd'}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" pEditableColumnField="endDate">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.endDate | date: 'yyyy-MM-dd'}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" pEditableColumnField="date">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ product.date | date: 'yyyy-MM-dd'}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</ng-template>
