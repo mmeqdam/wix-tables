@@ -14,8 +14,8 @@ export interface Project{
   time?:string,
   title?:string,
   title1?:number,
-  _createdDate?:Date,
+  _createdDate?:any,
   _id?:string,
   _owner?:string,
-  _updatedDate?:string
+  _updatedDate?:any
 }

@@ -39,6 +39,7 @@ export class AppComponent implements OnInit{
     }
     if(message?.projects){
       console.log(message.projects)
+      console.log('this project',this.projects)
       this.projects = message.project;
       this.isLoading = false;
     }
