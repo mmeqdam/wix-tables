@@ -10,7 +10,7 @@ import { ApiService } from 'src/services/api.service';
 })
 export class AppComponent implements OnInit{
   title = 'wix-tables';
-  isLoading:boolean = true;
+  isLoading:boolean = false;
   projects:Project[] = [];
   roles:any = "Preview User";
   constructor(private api:ApiService){}

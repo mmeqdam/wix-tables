@@ -22,11 +22,11 @@
     [filterLocale]="'ar'"
     >
     <ng-template pTemplate="caption">
-      <div class="d-flex align-items-center justify-content-end">
+      <div class="d-flex align-items-center gap-2 justify-content-end">
         <!-- <h4 class="px-3 me-5">{{roles | json}}</h4> -->
          <div class="d-flex justify-content-center align-items-center gap-2">
-           <p-button severity="success" icon="pi pi-save" [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
-           <p-button  icon="pi pi-plus" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
+           <p-button severity="success" [icon]="'pi pi-save'" [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
+           <p-button  [icon]="'pi pi-plus'" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
          </div>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
@@ -165,10 +165,13 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.summary" pEditableColumnField="summary">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <textarea pInputTextarea  [(ngModel)]="product.summary" required ></textarea>
+                <textarea pInputTextarea [autoResize]="false"  [(ngModel)]="product.summary" required ></textarea>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.summary }}
+                <p class="text-truncate" style="max-width: 150px;">
+
+                  {{ product.summary }}
+                </p>
               </ng-template>
             </p-cellEditor>
           </td>
@@ -307,7 +310,7 @@
           </td>
           <td>
             <div class="d-flex justify-content-center"></div>
-            <p-button severity="danger" icon="pi pi-trash" (onClick)="Delete(product.title1)"></p-button>
+            <p-button severity="danger" [icon]="'pi pi-trash'" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
           </td>
         </tr>
       </ng-template>
