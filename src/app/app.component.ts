@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
   projects:Project[] = [];
+  roles:any;
   constructor(private api:ApiService){}
   public Log = console.log;
 
@@ -20,10 +21,8 @@ export class AppComponent implements OnInit{
     this.api.GetProjects().subscribe(projects =>{
       this.projects = projects;
       this.isLoading = false;
+      this.postMessage({action:'getroles'})
     })
-    setInterval(() => {
-      this.postMessage();
-    }, 1000);
   }
 
   filter(text:Event,table:Table){
@@ -31,15 +30,15 @@ export class AppComponent implements OnInit{
     table.filterGlobal(inp.value , 'contains')
 
   }
-  postMessage(){
-    window.parent.postMessage({name:'test',age:25},'*')
-    window.parent.parent.postMessage({name:'e',age:19},'*')
-    window.parent.postMessage('testing1','*')
-    window.parent.parent.postMessage('testing3','*')
-    window.opener.postMessage('last test','*')
+  postMessage(message:any){
+    window.parent.postMessage(message,'*')
   }
   @HostListener('window:message',['$event'])
-  RecievedMessagetwo(event:MessageEvent){
-    console.log(event.data)
+  RecievedMessage(event:MessageEvent){
+    let message = event.data;
+
+    if(message.roles){
+      this.roles = message.roles;
+    }
   }
 }
