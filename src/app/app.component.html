@@ -23,7 +23,7 @@
     >
     <ng-template pTemplate="caption">
       <div class="d-flex align-items-center justify-content-end">
-        <h3>{{roles | json}}</h3>
+        <h4 class="px-3 me-5">{{roles | json}}</h4>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />

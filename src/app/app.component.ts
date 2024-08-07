@@ -12,7 +12,7 @@ export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
   projects:Project[] = [];
-  roles:any;
+  roles:any = "Preview User";
   constructor(private api:ApiService){}
   public Log = console.log;
 
