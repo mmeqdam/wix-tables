@@ -53,19 +53,19 @@
         <th>
           <div class="flex align-items-center">
             تاريخ البدء
-              <p-columnFilter type="date" field="startDate" display="menu"></p-columnFilter>
+              <p-columnFilter type="text" field="startDate" display="menu"></p-columnFilter>
           </div>
       </th>
       <th>
         <div class="flex align-items-center">
           تاريخ النهايه
-            <p-columnFilter type="date" field="endDate" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="endDate" display="menu"></p-columnFilter>
         </div>
     </th>
       <th>
         <div class="flex align-items-center">
           تاريخ العرض
-            <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+            <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
         </div>
     </th>
 
@@ -106,30 +106,33 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" pEditableColumnField="startDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar>
+                <input pInputText type="text" [(ngModel)]="product.startDate" />
+                <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.startDate | date: 'yyyy-MM-dd'}}
+                {{ product.startDate }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" pEditableColumnField="endDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar>
+                <input pInputText type="text" [(ngModel)]="product.endDate" />
+                <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.endDate | date: 'yyyy-MM-dd'}}
+                {{ product.endDate }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" pEditableColumnField="date">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar>
+                <input pInputText type="text" [(ngModel)]="product.date" />
+                <!-- <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.date | date: 'yyyy-MM-dd'}}
+                {{ product.date }}
               </ng-template>
             </p-cellEditor>
           </td>

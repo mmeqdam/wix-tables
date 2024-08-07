@@ -1,9 +1,21 @@
 export interface Project{
-title:string,
-title1:number,
-class:number,
-startDate:Date,
-endDate:Date,
-date:Date,
-newField:string
+  class?:number,
+  date?:string,
+  description?:string,
+  endDate?:string,
+  evaluationCriteria?:string,
+  materialsAndTools?:string,
+  newField?:string,
+  objectives?:string,
+  rating?:number,
+  startDate?:string,
+  steps?:string,
+  summary?:string,
+  time?:string,
+  title?:string,
+  title1?:number,
+  _createdDate?:Date,
+  _id?:string,
+  _owner?:string,
+  _updatedDate?:string
 }
