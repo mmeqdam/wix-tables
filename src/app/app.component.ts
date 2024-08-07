@@ -34,6 +34,7 @@ export class AppComponent implements OnInit{
   postMessage(){
     window.parent.postMessage({name:'test',age:25})
     window.postMessage({name:'test2',age:29})
+    postMessage({name:'test3',age:32})
   }
   @HostListener('window:message',['$event'])
   RecievedMessagetwo(event:MessageEvent){
