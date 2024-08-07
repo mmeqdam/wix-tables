@@ -32,11 +32,11 @@ export class AppComponent implements OnInit{
 
   }
   postMessage(){
-    window.parent.postMessage({name:'test',age:25})
-    window.parent.parent.postMessage({name:'e',age:19})
-    window.parent.postMessage('testing1')
-    window.parent.parent.postMessage('testing3')
-    window.opener.postMessage('last test')
+    window.parent.postMessage({name:'test',age:25},'*')
+    window.parent.parent.postMessage({name:'e',age:19},'*')
+    window.parent.postMessage('testing1','*')
+    window.parent.parent.postMessage('testing3','*')
+    window.opener.postMessage('last test','*')
   }
   @HostListener('window:message',['$event'])
   RecievedMessagetwo(event:MessageEvent){
