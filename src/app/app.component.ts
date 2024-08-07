@@ -20,8 +20,10 @@ export class AppComponent implements OnInit{
     this.api.GetProjects().subscribe(projects =>{
       this.projects = projects;
       this.isLoading = false;
-      this.postMessage();
     })
+    setInterval(() => {
+      this.postMessage();
+    }, 1000);
   }
 
   filter(text:Event,table:Table){
@@ -34,6 +36,18 @@ export class AppComponent implements OnInit{
   }
   @HostListener('window:onmessage',['$event'])
   RecievedMessage(event:MessageEvent){
-    console.log(event.data)
+    console.log('RecievedMessage',event.data)
+  }
+  @HostListener('window:message',['$event'])
+  RecievedMessagetwo(event:MessageEvent){
+    console.log('RecievedMessagetwo',event.data)
+  }
+  @HostListener('window.parent:message',['$event'])
+  RecievedMessagethree(event:MessageEvent){
+    console.log('RecievedMessagethree',event.data)
+  }
+  @HostListener('window.parent:onmessage',['$event'])
+  RecievedMessagefour(event:MessageEvent){
+    console.log('RecievedMessagefour',event.data)
   }
 }
