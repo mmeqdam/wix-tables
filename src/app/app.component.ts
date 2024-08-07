@@ -42,12 +42,4 @@ export class AppComponent implements OnInit{
   RecievedMessagetwo(event:MessageEvent){
     console.log('RecievedMessagetwo',event.data)
   }
-  @HostListener('window.parent:message',['$event'])
-  RecievedMessagethree(event:MessageEvent){
-    console.log('RecievedMessagethree',event.data)
-  }
-  @HostListener('window.parent:onmessage',['$event'])
-  RecievedMessagefour(event:MessageEvent){
-    console.log('RecievedMessagefour',event.data)
-  }
 }
