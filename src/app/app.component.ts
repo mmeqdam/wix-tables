@@ -19,6 +19,7 @@ export class AppComponent implements OnInit{
   isLoading:boolean = true;
   projects:Project[] = [];
   errorHappened:boolean = false;
+  allowedRoles = ['Schools','Students','Suber Admin','Teachers']
   selectedColumns:column[] =
   [
     {value:'title',header:'اسم المشروع'},
@@ -96,7 +97,7 @@ export class AppComponent implements OnInit{
     window.parent.postMessage(message,'*')
   }
   get isAdmin(){
-   return this.roles?.some(role => role?.name == 'Admin');
+   return this.roles?.some(role => this.allowedRoles.some(y => y == role?.title));
   }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){
