@@ -98,6 +98,11 @@ export class AppComponent implements OnInit{
   get isAdmin(){
    return this.roles?.some(role => role?.name == 'Admin');
   }
+  ColumnsChanged(){
+    if(this.selectedColumns.length == 0){
+      this.selectedColumns = [{value:'title',header:'اسم المشروع'}]
+    }
+  }
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
     let message = event.data;
