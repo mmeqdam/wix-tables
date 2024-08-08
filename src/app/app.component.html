@@ -27,7 +27,7 @@
     >
     <ng-template pTemplate="caption">
       <div class="d-flex align-items-center gap-2 justify-content-between">
-        <p-multiSelect [options]="allColumns" [(ngModel)]="selectedColumns" optionLabel="header"
+        <p-multiSelect [options]="allColumns" [pTooltip]="'الأعمدة المرئية'" [(ngModel)]="selectedColumns" optionLabel="header"
             selectedItemsLabel="{0} اعمده محدده" [style]="{'min-width': '300px'}" [minlength]="3"  placeholder="اختيار الأعمدة"></p-multiSelect>
         <h3 *ngIf="errorHappened" class="text-danger">ليش لديك صلاحيه لتنفيذ الأمر</h3>
         <div class="d-flex justify-content-center align-items-center gap-2">
