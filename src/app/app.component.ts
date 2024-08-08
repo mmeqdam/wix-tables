@@ -96,6 +96,7 @@ export class AppComponent implements OnInit{
 
     if(message.roles){
       this.roles = message.roles;
+      console.log(this.roles);
     }
     if(message?.projects){
       this.projects = message.projects;
