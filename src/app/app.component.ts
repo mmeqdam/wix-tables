@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
+import { Observable, share, throttleTime } from 'rxjs';
 import { Project } from 'src/Interfaces/project';
 import { ApiService } from 'src/services/api.service';
 
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
   projects:Project[] = [];
+  errorHappened:boolean = false;
   selectedColumns:column[] =
   [
     {value:'title',header:'اسم المشروع'},
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit{
   roles:any = "Preview User";
   constructor(private api:ApiService){}
   public Log = console.log;
-
+  turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
     this.postMessage({action:'getprojects'});
@@ -72,10 +74,12 @@ export class AppComponent implements OnInit{
   }
   Delete(title1:number){
     this.isLoading = true;
+
     this.postMessage({action:'delete',data:title1})
   }
   Save(){
     this.isLoading = true;
+
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
@@ -85,6 +89,7 @@ export class AppComponent implements OnInit{
   }
   AddEntry(){
    this.isLoading = true;
+
    this.postMessage({action:'add'})
   }
   postMessage(message:any){
@@ -98,9 +103,17 @@ export class AppComponent implements OnInit{
       this.roles = message.roles;
       console.log(this.roles);
     }
+    if(message == 'error'){
+      this.errorHappened = true;
+      setTimeout(() => {
+        this.errorHappened = false;
+      }, 1000);
+    }
     if(message?.projects){
       this.projects = message.projects;
       this.isLoading = false;
     }
   }
+
+
 }
