@@ -104,6 +104,7 @@ export class AppComponent implements OnInit{
       console.log(this.roles);
     }
     if(message == 'error'){
+      this.isLoading = false;
       this.errorHappened = true;
       setTimeout(() => {
         this.errorHappened = false;
