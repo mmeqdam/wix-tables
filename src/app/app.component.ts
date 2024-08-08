@@ -15,8 +15,8 @@ interface column{
 })
 export class AppComponent implements OnInit{
   title = 'wix-tables';
-  isLoading:boolean = false;
-  projects:Project[] = [{}];
+  isLoading:boolean = true;
+  projects:Project[] = [];
   selectedColumns:column[] =
   [
     {value:'title',header:'اسم المشروع'},
@@ -71,9 +71,11 @@ export class AppComponent implements OnInit{
 
   }
   Delete(title1:number){
+    this.isLoading = true;
     this.postMessage({action:'delete',data:title1})
   }
   Save(){
+    this.isLoading = true;
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
@@ -82,6 +84,7 @@ export class AppComponent implements OnInit{
     }
   }
   AddEntry(){
+   this.isLoading = true;
    this.postMessage({action:'add'})
   }
   postMessage(message:any){
