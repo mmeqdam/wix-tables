@@ -55,7 +55,7 @@ export class AppComponent implements OnInit{
     {value:'companionship',header:'الشراكة والتعاون'},
     {value:'rating',header:'العلامة النهائية'}
   ]
-  roles:any = "Preview User";
+  roles:any[] = [];
   constructor(private api:ApiService){}
   public Log = console.log;
   turningOff = false;
@@ -94,6 +94,9 @@ export class AppComponent implements OnInit{
   }
   postMessage(message:any){
     window.parent.postMessage(message,'*')
+  }
+  get isAdmin(){
+   return this.roles?.some(role => role?.name == 'Admin');
   }
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
