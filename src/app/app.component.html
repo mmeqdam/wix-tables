@@ -29,7 +29,7 @@
       <div class="d-flex align-items-center gap-2 justify-content-between">
         <p-multiSelect [options]="allColumns" [pTooltip]="'الأعمدة المرئية'" [(ngModel)]="selectedColumns" optionLabel="header"
             selectedItemsLabel="{0} اعمده محدده" [style]="{'min-width': '300px'}" (ngModelChange)="ColumnsChanged()"   placeholder="اختيار الأعمدة"></p-multiSelect>
-        <h3 *ngIf="errorHappened" class="text-danger">ليش لديك صلاحيه لتنفيذ الأمر</h3>
+        <h3 *ngIf="errorHappened" class="text-danger">ليس لديك صلاحيه لتنفيذ الأمر</h3>
         <div class="d-flex justify-content-center align-items-center gap-2">
         <p-button *ngIf="isAdmin" styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
           <span class="p-input-icon-left">
