@@ -98,12 +98,14 @@ export class AppComponent implements OnInit{
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
     let message = event.data;
+    console.log(message)
 
     if(message.roles){
       this.roles = message.roles;
       console.log(this.roles);
     }
     if(message == 'error'){
+      console.log('---- message is error ----')
       this.isLoading = false;
       this.errorHappened = true;
       setTimeout(() => {
