@@ -254,7 +254,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
+                <p-multiSelect [disabled]="isStudent" [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
