@@ -111,7 +111,7 @@
                   </div>
               </ng-template>
               <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionValue="_id" optionLabel="studentName">
+                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionLabel="studentName">
                       <ng-template let-option pTemplate="item">
                           <div class="inline-block vertical-align-middle">
                               <span class="ml-1 mt-1">{{ option.studentName }}</span>
@@ -254,7 +254,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect [options]="students" [appendTo]="'body'" optionValue="_id" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
+                <p-multiSelect [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
