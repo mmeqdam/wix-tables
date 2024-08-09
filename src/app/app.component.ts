@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   [
     {value:'title',header:'اسم المشروع'},
     {value:'title1',header:'رقم المشروع'},
-    {value:'teacherId',header:'المعلم'},
+    {value:'teacherid',header:'المعلم'},
     {value:'class',header:'الصف'},
     {value:'startDate',header:'تاريخ البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
     {value:'title1',header:'رقم المشروع'},
     {value:'summary',header:'ملخص المشروع'},
     {value:'school',header:'المدرسة'},
-    {value:'teacherId',header:'المعلم'},
+    {value:'teacherid',header:'المعلم'},
     {value:'class',header:'الصف'},
     {value:'startDate',header:'تاريه البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
@@ -105,8 +105,8 @@ export class AppComponent implements OnInit{
   get isTeacher(){
     return this.roles?.some(role => role?.title == 'Teachers')
   }
-  getTeacherName(id:string){
-    return this.teachers.find(x => x.teacherId == id)?.teacherName ?? '';
+  getTeacherName(id:any){
+    return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
   }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){

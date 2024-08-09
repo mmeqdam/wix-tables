@@ -9,7 +9,7 @@
     #dt
     [value]="projects"
     [columns]="selectedColumns"
-    [globalFilterFields]="['title','title1','summary','school','teacherId','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
+    [globalFilterFields]="['title','title1','summary','school','teacherid','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
     dataKey="title1"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
@@ -65,10 +65,10 @@
               <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th *ngIf="IsSelected('teacherId') && !isTeacher">
+          <th *ngIf="IsSelected('teacherid') && !isTeacher">
             <div class="flex align-items-center">
               المشرف
-              <p-columnFilter field="teacherId" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+              <p-columnFilter field="teacherid" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                 <ng-template pTemplate="header">
                     <div class="px-3 pt-3 pb-0">
                         <span class="font-bold">اختيار المشرف</span>
@@ -205,13 +205,13 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherId" *ngIf="IsSelected('teacherId') && !isTeacher" pEditableColumnField="teacherId">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherid" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherId"></p-dropdown>
+                <p-dropdown [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product.teacherId) }}
+                {{ getTeacherName(product.teacherid) }}
               </ng-template>
             </p-cellEditor>
           </td>
