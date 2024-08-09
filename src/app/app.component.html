@@ -234,7 +234,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" *ngIf="IsSelected('school') && !isSchool && !isTeacher" pEditableColumnField="school">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown [options]="schools" optionValue="schoolId" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
+                <p-dropdown [options]="schools" optionValue="_id" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{ getSchoolName(product.school) }}
