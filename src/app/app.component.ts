@@ -165,13 +165,10 @@ export class AppComponent implements OnInit{
     }
     if(message?.projects){
       this.projects = message.projects;
-      this.students = [];
-      this.projects.forEach(project =>{
-        this.students = this.students.concat(project.students);
-      })
-      this.students = Array.from(new Set(this.students));
-      console.warn('students',this.students);
       this.isLoading = false;
+    }
+    if(message?.students){
+      this.students = message.students;
     }
     if(message?.schools){
       this.schools = message.schools;
