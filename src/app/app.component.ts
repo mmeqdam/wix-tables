@@ -140,9 +140,9 @@ export class AppComponent implements OnInit{
   RemoveColumn(columnName:string,flag:boolean){
     if(flag){
       let indexall = this.allColumns.findIndex(x => x.value == columnName);
-      this.allColumns.splice(indexall,1);
+      this.allColumns = this.allColumns.splice(indexall,1);
       let index = this.selectedColumns.findIndex(x => x.value == columnName);
-      this.selectedColumns.splice(index,1);
+      this.selectedColumns = this.selectedColumns.splice(index,1);
     }
   }
 
