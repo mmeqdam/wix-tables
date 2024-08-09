@@ -121,8 +121,8 @@ export class AppComponent implements OnInit{
     return this.roles?.some(role => role?.title == 'Students');
   }
 
-  getStudentNames(studentIds:string[]):string{
-    return this.students?.filter(student => studentIds.some(y => y == student._id)).join(',') ?? '';
+  getStudentNames(students:any[]):string{
+    return students.map(x => x.studentName).join(',');
   }
   getTeacherName(id:any){
     return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
