@@ -312,7 +312,7 @@
                 <input [readonly]="!isAdmin" pInputText type="time" [(ngModel)]="product.time" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.time }}
+                {{ product.time.toString().substring(0,5) }}
               </ng-template>
             </p-cellEditor>
           </td>
