@@ -65,10 +65,25 @@
               <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th *ngIf="IsSelected('teacher')">
+          <th *ngIf="IsSelected('teacherId') && !isTeacher">
             <div class="flex align-items-center">
               المشرف
-                <p-columnFilter type="text" field="teacher" display="menu"></p-columnFilter>
+              <p-columnFilter field="teacherId" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                <ng-template pTemplate="header">
+                    <div class="px-3 pt-3 pb-0">
+                        <span class="font-bold">اختيار المشرف</span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [ngModel]="value" [options]="teachers" placeholder="Any" (onChange)="filter($event.value)" optionValue="teacherId" optionLabel="teacherName">
+                        <ng-template let-option pTemplate="item">
+                            <div class="inline-block vertical-align-middle">
+                                <span class="ml-1 mt-1">{{ option.teacherName }}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+            </p-columnFilter>
             </div>
         </th>
         <th *ngIf="IsSelected('class')">
@@ -190,13 +205,13 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacher" *ngIf="IsSelected('teacher')" pEditableColumnField="teacher">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherId" *ngIf="IsSelected('teacherId') && !isTeacher" pEditableColumnField="teacherId">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.teacher" required />
+                <p-dropdown [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherId"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.teacher }}
+                {{ getTeacherName(product.teacherId) }}
               </ng-template>
             </p-cellEditor>
           </td>

@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Observable, share, throttleTime } from 'rxjs';
 import { Project } from 'src/Interfaces/project';
+import { Teacher } from 'src/Interfaces/teacher';
 import { ApiService } from 'src/services/api.service';
 
 interface column{
@@ -19,12 +20,13 @@ export class AppComponent implements OnInit{
   isLoading:boolean = true;
   projects:Project[] = [];
   errorHappened:boolean = false;
+  teachers:Teacher[] = [];
   allowedRoles = ['Schools','Suber Admin','Teachers']
   selectedColumns:column[] =
   [
     {value:'title',header:'اسم المشروع'},
     {value:'title1',header:'رقم المشروع'},
-    {value:'teacher',header:'المعلم'},
+    {value:'teacherId',header:'المعلم'},
     {value:'class',header:'الصف'},
     {value:'startDate',header:'تاريخ البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
@@ -43,7 +45,7 @@ export class AppComponent implements OnInit{
     {value:'title1',header:'رقم المشروع'},
     {value:'summary',header:'ملخص المشروع'},
     {value:'school',header:'المدرسة'},
-    {value:'teacher',header:'المعلم'},
+    {value:'teacherId',header:'المعلم'},
     {value:'class',header:'الصف'},
     {value:'startDate',header:'تاريه البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
@@ -62,8 +64,9 @@ export class AppComponent implements OnInit{
   turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
-    this.postMessage({action:'getprojects'});
+    this.postMessage({action:'getteachers'})
     this.postMessage({action:'getroles'})
+    this.postMessage({action:'getprojects'});
   }
   IsSelected(col:string):boolean{
     return this.selectedColumns.some(x => x.value == col);
@@ -99,6 +102,12 @@ export class AppComponent implements OnInit{
   get isAdmin(){
    return this.roles?.some(role => this.allowedRoles.some(y => y == role?.title));
   }
+  get isTeacher(){
+    return this.roles?.some(role => role?.title == 'Teachers')
+  }
+  getTeacherName(id:string){
+    return this.teachers.find(x => x.teacherId == id)?.teacherName ?? '';
+  }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){
       this.selectedColumns = [{value:'title',header:'اسم المشروع'}]
@@ -111,7 +120,6 @@ export class AppComponent implements OnInit{
 
     if(message.roles){
       this.roles = message.roles;
-      console.log(this.roles);
     }
     if(message == 'error'){
       console.log('---- message is error ----')
@@ -124,6 +132,9 @@ export class AppComponent implements OnInit{
     if(message?.projects){
       this.projects = message.projects;
       this.isLoading = false;
+    }
+    if(message?.teachers){
+      this.teachers = message.teachers;
     }
   }
 
