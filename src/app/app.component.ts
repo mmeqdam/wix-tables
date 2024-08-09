@@ -169,6 +169,9 @@ export class AppComponent implements OnInit{
       console.warn('students',this.students);
       this.isLoading = false;
     }
+    if(message?.schools){
+      this.schools = message.schools;
+    }
     if(message?.teachers){
       console.log('teachers',message.teachers)
       this.teachers = message.teachers;
