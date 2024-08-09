@@ -169,6 +169,7 @@ export class AppComponent implements OnInit{
       this.projects.forEach(project =>{
         this.students = this.students.concat(project.students);
       })
+      this.students = Array.from(new Set(this.students));
       console.warn('students',this.students);
       this.isLoading = false;
     }
