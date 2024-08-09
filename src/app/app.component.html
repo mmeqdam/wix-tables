@@ -111,7 +111,7 @@
                   </div>
               </ng-template>
               <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionValue="_id" optionLabel="studentName">
+                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionValue="studentId" optionLabel="studentName">
                       <ng-template let-option pTemplate="item">
                           <div class="inline-block vertical-align-middle">
                               <span class="ml-1 mt-1">{{ option.studentName }}</span>
