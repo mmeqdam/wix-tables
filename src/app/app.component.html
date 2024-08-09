@@ -62,7 +62,22 @@
           <th *ngIf="IsSelected('school') && !isSchool && !isTeacher">
             <div class="flex align-items-center">
               المدرسه
-              <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
+              <p-columnFilter field="school" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                <ng-template pTemplate="header">
+                    <div class="px-3 pt-3 pb-0">
+                        <span class="font-bold">اختيار المدرسه</span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                    <p-multiSelect [ngModel]="value" [options]="schools" placeholder="Any" (onChange)="filter($event.value)" optionValue="_id" optionLabel="schoolName">
+                        <ng-template let-option pTemplate="item">
+                            <div class="inline-block vertical-align-middle">
+                                <span class="ml-1 mt-1">{{ option.schoolName }}</span>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
+                </ng-template>
+              </p-columnFilter>
             </div>
         </th>
           <th *ngIf="IsSelected('teacherid') && !isTeacher">
