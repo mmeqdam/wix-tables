@@ -73,6 +73,7 @@ export class AppComponent implements OnInit{
     this.postMessage({action:'getroles'})
     this.postMessage({action:'getprojects'});
     this.postMessage({action:'getschools'});
+    this.postMessage({action:'getstudents'});
     this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
     this.RemoveColumn('teacherid',(this.isTeacher));
   }
