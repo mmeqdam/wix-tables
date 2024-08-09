@@ -122,7 +122,7 @@ export class AppComponent implements OnInit{
   }
 
   getStudentNames(studentIds:string[]):string{
-    return this.students?.filter(student => studentIds.some(y => y == student.studentId)).join(',') ?? '';
+    return this.students?.filter(student => studentIds.some(y => y == student._id)).join(',') ?? '';
   }
   getTeacherName(id:any){
     return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
@@ -166,6 +166,7 @@ export class AppComponent implements OnInit{
       this.projects.forEach(project =>{
         this.students.concat(project.students);
       })
+      console.warn('students',this.students);
       this.isLoading = false;
     }
     if(message?.teachers){
