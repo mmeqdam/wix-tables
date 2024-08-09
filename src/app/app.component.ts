@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Observable, share, throttleTime } from 'rxjs';
 import { Project } from 'src/Interfaces/project';
+import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
 import { ApiService } from 'src/services/api.service';
 
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
   projects:Project[] = [];
+  students:any[] = [];
+  schools:School[] = [];
   errorHappened:boolean = false;
   teachers:Teacher[] = [];
   allowedRoles = ['Schools','Suber Admin','Teachers']
@@ -28,6 +31,7 @@ export class AppComponent implements OnInit{
     {value:'title1',header:'رقم المشروع'},
     {value:'teacherid',header:'المعلم'},
     {value:'class',header:'الصف'},
+    {value:'students',header:'الطلاب'},
     {value:'startDate',header:'تاريخ البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
     {value:'date',header:'تاريخ العرض'},
@@ -47,6 +51,7 @@ export class AppComponent implements OnInit{
     {value:'school',header:'المدرسة'},
     {value:'teacherid',header:'المعلم'},
     {value:'class',header:'الصف'},
+    {value:'students',header:'الطلاب'},
     {value:'startDate',header:'تاريه البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
     {value:'date',header:'تاريخ العرض'},
@@ -67,6 +72,9 @@ export class AppComponent implements OnInit{
     this.postMessage({action:'getteachers'})
     this.postMessage({action:'getroles'})
     this.postMessage({action:'getprojects'});
+    this.postMessage({action:'getschools'});
+    this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
+    this.RemoveColumn('teacherid',(this.isTeacher));
   }
   IsSelected(col:string):boolean{
     return this.selectedColumns.some(x => x.value == col);
@@ -103,7 +111,18 @@ export class AppComponent implements OnInit{
    return this.roles?.some(role => this.allowedRoles.some(y => y == role?.title));
   }
   get isTeacher(){
-    return this.roles?.some(role => role?.title == 'Teachers')
+    return this.roles?.some(role => role?.title == 'Teachers');
+  }
+
+  get isSchool(){
+    return this.roles?.some(role => role?.title == 'Schools');
+  }
+  get isStudent(){
+    return this.roles?.some(role => role?.title == 'Students');
+  }
+
+  getStudentNames(studentIds:string[]):string{
+    return this.students?.filter(student => studentIds.some(y => y == student.studentId)).join(',') ?? '';
   }
   getTeacherName(id:any){
     return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
@@ -113,6 +132,18 @@ export class AppComponent implements OnInit{
       this.selectedColumns = [{value:'title',header:'اسم المشروع'}]
     }
   }
+
+  RemoveColumn(columnName:string,flag:boolean){
+    if(flag){
+      let indexall = this.allColumns.findIndex(x => x.value == columnName);
+      this.allColumns.splice(indexall,1);
+      let index = this.selectedColumns.findIndex(x => x.value == columnName);
+      this.selectedColumns.splice(index,1);
+    }
+  }
+
+
+
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
     let message = event.data;
@@ -131,6 +162,10 @@ export class AppComponent implements OnInit{
     }
     if(message?.projects){
       this.projects = message.projects;
+      this.students = [];
+      this.projects.forEach(project =>{
+        this.students.concat(project.students);
+      })
       this.isLoading = false;
     }
     if(message?.teachers){

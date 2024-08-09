@@ -19,6 +19,7 @@ export interface Project{
   work_quality?:number,
   companionship?:number,
   progression_percentage?:number,
+  students?:any[],
   teacherId?:string,
   _createdDate?:any,
   _id?:string,

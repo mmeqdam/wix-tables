@@ -9,7 +9,7 @@
     #dt
     [value]="projects"
     [columns]="selectedColumns"
-    [globalFilterFields]="['title','title1','summary','school','teacherid','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
+    [globalFilterFields]="['title','title1','summary','school','teacherid','students','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','companionship','rating']"
     dataKey="title1"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [showCurrentPageReport]="true"
@@ -59,7 +59,7 @@
               <p-columnFilter type="text" field="summary" display="menu"></p-columnFilter>
             </div>
         </th>
-          <th *ngIf="IsSelected('school')">
+          <th *ngIf="IsSelected('school') && !isSchool && !isTeacher">
             <div class="flex align-items-center">
               المدرسه
               <p-columnFilter type="text" field="school" display="menu"></p-columnFilter>
@@ -86,6 +86,27 @@
             </p-columnFilter>
             </div>
         </th>
+        <th *ngIf="IsSelected('students')">
+          <div class="flex align-items-center">
+            الطلاب
+            <p-columnFilter field="students" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+              <ng-template pTemplate="header">
+                  <div class="px-3 pt-3 pb-0">
+                      <span class="font-bold">اختيار الطلاب</span>
+                  </div>
+              </ng-template>
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionValue="_id" optionLabel="studentName">
+                      <ng-template let-option pTemplate="item">
+                          <div class="inline-block vertical-align-middle">
+                              <span class="ml-1 mt-1">{{ option.studentName }}</span>
+                          </div>
+                      </ng-template>
+                  </p-multiSelect>
+              </ng-template>
+          </p-columnFilter>
+          </div>
+      </th>
         <th *ngIf="IsSelected('class')">
           <div class="flex align-items-center">
             الصف
@@ -195,10 +216,10 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" *ngIf="IsSelected('school')" pEditableColumnField="school">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" *ngIf="IsSelected('school') && !isSchool && !isTeacher" pEditableColumnField="school">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.school" required />
+                <p-dropdown [options]="schools" optionValue="schoolId" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product.school }}
@@ -212,6 +233,18 @@
               </ng-template>
               <ng-template pTemplate="output">
                 {{ getTeacherName(product.teacherid) }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-multiSelect [options]="students" [appendTo]="'body'" optionValue="_id" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <p class="text-truncate" style="max-width: 150px;">
+                  {{ getStudentNames(product.students) }}
+                </p>
               </ng-template>
             </p-cellEditor>
           </td>
