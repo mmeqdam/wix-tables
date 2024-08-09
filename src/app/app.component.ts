@@ -127,6 +127,9 @@ export class AppComponent implements OnInit{
   getTeacherName(id:any){
     return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
   }
+  getSchoolName(id:any){
+    return this.schools.find(x => x.schoolId == id)?.schoolName ?? 'معلم';
+  }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){
       this.selectedColumns = [{value:'title',header:'اسم المشروع'}]
