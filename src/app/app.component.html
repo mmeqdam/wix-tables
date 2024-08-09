@@ -237,7 +237,7 @@
                 <p-dropdown [options]="schools" optionValue="schoolId" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.school }}
+                {{ getSchoolName(product.school) }}
               </ng-template>
             </p-cellEditor>
           </td>
