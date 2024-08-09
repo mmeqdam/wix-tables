@@ -74,8 +74,6 @@ export class AppComponent implements OnInit{
     this.postMessage({action:'getprojects'});
     this.postMessage({action:'getschools'});
     this.postMessage({action:'getstudents'});
-    this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
-    this.RemoveColumn('teacherid',(this.isTeacher));
   }
   IsSelected(col:string):boolean{
     return this.selectedColumns.some(x => x.value == col);
@@ -156,6 +154,8 @@ export class AppComponent implements OnInit{
 
     if(message.roles){
       this.roles = message.roles;
+      this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
+      this.RemoveColumn('teacherid',(this.isTeacher));
     }
     if(message == 'error'){
       console.log('---- message is error ----')
