@@ -244,7 +244,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherid" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown [readonly]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
+                <p-dropdown [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{ getTeacherName(product.teacherid) }}
@@ -254,7 +254,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect appendTo="body" [disabled]="isStudent" [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
+                <p-multiSelect appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
