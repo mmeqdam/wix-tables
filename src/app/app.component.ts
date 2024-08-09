@@ -134,6 +134,7 @@ export class AppComponent implements OnInit{
       this.isLoading = false;
     }
     if(message?.teachers){
+      console.log('teachers',message.teachers)
       this.teachers = message.teachers;
     }
   }
