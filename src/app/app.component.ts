@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
   schools:School[] = [];
   errorHappened:boolean = false;
   teachers:Teacher[] = [];
-  allowedRoles = ['Schools','Suber Admin','Teachers']
+  allowedRoles = ['Schools','Suber Admin','Teachers','Admin','Owner']
   selectedColumns:column[] =
   [
     {value:'title',header:'اسم المشروع'},
