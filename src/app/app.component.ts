@@ -69,11 +69,7 @@ export class AppComponent implements OnInit{
   turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
-    this.postMessage({action:'getteachers'})
-    this.postMessage({action:'getroles'})
-    this.postMessage({action:'getprojects'});
-    this.postMessage({action:'getschools'});
-    this.postMessage({action:'getstudents'});
+
   }
   IsSelected(col:string):boolean{
     return this.selectedColumns.some(x => x.value == col);
@@ -163,6 +159,13 @@ export class AppComponent implements OnInit{
       setTimeout(() => {
         this.errorHappened = false;
       }, 1000);
+    }
+    if(message == 'loaded'){
+      this.postMessage({action:'getteachers'})
+      this.postMessage({action:'getroles'})
+      this.postMessage({action:'getprojects'});
+      this.postMessage({action:'getschools'});
+      this.postMessage({action:'getstudents'});
     }
     if(message?.projects){
       this.projects = message.projects;
