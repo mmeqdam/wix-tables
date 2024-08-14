@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   students:any[] = [];
   schools:School[] = [];
   errorHappened:boolean = false;
+  multipleroles:boolean = false;
   teachers:Teacher[] = [];
   allowedRoles = ['Schools','Suber Admin','Teachers','Admin','Owner']
   selectedColumns:column[] =
