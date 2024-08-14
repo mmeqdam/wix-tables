@@ -204,7 +204,7 @@
                 <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.title" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.title }}
+                {{ product?.title }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -214,7 +214,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.title1" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.title1 }}
+                {{ product?.title1 }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -226,7 +226,7 @@
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
 
-                  {{ product.summary }}
+                  {{ product?.summary }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -237,7 +237,7 @@
                 <p-dropdown appendTo="body" [options]="schools" optionValue="_id" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getSchoolName(product.school) }}
+                {{ getSchoolName(product?.school) }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -247,7 +247,7 @@
                 <p-dropdown [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product.teacherid) }}
+                {{ getTeacherName(product?.teacherid) }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -258,7 +258,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
-                  {{ getStudentNames(product.students) }}
+                  {{ getStudentNames(product?.students ?? []) }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -269,7 +269,7 @@
                 <input [readonly]="!isAdmin" type="number" pInputText [(ngModel)]="product.class" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.class }}
+                {{ product?.class }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -280,7 +280,7 @@
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.startDate }}
+                {{ product?.startDate }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -291,7 +291,7 @@
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.endDate }}
+                {{ product?.endDate }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -302,7 +302,7 @@
                 <!-- <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.date }}
+                {{ product?.date }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -312,7 +312,7 @@
                 <input [readonly]="!isAdmin" pInputText type="time" [(ngModel)]="product.time" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.time.toString().substring(0,5) }}
+                {{ product?.time?.toString()?.substring(0,5) }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -322,7 +322,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.progression_percentage" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.progression_percentage + '%' }}
+                {{ product?.progression_percentage + '%' }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -332,7 +332,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.notes" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.notes }}
+                {{ product?.notes }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -342,7 +342,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.presentation_clarity" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.presentation_clarity + '%' }}
+                {{ product?.presentation_clarity + '%' }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -352,7 +352,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.work_quality" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.work_quality + '%' }}
+                {{ product?.work_quality + '%' }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -362,7 +362,7 @@
                 <input  [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.companionship" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.companionship + '%' }}
+                {{ product?.companionship + '%' }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -372,7 +372,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.rating" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product.rating + '%' }}
+                {{ product?.rating + '%' }}
               </ng-template>
             </p-cellEditor>
           </td>

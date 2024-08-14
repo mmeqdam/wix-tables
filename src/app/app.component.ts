@@ -120,10 +120,10 @@ export class AppComponent implements OnInit{
     return students.map(x => x.studentName).join(',');
   }
   getTeacherName(id:any){
-    return this.teachers.find(x => x.teacherId == id)?.teacherName ?? 'معلم';
+    return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
   }
   getSchoolName(id:any){
-    return this.schools.find(x => x._id == id)?.schoolName ?? 'معلم';
+    return this.schools.find(x => x?._id == id)?.schoolName ?? 'مدرسه';
   }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){
