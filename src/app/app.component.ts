@@ -53,7 +53,7 @@ export class AppComponent implements OnInit{
     {value:'teacherid',header:'المعلم'},
     {value:'class',header:'الصف'},
     {value:'students',header:'الطلاب'},
-    {value:'startDate',header:'تاريه البدء'},
+    {value:'startDate',header:'تاريخ البدء'},
     {value:'endDate',header:'تاريخ الأنتهاء'},
     {value:'date',header:'تاريخ العرض'},
     {value:'time',header:'وقت العرض'},
