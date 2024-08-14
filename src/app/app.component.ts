@@ -71,13 +71,13 @@ export class AppComponent implements OnInit{
   turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
-    this.filterService.register('containsStudent',(value:any[],filter:any):boolean => {
+    this.filterService.register('containsStudent',(value:any[],filter:any[]):boolean => {
       console.log('val',value);
       console.log('filter',filter);
       if(filter === undefined || filter === null || filter?.length === 0){
           return true;
       }
-      return value.some(v => filter.includes(v));
+      return value.some(val => filter.find(x => x._id == val._id));
     })
 
   }
