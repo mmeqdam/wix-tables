@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FilterService } from 'primeng/api';
 import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Observable, share, throttleTime } from 'rxjs';
 import { Project } from 'src/Interfaces/project';
@@ -65,11 +66,19 @@ export class AppComponent implements OnInit{
     {value:'rating',header:'العلامة النهائية'}
   ]
   roles:any[] = [];
-  constructor(private api:ApiService){}
+  constructor(private filterService:FilterService){}
   public Log = console.log;
   turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
+    this.filterService.register('containsStudent',(value:any[],filter:any):boolean => {
+      console.log('val',value);
+      console.log('filter',filter);
+      if(filter === undefined || filter === null || filter?.length === 0){
+          return true;
+      }
+      return value.some(v => filter.includes(v));
+    })
 
   }
   IsSelected(col:string):boolean{

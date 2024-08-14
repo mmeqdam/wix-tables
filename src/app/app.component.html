@@ -105,7 +105,7 @@
         <th *ngIf="IsSelected('students')">
           <div class="flex align-items-center">
             الطلاب
-            <p-columnFilter field="students" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+            <p-columnFilter field="students" matchMode="containsStudent" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
               <ng-template pTemplate="header">
                   <div class="px-3 pt-3 pb-0">
                       <span class="font-bold">اختيار الطلاب</span>
