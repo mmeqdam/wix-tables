@@ -14,7 +14,7 @@ export class Project{
   date?:string = '';
   time?:string = '';
   school?:string = '';
-  notes?:number = 0;
+  notes?:string = '';
   presentation_clarity?:number = 0;
   work_quality?:number = 0;
   companionship?:number = 0;

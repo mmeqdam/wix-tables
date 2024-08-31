@@ -162,7 +162,7 @@
       <th *ngIf="IsSelected('notes')">
         <div class="flex align-items-center">
           ملاحظات
-          <p-columnFilter type="numeric" field="notes" display="menu"></p-columnFilter>
+          <p-columnFilter type="text" field="notes" display="menu"></p-columnFilter>
         </div>
     </th>
       <th *ngIf="IsSelected('presentation_clarity')">
@@ -330,10 +330,12 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.notes" />
+                <input [readonly]="!isAdmin" pInputText [(ngModel)]="product.notes" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.notes }}
+                <p class="text-truncate" style="max-width: 150px;">
+                  {{ product?.notes }}
+                </p>
               </ng-template>
             </p-cellEditor>
           </td>
