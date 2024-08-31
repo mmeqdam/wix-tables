@@ -66,6 +66,7 @@ export class AppComponent implements OnInit{
     {value:'rating',header:'العلامة النهائية'}
   ]
   roles:any[] = [];
+
   constructor(private filterService:FilterService){}
   public Log = console.log;
   turningOff = false;
