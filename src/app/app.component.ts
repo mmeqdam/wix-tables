@@ -41,7 +41,7 @@ export class AppComponent implements OnInit{
     {value:'progression_percentage',header:'نسبة الأنجاز'},
     {value:'notes',header:'ملاحظات'},
     {value:'presentation_clarity',header:'وضوح العرض'},
-    {value:'work_quality',header:'جوده العمل'},
+    {value:'work_quality',header:'جودة العمل'},
     {value:'companionship',header:'الشراكة والتعاون'},
     {value:'rating',header:'العلامة النهائية'},
   ]
