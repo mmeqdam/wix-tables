@@ -19,7 +19,7 @@ interface column{
 })
 export class AppComponent implements OnInit{
   title = 'wix-tables';
-  isLoading:boolean = true;
+  isLoading:boolean = false;
   projects:Project[] = [];
   students:any[] = [];
   schools:School[] = [];
@@ -72,6 +72,63 @@ export class AppComponent implements OnInit{
   turningOff = false;
   editedTitles:number[] = [];
   async ngOnInit() {
+
+    this.projects.push(
+      {
+        title: 'test',
+        description: 'Hello',
+        steps: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+      {
+        title: 'test'
+
+      },
+  )
     this.filterService.register('containsStudent',(value:any[],filter:any[]):boolean => {
       console.log('val',value);
       console.log('filter',filter);

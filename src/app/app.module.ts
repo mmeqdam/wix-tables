@@ -13,12 +13,14 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
-import {MultiSelectModule} from 'primeng/multiselect'
+import {MultiSelectModule} from 'primeng/multiselect';
+import { ProjectCardComponent } from './project-card/project-card.component'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProjectCardComponent
   ],
   imports: [
     BrowserModule,
