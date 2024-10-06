@@ -1,5 +1,5 @@
 <div *ngIf="isLoading;else mainContent" class="d-flex justify-content-center w-100 " style="margin-top: 30vh;">
-  <div class="card" style="background-color: unset !important; border: unset !important;">
+  <div class="card" style="background-color: unset !important; border: unset !important; ">
        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration="1s"></p-progressSpinner>
    </div>
 </div>
@@ -7,32 +7,29 @@
 <ng-template #mainContent>
 
   <div class="d-flex flex-row-reverse">
-    <div class="border border-5 border-danger-subtle">
+    <div class="border border-3 border-wahit">
 
       <app-project-card [project]="{
 
-        title:'اسم المشروع',
-        title1:'رقم المشروع',
-        summary:'تلخيص المشروع',
-        description:'وصف المشروع',
-        class:'الصف',
-        rating:'التقييم',
-        steps:'الخطوات',
-        objectives:'الاهداف',
-        evaluationCriteria:'نسبة التقييم',
-        materialsAndTools:'الادوات',
+title:'اسم المشروع',
+        notes:'رقم المشروع',
+        summary:'الطلاب ',
+       time:'الصف',
         startDate:'تاريخ البدء',
-        endDate:'تاريخ الأنتهاء',
-        date:'تاريخ',
-        time:'الوقت',
-        school:'المدرسة',
-        notes:'الملاحظات',
-        presentation_clarity:'جوده العرض',
-        work_quality:'جودة العمل',
-        companionship:'التعاون',
-        progression_percentage:'نسبه الأنجاز',
-        students:'الطلاب',
-        teacherId:'المعلم',
+
+        endDate:'تاريخ النهاية',
+
+
+        description:'تاريخ العرض',
+
+        objectives:'ملاحظات المعلم',
+        evaluationCriteria:'نسبة الانجاز',
+        materialsAndTools:'جودة العمل',
+        date:'الشراكة والتعاون ',
+        school:'الابداع',
+
+        steps:'الدرجة النهائية',
+        
         _createdDate:'',
         _id:'',
         _owner:'',

@@ -75,59 +75,99 @@ export class AppComponent implements OnInit{
 
     this.projects.push(
       {
-        title: 'test',
-        description: 'Hello',
-        steps: 'test'
+        title:' خزاع الالي',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+        description:'2154',
+
+        objectives:' جيد',
+        evaluationCriteria:'متوسط ',
+        materialsAndTools:'جيد ',
+        date:' متعاون ',
+        school:'ممبدع',
+
+        steps:'100',
+        
+        
 
       },
       {
-        title: 'test'
+        title:' خزاع الالي',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+        description:'2154',
+
+        objectives:' جيد',
+        evaluationCriteria:'متوسط ',
+        materialsAndTools:'جيد ',
+        date:' متعاون ',
+        school:'ممبدع',
+
+        steps:'100',
+        
+        
 
       },
       {
-        title: 'test'
+        title:' خزاع الالي',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+        description:'2154',
+
+        objectives:' جيد',
+        evaluationCriteria:'متوسط ',
+        materialsAndTools:'جيد ',
+        date:' متعاون ',
+        school:'ممبدع',
+
+        steps:'100',
+        
+        
+        
 
       },
       {
-        title: 'test'
+        title:' خزاع الالي',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+        description:'2154',
+
+        objectives:' جيد',
+        evaluationCriteria:'متوسط ',
+        materialsAndTools:'جيد ',
+        date:' متعاون ',
+        school:'ممبدع',
+
+        steps:'100',
+        
+          
 
       },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
-      {
-        title: 'test'
-
-      },
+      
   )
     this.filterService.register('containsStudent',(value:any[],filter:any[]):boolean => {
       console.log('val',value);
