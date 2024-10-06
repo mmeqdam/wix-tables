@@ -14,13 +14,16 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { ProjectCardComponent } from './project-card/project-card.component'
+import { ProjectCardComponent } from './project-card/project-card.component';
+import { ChunkPipe } from './pipes/chunk.pipe';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    ChunkPipe,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { ProjectCardComponent } from './project-card/project-card.component'
     InputTextareaModule,
     TooltipModule,
     ButtonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    PaginatorModule
 
   ],
   providers: [],

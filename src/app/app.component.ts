@@ -26,6 +26,8 @@ export class AppComponent implements OnInit{
   errorHappened:boolean = false;
   multipleroles:boolean = false;
   teachers:Teacher[] = [];
+  currentSlice = 0;
+  chunkAmount = 4;
   allowedRoles = ['Schools','Suber Admin','Teachers','Admin','Owner']
   selectedColumns:column[] =
   [
@@ -93,8 +95,8 @@ export class AppComponent implements OnInit{
         school:'ممبدع',
 
         steps:'100',
-        
-        
+
+
 
       },
       {
@@ -116,8 +118,8 @@ export class AppComponent implements OnInit{
         school:'ممبدع',
 
         steps:'100',
-        
-        
+
+
 
       },
       {
@@ -139,9 +141,9 @@ export class AppComponent implements OnInit{
         school:'ممبدع',
 
         steps:'100',
-        
-        
-        
+
+
+
 
       },
       {
@@ -163,11 +165,34 @@ export class AppComponent implements OnInit{
         school:'ممبدع',
 
         steps:'100',
-        
-          
+
+
 
       },
-      
+      {
+        title:'الكرسي المتحرك',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+        description:'2154',
+
+        objectives:' جيد',
+        evaluationCriteria:'متوسط ',
+        materialsAndTools:'جيد ',
+        date:' متعاون ',
+        school:'ممبدع',
+
+        steps:'100',
+
+
+
+      },
+
   )
     this.filterService.register('containsStudent',(value:any[],filter:any[]):boolean => {
       console.log('val',value);

@@ -8,5 +8,6 @@ import { Project } from 'src/Interfaces/project';
 })
 export class ProjectCardComponent {
   @Input() project!: Project | any;
+  @Input() width: number = 1;
 
 }
