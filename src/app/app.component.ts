@@ -69,7 +69,8 @@ export class AppComponent implements OnInit{
   ]
   roles:any[] = [];
 
-  constructor(private filterService:FilterService){}
+  constructor(private filterService:FilterService){
+  }
   public Log = console.log;
   turningOff = false;
   editedTitles:number[] = [];

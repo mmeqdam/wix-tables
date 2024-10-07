@@ -26,13 +26,13 @@
       }"></app-project-card>
     </div>
     <div class="col row justify-content-end gap-0 flex-nowrap m-0 p-0" style="scroll-snap-type: x mandatory;">
-      <app-project-card class="col-md-4 col-lg-3 col-6 p-0 m-0"  *ngFor="let project of projects | slice: (currentSlice*chunkAmount) : (currentSlice*chunkAmount)+chunkAmount" [project]="project"></app-project-card>
+      <app-project-card class="col p-0 m-0"  *ngFor="let project of projects | slice: (currentSlice*chunkAmount) : (currentSlice*chunkAmount)+chunkAmount" [project]="project"></app-project-card>
     </div>
   </div>
   <div class="d-flex justify-content-center">
 
 <div class="card flex justify-content-center">
-  <p-paginator (onPageChange)="currentSlice = $event.page ?? 0" [first]="0" [rows]="chunkAmount" [totalRecords]="projects.length" [rowsPerPageOptions]="[]"></p-paginator>
+  <p-paginator (onPageChange)="currentSlice = $event.page ?? 0;chunkAmount = $event.rows ?? 2" [first]="0" [rows]="chunkAmount" [totalRecords]="projects.length"  [rowsPerPageOptions]="[1,2,3,4,5,10,15,20,25]"></p-paginator>
 </div>
   </div>
 </ng-template>
