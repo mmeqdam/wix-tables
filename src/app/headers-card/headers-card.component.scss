@@ -1,0 +1,19 @@
+$lightness: 60;
+$sat: 90%;
+
+.main-cell{
+  scroll-snap-align:center;
+}
+.cell-borders span{
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+
+}
+
+.blue-bg{
+  background-color: hsl(195.06deg $sat $lightness);
+}
+.orange-bg{
+  background-color: hsl(27 $sat $lightness);
+}

@@ -2,13 +2,9 @@ export class Project{
   title?:string = '';
   title1?:number = 0;
   summary?:string = '';
-  description?:string = '';
   class?:number = 0;
   rating?:number = 0;
-  steps?:string = '';
-  objectives?:string = '';
   evaluationCriteria?:string = '';
-  materialsAndTools?:string = '';
   startDate?:string = '';
   endDate?:string = '';
   date?:string = '';

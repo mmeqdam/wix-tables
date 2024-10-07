@@ -6,6 +6,7 @@ import { Project } from 'src/Interfaces/project';
 import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
 import { ApiService } from 'src/services/api.service';
+import { HelperService } from 'src/services/helper.service';
 
 interface column{
   value:string,
@@ -18,6 +19,7 @@ interface column{
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
+
   title = 'wix-tables';
   isLoading:boolean = false;
   projects:Project[] = [];
@@ -69,7 +71,7 @@ export class AppComponent implements OnInit{
   ]
   roles:any[] = [];
 
-  constructor(private filterService:FilterService){
+  constructor(private filterService:FilterService,private helper:HelperService){
   }
   public Log = console.log;
   turningOff = false;
@@ -85,20 +87,9 @@ export class AppComponent implements OnInit{
         startDate:'2022',
 
         endDate:'2024 ',
-
-
-        description:'2154',
-
-        objectives:' جيد',
         evaluationCriteria:'متوسط ',
-        materialsAndTools:'جيد ',
         date:' متعاون ',
         school:'ممبدع',
-
-        steps:'100',
-
-
-
       },
       {
         title:' خزاع الالي',
@@ -110,38 +101,14 @@ export class AppComponent implements OnInit{
         endDate:'2024 ',
 
 
-        description:'2154',
 
-        objectives:' جيد',
+
+
         evaluationCriteria:'متوسط ',
-        materialsAndTools:'جيد ',
+
         date:' متعاون ',
         school:'ممبدع',
 
-        steps:'100',
-
-
-
-      },
-      {
-        title:' خزاع الالي',
-        notes:'5 ',
-        summary:'معاذ',
-       time:'7',
-        startDate:'2022',
-
-        endDate:'2024 ',
-
-
-        description:'2154',
-
-        objectives:' جيد',
-        evaluationCriteria:'متوسط ',
-        materialsAndTools:'جيد ',
-        date:' متعاون ',
-        school:'ممبدع',
-
-        steps:'100',
 
 
 
@@ -157,15 +124,39 @@ export class AppComponent implements OnInit{
         endDate:'2024 ',
 
 
-        description:'2154',
 
-        objectives:' جيد',
+
+
         evaluationCriteria:'متوسط ',
-        materialsAndTools:'جيد ',
+
         date:' متعاون ',
         school:'ممبدع',
 
-        steps:'100',
+
+
+
+
+
+      },
+      {
+        title:' خزاع الالي',
+        notes:'5 ',
+        summary:'معاذ',
+       time:'7',
+        startDate:'2022',
+
+        endDate:'2024 ',
+
+
+
+
+
+        evaluationCriteria:'متوسط ',
+
+        date:' متعاون ',
+        school:'ممبدع',
+
+
 
 
 
@@ -180,15 +171,15 @@ export class AppComponent implements OnInit{
         endDate:'2024 ',
 
 
-        description:'2154',
 
-        objectives:' جيد',
+
+
         evaluationCriteria:'متوسط ',
-        materialsAndTools:'جيد ',
+
         date:' متعاون ',
         school:'ممبدع',
 
-        steps:'100',
+
 
 
 
@@ -236,29 +227,7 @@ export class AppComponent implements OnInit{
   postMessage(message:any){
     window.parent.postMessage(message,'*')
   }
-  get isAdmin(){
-   return this.roles?.some(role => this.allowedRoles.some(y => y == role?.title));
-  }
-  get isTeacher(){
-    return this.roles?.some(role => role?.title == 'Teachers');
-  }
 
-  get isSchool(){
-    return this.roles?.some(role => role?.title == 'Schools');
-  }
-  get isStudent(){
-    return this.roles?.some(role => role?.title == 'Students');
-  }
-
-  getStudentNames(students:any[]):string{
-    return students.map(x => x.studentName).join(',');
-  }
-  getTeacherName(id:any){
-    return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
-  }
-  getSchoolName(id:any){
-    return this.schools.find(x => x?._id == id)?.schoolName ?? 'مدرسه';
-  }
   ColumnsChanged(){
     if(this.selectedColumns.length == 0){
       this.selectedColumns = [{value:'title',header:'اسم المشروع'}]
@@ -282,9 +251,7 @@ export class AppComponent implements OnInit{
     console.log(message)
 
     if(message.roles){
-      this.roles = message.roles;
-      this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
-      this.RemoveColumn('teacherid',(this.isTeacher));
+      this.helper.roles = message.roles;
     }
     if(message == 'error'){
       console.log('---- message is error ----')
@@ -306,14 +273,14 @@ export class AppComponent implements OnInit{
       this.isLoading = false;
     }
     if(message?.students){
-      this.students = message.students;
+      this.helper.students = message.students;
     }
     if(message?.schools){
-      this.schools = message.schools;
+      this.helper.schools = message.schools;
     }
     if(message?.teachers){
       console.log('teachers',message.teachers)
-      this.teachers = message.teachers;
+      this.helper.teachers = message.teachers;
     }
   }
 

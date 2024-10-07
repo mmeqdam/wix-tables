@@ -6,33 +6,41 @@
 
 <ng-template #mainContent>
 
-  <div class="row  m-0 p-0 flex-row-reverse gap-0">
-    <div class="col-md-2 m-0 p-0 col">
-      <app-project-card [project]="{
-
-        title:'اسم المشروع',
-        notes:'رقم المشروع',
-        summary:'الطلاب ',
-        time:'الصف',
-        startDate:'تاريخ البدء',
-        endDate:'تاريخ النهاية',
-        description:'تاريخ العرض',
-        objectives:'ملاحظات المعلم',
-        evaluationCriteria:'نسبة الانجاز',
-        materialsAndTools:'جودة العمل',
-        date:'الشراكة والتعاون ',
-        school:'الابداع',
-        steps:'الدرجة النهائية'
-      }"></app-project-card>
+    <div class="row  m-0 p-0 flex-row-reverse gap-0">
+      <div class="col-md-2 m-0 p-0 col">
+        <app-headers-card [project]="{
+          title:'اسم المشروع',
+          title1:'رقم المشروع',
+          summary:'تلخيص المشروع',
+          description:'وصف المشروع',
+          class:'الصف',
+          rating: 'التقييم',
+          steps: 'الخطوات',
+          objectives: 'الأهداف',
+          evaluationCriteria: 'اسس التقييم',
+          materialsAndTools: 'الادوات',
+          startDate: 'تاريخ البدء',
+          endDate: 'تاريخ الأنتهاء',
+          date: 'تاريخ',
+          time: 'الوقت',
+          school: 'المدرسة',
+          notes:'الملاحظات',
+          presentation_clarity: 'وضوح العرض',
+          work_quality: 'جودة العمل',
+          companionship: 'الشراكة والتعاون',
+          progression_percentage: 'نسبة الأنجاز',
+          students: 'الطلاب',
+          teacherId: 'المشرف'
+        }"></app-headers-card>
+      </div>
+      <div class="col row justify-content-end gap-0 flex-nowrap m-0 p-0" style="scroll-snap-type: x mandatory;">
+        <app-project-card class="col p-0 m-0"  *ngFor="let project of projects | slice: (currentSlice*chunkAmount) : (currentSlice*chunkAmount)+chunkAmount" [project]="project"></app-project-card>
+      </div>
     </div>
-    <div class="col row justify-content-end gap-0 flex-nowrap m-0 p-0" style="scroll-snap-type: x mandatory;">
-      <app-project-card class="col p-0 m-0"  *ngFor="let project of projects | slice: (currentSlice*chunkAmount) : (currentSlice*chunkAmount)+chunkAmount" [project]="project"></app-project-card>
-    </div>
-  </div>
-  <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
 
-<div class="card flex justify-content-center">
-  <p-paginator (onPageChange)="currentSlice = $event.page ?? 0;chunkAmount = $event.rows ?? 2" [first]="0" [rows]="chunkAmount" [totalRecords]="projects.length"  [rowsPerPageOptions]="[1,2,3,4,5,10,15,20,25]"></p-paginator>
-</div>
+  <div class="flex justify-content-center" style="transform: scale(0.8);">
+    <p-paginator  (onPageChange)="currentSlice = $event.page ?? 0;chunkAmount = $event.rows ?? 2" [first]="0" [rows]="chunkAmount" [totalRecords]="projects.length"  [rowsPerPageOptions]="[1,2,3,4,5,10,15,20,25]"></p-paginator>
   </div>
+    </div>
 </ng-template>

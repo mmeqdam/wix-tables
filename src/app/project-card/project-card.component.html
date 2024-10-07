@@ -1,26 +1,166 @@
-<div class="d-flex main-cell cell-borders m-0 p-0 text-nowrap flex-column flex-grow-1 text-center col-12"
+<div class="d-flex  main-cell  cell-borders m-0 p-0 text-nowrap flex-column flex-grow-1 text-center col-12"
  style="background-color: rgb(250, 250, 250);line-height: 2.4;margin-top: 10px;padding: 1px;">
-<span class="blue-bg" *ngIf="project.title">{{project.title}}</span>
-<span class="blue-bg" *ngIf="project.notes">{{project.notes}}</span>
+<span  class="blue-bg">
+  <div (click)="editMode['title'] = true;focusInput('title')" *ngIf="!editMode['title']">
+    {{project.title}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['title']">
+    <input id="title"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.title" (keydown)="keyDown($event,'title')" (blur)="editMode['title'] = false" />
+  </div>
 
-<span class="blue-bg" *ngIf="project.title1">{{project.title1}}</span>
-<span class="blue-bg" *ngIf="project.summary">{{project.summary}}</span>
+</span>
+<span class="blue-bg">
+  <div (click)="editMode['title1'] = true;focusInput('title1')" *ngIf="!editMode['title1']">
+    {{project.title1}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['title1']">
+    <input id="title1" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.title1" (keydown)="keyDown($event,'title1')" (blur)="editMode['title1'] = false" />
+  </div>
 
+</span>
+<span class="blue-bg" >
+  <div (click)="editMode['summary'] = true;focusInput('summary')" *ngIf="!editMode['summary']">
+    {{project.summary}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['summary']">
+    <textarea
+    id="summary"
+    pInputTextarea [autoResize]="false" [autofocus]="true"
+    class="p-0 m-0 text-center"
+    [(ngModel)]="project.summary" (keydown)="keyDown($event,'summary')" (blur)="editMode['summary'] = false" required></textarea>
+  </div>
 
-<span class="blue-bg" *ngIf="project.class">{{project.class}}</span>
-<span class="blue-bg" *ngIf="project.rating">{{project.rating}}</span>
-<span class="blue-bg" *ngIf="project.steps">{{project.steps}}</span>
-<span class="blue-bg" *ngIf="project.objectives">{{project.objectives}}</span>
-<span class="blue-bg" *ngIf="project.materialsAndTools">{{project.materialsAndTools}}</span>
-<span class="blue-bg" *ngIf="project.startDate">{{project.startDate}}</span>
-<span class="blue-bg" *ngIf="project.endDate">{{project.endDate}}</span>
-<span class="orange-bg" style="margin-top: 6px;" *ngIf="project.evaluationCriteria">{{project.evaluationCriteria}}</span>
+</span>
+<span class="blue-bg">
+  <div (click)="editMode['class'] = true;focusInput('class')" *ngIf="!editMode['class']">
+    {{project.class}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['class']">
+    <input id="class" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.class" (keydown)="keyDown($event,'class')" (blur)="editMode['class'] = false" />
+  </div>
 
-<span class="orange-bg" *ngIf="project.date">{{project.date}}</span>
-<span class="orange-bg" *ngIf="project.time">{{project.time}}</span>
-<span class="orange-bg" *ngIf="project.description">{{project.description}}</span>
+</span>
+<span class="blue-bg" >
+  <div (click)="editMode['rating'] = true;focusInput('rating')" *ngIf="!editMode['rating']">
+    {{project.rating ? project.rating + '%' : ''}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['rating']">
+    <input id="rating" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.rating" (keydown)="keyDown($event,'rating')" (blur)="editMode['rating'] = false" />
+  </div>
+</span>
+<span class="blue-bg" >
+  <div (click)="editMode['startDate'] = true;focusInput('startDate')" *ngIf="!editMode['startDate']">
+    {{project.startDate}}&nbsp;
+  </div>
+  <div *ngIf="editMode['startDate']">
+    <input id="startDate" type="text"  pInputText [autofocus]="true" class="p-0 m-0 text-center"
+    [(ngModel)]="project.startDate" (keydown)="keyDown($event,'startDate')" (blur)="editMode['startDate'] = false" />
+  </div>
 
-<span class="orange-bg" *ngIf="project.school">{{project.school}}</span>
+</span>
+<span class="blue-bg" >
+  <div (click)="editMode['endDate'] = true;focusInput('endDate')" *ngIf="!editMode['endDate']">
+    {{project.endDate}}&nbsp;
+  </div>
+  <div *ngIf="editMode['endDate']">
+    <input id="endDate" type="text"  pInputText [autofocus]="true" class="p-0 m-0 text-center"
+    [(ngModel)]="project.endDate" (keydown)="keyDown($event,'endDate')" (blur)="editMode['endDate'] = false" />
+  </div>
+
+</span>
+<span class="blue-bg" >
+  <div (click)="editMode['date'] = true;focusInput('date')" *ngIf="!editMode['date']">
+    {{project.date}}&nbsp;
+  </div>
+  <div *ngIf="editMode['date']">
+    <input id="date" type="text"  pInputText [autofocus]="true" class="p-0 m-0 text-center"
+    [(ngModel)]="project.date" (keydown)="keyDown($event,'date')" (blur)="editMode['date'] = false" />
+  </div>
+
+</span>
+<span class="orange-bg" style="margin-top: 6px;">
+  <div (click)="editMode['time'] = true;focusInput('time')" *ngIf="!editMode['time']">
+    {{project.time?.toString()?.substring(0,5)}}&nbsp;
+  </div>
+  <div *ngIf="editMode['time']">
+    <input id="time" type="time"  pInputText [autofocus]="true" class="p-0 m-0 text-center"
+    [(ngModel)]="project.time" (keydown)="keyDown($event,'time')" (blur)="editMode['time'] = false" />
+  </div>
+</span>
+
+<span class="orange-bg" >
+  <div (click)="editMode['school'] = true;focusInput('school')" *ngIf="!editMode['school']">
+    {{helper.getSchoolName(project.school)}}&nbsp;
+  </div>
+  <div *ngIf="editMode['school']">
+    <p-dropdown  #drp (onBlur)="editMode['school'] = false"  (onHide)="editMode['school'] = false" appendTo="body" [options]="helper.schools" optionValue="_id" optionLabel="schoolName" [(ngModel)]="project.school"></p-dropdown>
+  </div>
+</span>
+<span class="orange-bg" >
+  <div class="text-truncate text-nowrap" (click)="editMode['notes'] = true;focusInput('notes')" *ngIf="!editMode['notes']">
+    {{project.notes}}&nbsp;
+  </div>
+  <div *ngIf="editMode['notes']">
+    <input id="notes" type="text"  pInputText [autofocus]="true" class="p-0 m-0 text-center"
+    [(ngModel)]="project.notes" (keydown)="keyDown($event,'notes')" (blur)="editMode['notes'] = false" />
+  </div>
+</span>
+<span class="orange-bg" >
+  <div (click)="editMode['presentation_clarity'] = true;focusInput('presentation_clarity')" *ngIf="!editMode['presentation_clarity']">
+    {{project.presentation_clarity ? project.presentation_clarity + '%' : ''}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['presentation_clarity']">
+    <input id="presentation_clarity" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.presentation_clarity" (keydown)="keyDown($event,'presentation_clarity')" (blur)="editMode['presentation_clarity'] = false" />
+  </div>
+
+</span>
+<span class="orange-bg" >
+  <div (click)="editMode['work_quality'] = true;focusInput('work_quality')" *ngIf="!editMode['work_quality']">
+    {{project.work_quality ? project.work_quality + '%' : ''}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['work_quality']">
+    <input id="work_quality" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.work_quality" (keydown)="keyDown($event,'work_quality')" (blur)="editMode['work_quality'] = false" />
+  </div>
+
+</span>
+<span class="orange-bg" >
+  <div (click)="editMode['companionship'] = true;focusInput('companionship')" *ngIf="!editMode['companionship']">
+    {{project.companionship ? project.companionship + '%' : ''}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['companionship']">
+    <input id="companionship" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.companionship" (keydown)="keyDown($event,'companionship')" (blur)="editMode['companionship'] = false" />
+  </div>
+
+</span>
+<span class="orange-bg" >
+  <div (click)="editMode['progression_percentage'] = true;focusInput('progression_percentage')" *ngIf="!editMode['progression_percentage']">
+    {{project.progression_percentage ? project.progression_percentage + '%' : ''}}&nbsp;
+  </div>
+  <div  *ngIf="editMode['progression_percentage']">
+    <input id="progression_percentage" type="number"  pInputText [autofocus]="true" class="p-0 m-0 text-center" [(ngModel)]="project.progression_percentage" (keydown)="keyDown($event,'progression_percentage')" (blur)="editMode['progression_percentage'] = false" />
+  </div>
+
+</span>
+<span class="orange-bg" >
+  <div class="text-truncate text-nowrap" (click)="editMode['students'] = true;focusInput('students')" *ngIf="!editMode['students']">
+    {{ helper.getStudentNames(project?.students ?? []) }}
+    &nbsp;
+  </div>
+  <div  *ngIf="editMode['students']">
+    <p-multiSelect  (onBlur)="editMode['students'] = false" appendTo="body"  (onHide)="editMode['students'] = false"   [options]="helper.students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="project.students"></p-multiSelect>
+  </div>
+
+</span>
+<span class="orange-bg" >
+  <div class="text-truncate text-nowrap" (click)="editMode['teacherId'] = true;focusInput('teacherId')" *ngIf="!editMode['teacherId']">
+    {{ helper.getTeacherName(project?.teacherId) }}
+    &nbsp;
+  </div>
+  <div  *ngIf="editMode['teacherId']">
+    <p-dropdown    (onBlur)="editMode['teacherId'] = false" (onHide)="editMode['teacherId'] = false"   [options]="helper.teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="project.teacherId"></p-dropdown>
+  </div>
+
+</span>
 
 
 </div>

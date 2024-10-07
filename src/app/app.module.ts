@@ -17,6 +17,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { ProjectCardComponent } from './project-card/project-card.component';
 import { ChunkPipe } from './pipes/chunk.pipe';
 import { PaginatorModule } from 'primeng/paginator';
+import { HeadersCardComponent } from './headers-card/headers-card.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PaginatorModule } from 'primeng/paginator';
     AppComponent,
     ProjectCardComponent,
     ChunkPipe,
+    HeadersCardComponent,
   ],
   imports: [
     BrowserModule,
