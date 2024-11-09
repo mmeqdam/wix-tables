@@ -166,28 +166,28 @@
             </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('progression_percentage')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('progression_percentage')">
             <div class="flex align-items-center">
               نسبة الأنجاز
               <p-columnFilter type="numeric" field="progression_percentage" display="menu"></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('notes')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('notes')">
             <div class="flex align-items-center">
               ملاحظات
               <p-columnFilter type="text" field="notes" display="menu"></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('presentation_clarity')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('presentation_clarity')">
             <div class="flex align-items-center">
               وضوح العرض
               <p-columnFilter type="numeric" field="presentation_clarity" display="menu"></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('work_quality')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('work_quality')">
             <div class="flex align-items-center">
               جودة العمل
               <p-columnFilter type="numeric" field="work_quality" display="menu"></p-columnFilter>
@@ -201,14 +201,14 @@
             </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('companionship')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('companionship')">
         <div class="flex align-items-center">
           الشراكة والتعاون
           <p-columnFilter type="numeric" field="companionship" display="menu"></p-columnFilter>
         </div>
           </th>
 
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('rating')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('rating')">
         <div class="flex align-items-center">
           العلامة النهائية
           <p-columnFilter type="numeric" field="rating" display="menu"></p-columnFilter>
@@ -344,7 +344,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" *ngIf="IsSelected('progression_percentage')" pEditableColumnField="progression_percentage">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" *ngIf="IsSelected('progression_percentage')" pEditableColumnField="progression_percentage">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.progression_percentage" />
@@ -354,7 +354,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input [readonly]="!isAdmin" pInputText [(ngModel)]="product.notes" />
@@ -366,7 +366,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" *ngIf="IsSelected('presentation_clarity')" pEditableColumnField="presentation_clarity">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" *ngIf="IsSelected('presentation_clarity')" pEditableColumnField="presentation_clarity">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.presentation_clarity" />
@@ -377,7 +377,7 @@
             </p-cellEditor>
           </td>
 
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" *ngIf="IsSelected('work_quality')" pEditableColumnField="work_quality">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" *ngIf="IsSelected('work_quality')" pEditableColumnField="work_quality">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.work_quality" />
@@ -399,7 +399,7 @@
             </p-cellEditor>
           </td>
 
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" *ngIf="IsSelected('companionship')" pEditableColumnField="companionship">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" *ngIf="IsSelected('companionship')" pEditableColumnField="companionship">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input  [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.companionship" />
@@ -409,7 +409,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #B7E892;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" *ngIf="IsSelected('rating')" pEditableColumnField="rating">
+          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" *ngIf="IsSelected('rating')" pEditableColumnField="rating">
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.rating" />
