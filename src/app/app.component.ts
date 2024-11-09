@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
   allowedRoles = ['Schools','Suber Admin','Teachers','Admin','Owner']
   selectedColumns: column[] = [
     { value: 'title', header: 'اسم المشروع' },
+    { value: 'innovation', header: 'الأصالة والإبداع' } ,
     { value: 'title1', header: 'رقم المشروع' },
     { value: 'teacherId', header: 'المعلم' },
     { value: 'class', header: 'الصف' },
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit{
     { value: 'work_quality', header: 'جودة العمل' },
     { value: 'companionship', header: 'الشراكة والتعاون' },
     { value: 'rating', header: 'العلامة النهائية' },
-    { value: 'innovation', header: 'الأصالة والإبداع' }
+    
   ];
   allColumns:column[] =
   [
