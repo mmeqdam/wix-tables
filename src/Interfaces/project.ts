@@ -25,7 +25,5 @@ export class Project {
   _id?: string = '';
   _owner?: string = '';
   _updatedDate?: any = '';
-
-  // Set innovation as a number type
   innovation?: number = 0;
 }

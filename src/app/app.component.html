@@ -194,7 +194,7 @@
             </div>
           </th>
           
-          <th style="background-color: #B7E892;" *ngIf="IsSelected('innovation')">
+          <th style="background-color: #effee3db;" *ngIf="IsSelected('innovation')">
             <div class="flex align-items-center">
               الأصالة والإبداع
               <p-columnFilter type="numeric" field="innovation" display="menu"></p-columnFilter>
@@ -394,7 +394,7 @@
                 <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.innovation" />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.innovation + '%' }}
+                {{ (product?.innovation || "0")+ '%' }}
               </ng-template>
             </p-cellEditor>
           </td>

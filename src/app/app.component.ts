@@ -43,7 +43,7 @@ export class AppComponent implements OnInit{
     { value: 'work_quality', header: 'جودة العمل' },
     { value: 'companionship', header: 'الشراكة والتعاون' },
     { value: 'rating', header: 'العلامة النهائية' },
-    { value: 'innovation', header: 'الأصالة والإبداع' } // Added as a numeric field
+    { value: 'innovation', header: 'الأصالة والإبداع' }
   ];
   allColumns:column[] =
   [
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit{
     {value:'work_quality',header:'جودة العمل'},
     {value:'companionship',header:'الشراكة والتعاون'},
     {value:'rating',header:'العلامة النهائية'},
-    { value: 'innovation', header: 'الأصالة والإبداع' } // Added as a numeric field
+    { value: 'innovation', header: 'الأصالة والإبداع' } 
   ]
   roles:any[] = [];
 
@@ -98,7 +98,8 @@ export class AppComponent implements OnInit{
   }
   Save(){
     this.isLoading = true;
-
+    console.log(this.projects);
+    
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
