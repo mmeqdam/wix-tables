@@ -122,7 +122,7 @@
                   <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionLabel="studentName">
                       <ng-template let-option pTemplate="item">
                           <div class="inline-block vertical-align-middle">
-                              <span class="ml-1 mt-1">{{ option.email }}</span>
+                              <span class="ml-1 mt-1">{{ option.studentName }}</span>
                           </div>
                       </ng-template>
                   </p-multiSelect>
@@ -282,7 +282,15 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
+                <p-multiSelect 
+                appendTo="body" 
+                [readonly]="isStudent" 
+                [disabled]="isStudent" 
+                [options]="students" 
+                optionLabel="studentName" 
+                optionValue="studentName" 
+                [(ngModel)]="product.students">
+                </p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
