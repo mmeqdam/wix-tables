@@ -131,7 +131,7 @@ export class AppComponent implements OnInit{
   }
 
   getStudentNames(students:any[]):string{
-    console.log("here we show the prod",students);
+    console.log(students.map(x => x.studentName).join(','));
     
     return students.map(x => x.studentName).join(',');
   }
