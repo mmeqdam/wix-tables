@@ -288,13 +288,13 @@
                 [disabled]="isStudent" 
                 [options]="students"
                 optionLabel="studentName" 
-
+                [placeholder]="getStudentNames(product?.students ?? [])"
                 [(ngModel)]="product.students">
                 </p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
-                  yalla bina
+                  {{ getStudentNames(product?.students ?? []) }}
                 </p>
               </ng-template>
             </p-cellEditor>
