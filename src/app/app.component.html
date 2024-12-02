@@ -279,28 +279,33 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <p-multiSelect 
-                  [readonly]="isStudent" 
-                  [disabled]="isStudent" 
-                  [options]="students" 
-                  [appendTo]="'body'" 
-                  optionLabel="studentName" 
-                  display="chip"
-                  placeholder="Select Students">
-                  [(ngModel)]="product.students">
-                </p-multiSelect>
-              </ng-template>
-              
-              <ng-template pTemplate="output">
-                <p class="text-truncate" style="max-width: 150px;">
-                  {{ getStudentNames(product?.students ?? []) }}
-                </p>
-              </ng-template>
-            </p-cellEditor>
-          </td>
+          <tr *ngFor="let product of projects; let i = index">
+            <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <!-- MultiSelect for students -->
+                  <p-multiSelect 
+                    [readonly]="isStudent" 
+                    [disabled]="isStudent"
+                    [options]="students" 
+                    optionLabel="studentName" 
+                    display="chip"
+                    placeholder="Select Students"
+                    [(ngModel)]="projects[i].students" 
+                  >
+                  </p-multiSelect>
+                </ng-template>
+          
+                <ng-template pTemplate="output">
+                  <!-- Display selected student names -->
+                  <p class="text-truncate" style="max-width: 150px;">
+                    {{ getStudentNames(projects[i].students ?? []) }}
+                  </p>
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </tr>
+          
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
             <p-cellEditor>
               <ng-template pTemplate="input">
