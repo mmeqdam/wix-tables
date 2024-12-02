@@ -156,24 +156,46 @@ export class AppComponent implements OnInit{
 
 
 
-  @HostListener('window:message', ['$event'])
-  RecievedMessage(event: MessageEvent) {
+  @HostListener('window:message',['$event'])
+  RecievedMessage(event:MessageEvent){
     let message = event.data;
-    if (message?.projects) {
-      this.projects = message.projects as Project[];  // Ensure projects are typed as Project[]
+    console.log(message)
+
+    if(message.roles){
+      this.roles = message.roles;
+      this.RemoveColumn('school',(this.isSchool || this.isStudent || this.isTeacher));
+      this.RemoveColumn('teacherid',(this.isTeacher));
+    }
+    if(message == 'error'){
+      console.log('---- message is error ----')
+      this.isLoading = false;
+      this.errorHappened = true;
+      setTimeout(() => {
+        this.errorHappened = false;
+      }, 1000);
+    }
+    if(message == 'loaded'){
+      this.postMessage({action:'getteachers'})
+      this.postMessage({action:'getroles'})
+      this.postMessage({action:'getprojects'});
+      this.postMessage({action:'getschools'});
+      this.postMessage({action:'getstudents'});
+    }
+    if(message?.projects){
+      this.projects = message.projects;
       this.isLoading = false;
     }
-    if (message?.students) {
-      this.students = message.students as any[];  // Ensure students are typed as an array
+    if(message?.students){
+      this.students = message.students;
     }
-    if (message?.schools) {
-      this.schools = message.schools as School[];  // Ensure schools are typed as School[]
+    if(message?.schools){
+      this.schools = message.schools;
     }
-    if (message?.teachers) {
-      this.teachers = message.teachers as Teacher[];  // Ensure teachers are typed as Teacher[]
+    if(message?.teachers){
+      console.log('teachers',message.teachers)
+      this.teachers = message.teachers;
     }
   }
-
 
 
 }
