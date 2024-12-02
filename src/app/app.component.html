@@ -225,7 +225,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-product let-editing="editing">
-        <tr *ngFor="let product of projects; let i = index">
+        <tr>
           <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title" *ngIf="IsSelected('title')"  pEditableColumnField="title">
             <p-cellEditor>
               <ng-template pTemplate="input">
@@ -269,42 +269,38 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherId" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherid" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherId"></p-dropdown>
+                <p-dropdown appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product?.teacherId) }}
+                {{ getTeacherName(product?.teacherid) }}
               </ng-template>
             </p-cellEditor>
           </td>
-            <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <!-- MultiSelect for students -->
-                  <p-multiSelect 
-                    [readonly]="isStudent" 
-                    [disabled]="isStudent"
-                    [options]="students" 
-                    optionLabel="studentName" 
-                    display="chip"
-                    placeholder="Select Students"
-                    [(ngModel)]="projects[i].students" 
-                  >
-                  </p-multiSelect>
-                </ng-template>
-          
-                <ng-template pTemplate="output">
-                  <!-- Display selected student names -->
-                  <p class="text-truncate" style="max-width: 150px;">
-                    {{ getStudentNames(projects[i].students ?? []) }}
-                  </p>
-                </ng-template>
-              </p-cellEditor>
-            </td>
-          
-          
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-multiSelect 
+                appendTo="body" 
+                [readonly]="isStudent" 
+                [disabled]="isStudent" 
+                [options]="students"
+                optionValue="_id"
+                [appendTo]="'body'" 
+                optionLabel="studentName"
+                placeholder="Select Students"
+                [(ngModel)]="product.students">
+              </p-multiSelect>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <p class="text-truncate" style="max-width: 150px;">
+                  {{ getStudentNames(product?.students ?? []) }}
+                </p>
+              </ng-template>
+            </p-cellEditor>
+          </td>
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
             <p-cellEditor>
               <ng-template pTemplate="input">
@@ -435,7 +431,7 @@
           </td>
           <td *ngIf="selectedColumns.length != 0 && isAdmin" >
             <div class="d-flex justify-content-center px-1" style="width: fit-content;"></div>
-            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1 ?? 0)"></p-button>
+            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
           </td>
         </tr>
     </ng-template>
