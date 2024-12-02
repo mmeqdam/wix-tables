@@ -225,7 +225,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-product let-editing="editing">
-        <tr>
+        <tr *ngFor="let product of projects; let i = index">
           <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title" *ngIf="IsSelected('title')"  pEditableColumnField="title">
             <p-cellEditor>
               <ng-template pTemplate="input">
@@ -269,17 +269,16 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherid" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
+          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherId" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
+                <p-dropdown appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherId"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product?.teacherid) }}
+                {{ getTeacherName(product?.teacherId) }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <tr *ngFor="let product of projects; let i = index">
             <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
               <p-cellEditor>
                 <ng-template pTemplate="input">
@@ -304,7 +303,7 @@
                 </ng-template>
               </p-cellEditor>
             </td>
-          </tr>
+          
           
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
             <p-cellEditor>
