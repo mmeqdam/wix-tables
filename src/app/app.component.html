@@ -435,7 +435,7 @@
           </td>
           <td *ngIf="selectedColumns.length != 0 && isAdmin" >
             <div class="d-flex justify-content-center px-1" style="width: fit-content;"></div>
-            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
+            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1 ?? 0)"></p-button>
           </td>
         </tr>
     </ng-template>
