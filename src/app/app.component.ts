@@ -130,8 +130,17 @@ export class AppComponent implements OnInit{
     return this.roles?.some(role => role?.title == 'Students');
   }
 
-  getStudentNames(students:any[]):string{
-    return students.map(x => x).join(',');
+  getStudentNames(students: any[]): string {
+    return students
+      .map(x => {
+        // Check if x is an object and has a studentName property
+        if (typeof x === 'object' && x !== null && 'studentName' in x) {
+          return x.studentName;
+        }
+        // If it's a string, return it directly
+        return x;
+      })
+      .join(',');
   }
   getTeacherName(id:any){
     return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
