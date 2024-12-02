@@ -185,22 +185,16 @@ export class AppComponent implements OnInit{
       this.postMessage({action:'getschools'});
       this.postMessage({action:'getstudents'});
     }
-    if (message?.projects) {
+    if(message?.projects){
+      console.log("1 meine",this.projects);
+      console.log("message",message.projects);
       this.projects = message.projects;
-    
-      // Iterate through each project
-      this.projects.forEach(project => {
-        // Check if the project has students and it's an array
-        if (project.students && Array.isArray(project.students)) {
-          // Replace each student object with their _id
-          project.students = project.students.map(student => student._id);
-        }
-      });
-    
+      console.log("2 meine",this.projects);
+      
       this.isLoading = false;
     }
     if(message?.students){
-
+      
       this.students = message.students;
     }
     if(message?.schools){
