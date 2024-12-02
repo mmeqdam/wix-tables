@@ -104,6 +104,8 @@ export class AppComponent implements OnInit{
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
+    console.log(event?.index , "have been edited");
+    
     if(event?.index){
       this.editedTitles.push(event.index);
     }
