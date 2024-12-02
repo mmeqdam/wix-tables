@@ -105,7 +105,6 @@ export class AppComponent implements OnInit{
   }
   Edited(event:TableEditCompleteEvent){
     console.log(event?.index , "have been edited");
-    
     if(event?.index){
       this.editedTitles.push(event.index);
     }

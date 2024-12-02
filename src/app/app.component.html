@@ -33,7 +33,7 @@
         <h3 *ngIf="errorHappened" class="text-danger">ليس لديك صلاحيه لتنفيذ الأمر</h3>
         <h3 *ngIf="multipleroles" class="text-primary">لديك اكثر من role واحد</h3>
         <div class="d-flex justify-content-center align-items-center gap-2">
-        <p-button *ngIf="isAdmin" styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
+        <p-button *ngIf="isAdmin && editedTitles.length > 0" styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
@@ -291,6 +291,7 @@
                 optionLabel="studentName"
                 optionValue="studentName" 
                 placeholder="Select Students" 
+                
                 [(ngModel)]="product.students"
                 ></p-multiSelect>
               </ng-template>
