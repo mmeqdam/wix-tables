@@ -131,7 +131,7 @@ export class AppComponent implements OnInit{
   }
 
   getStudentNames(students:any[]):string{
-    return students.map(x => x).join(',');
+    return students.map(x => x.studentName).join(',');
   }
   getTeacherName(id:any){
     return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
