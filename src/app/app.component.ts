@@ -100,7 +100,6 @@ export class AppComponent implements OnInit{
   Save(){
     this.isLoading = true;
     console.log(this.projects);
-    
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
@@ -186,11 +185,22 @@ export class AppComponent implements OnInit{
       this.postMessage({action:'getschools'});
       this.postMessage({action:'getstudents'});
     }
-    if(message?.projects){
+    if (message?.projects) {
       this.projects = message.projects;
+    
+      // Iterate through each project
+      this.projects.forEach(project => {
+        // Check if the project has students and it's an array
+        if (project.students && Array.isArray(project.students)) {
+          // Replace each student object with their _id
+          project.students = project.students.map(student => student._id);
+        }
+      });
+    
       this.isLoading = false;
     }
     if(message?.students){
+
       this.students = message.students;
     }
     if(message?.schools){
