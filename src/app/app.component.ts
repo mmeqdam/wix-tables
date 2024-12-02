@@ -130,9 +130,14 @@ export class AppComponent implements OnInit{
     return this.roles?.some(role => role?.title == 'Students');
   }
 
-  getStudentNames(students:any[]):string{
-    return students.map(x => x.studentName).join(',');
+  getStudentNames(s: any[]): string {
+    // Assuming 'students' is your global array of students
+    return s.map(x => {
+      const student = this.students.find(student => student._id === x._id);
+      return student ? student.studentName : ''; // Return student name or empty if not found
+    }).join(',');
   }
+  
   getTeacherName(id:any){
     return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
   }
