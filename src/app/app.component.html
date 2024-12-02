@@ -292,10 +292,11 @@
                   [(ngModel)]="product.students">
                 </p-multiSelect>
               </ng-template>
-              {{product | json}} 
+              
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
                   {{ getStudentNames(product?.students ?? []) }}
+                  {{product | json}} 
                 </p>
               </ng-template>
             </p-cellEditor>
