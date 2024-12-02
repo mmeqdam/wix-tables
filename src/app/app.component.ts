@@ -187,7 +187,8 @@ export class AppComponent implements OnInit{
     }
     if (message?.projects) {
       this.projects = message.projects;
-    
+      console.log("data got in message" , message.projects);
+      
       // Iterate through each project
       this.projects.forEach(project => {
         // Check if the project has students and it's an array
@@ -196,7 +197,7 @@ export class AppComponent implements OnInit{
           project.students = project.students.map(student => student._id);
         }
       });
-      console.log("after",this.projects);
+      console.log("data after treat",this.projects);
       
       this.isLoading = false;
     }
