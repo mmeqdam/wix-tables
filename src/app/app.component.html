@@ -282,17 +282,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect 
-                appendTo="body" 
-                [readonly]="isStudent" 
-                [disabled]="isStudent" 
-                [options]="students"
-                [appendTo]="'body'" 
-                [showClear]="true" 
-                optionLabel="studentName"
-                placeholder="Select Students"
-                [(ngModel)]="product.students">
-              </p-multiSelect>
+                <p-multiSelect appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="students" [appendTo]="'body'" optionLabel="studentName" [(ngModel)]="product.students"></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">

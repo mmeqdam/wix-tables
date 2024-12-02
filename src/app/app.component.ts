@@ -100,6 +100,7 @@ export class AppComponent implements OnInit{
   Save(){
     this.isLoading = true;
     console.log(this.projects);
+    
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
@@ -129,14 +130,9 @@ export class AppComponent implements OnInit{
     return this.roles?.some(role => role?.title == 'Students');
   }
 
-  getStudentNames(s: any[]): string {
-    // Assuming 'students' is your global array of students
-    return s.map(x => {
-      const student = this.students.find(student => student._id === x._id);
-      return student ? student.studentName : ''; // Return student name or empty if not found
-    }).join(',');
+  getStudentNames(students:any[]):string{
+    return students.map(x => x.studentName).join(',');
   }
-  
   getTeacherName(id:any){
     return this.teachers.find(x => x?.teacherId == id)?.teacherName ?? 'معلم';
   }
@@ -185,24 +181,11 @@ export class AppComponent implements OnInit{
       this.postMessage({action:'getschools'});
       this.postMessage({action:'getstudents'});
     }
-    if (message?.projects) {
+    if(message?.projects){
       this.projects = message.projects;
-      console.log("data got in message" , message.projects);
-      
-      // Iterate through each project
-      this.projects.forEach(project => {
-        // Check if the project has students and it's an array
-        if (project.students && Array.isArray(project.students)) {
-          // Replace each student object with their _id
-          project.students = project.students.map(student => student._id);
-        }
-      });
-      console.log("data after treat",this.projects);
-      
       this.isLoading = false;
     }
     if(message?.students){
-      
       this.students = message.students;
     }
     if(message?.schools){
