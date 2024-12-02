@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   isLoading:boolean = true;
   projects:Project[] = [];
   students:any[] = [];
+  selectedStudents:any[] = [];
   schools:School[] = [];
   errorHappened:boolean = false;
   multipleroles:boolean = false;

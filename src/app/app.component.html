@@ -283,15 +283,16 @@
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <p-multiSelect 
-                appendTo="body" 
-                [readonly]="isStudent" 
-                [disabled]="isStudent" 
-                [options]="students"
-                optionLabel="studentName" 
-                [placeholder]="getStudentNames(product?.students ?? [])"
-                [(ngModel)]="product.students">
+                  appendTo="body" 
+                  [readonly]="isStudent" 
+                  [disabled]="isStudent" 
+                  [options]="students" 
+                  [appendTo]="'body'" 
+                  optionLabel="studentName" 
+                  [(ngModel)]="product.students">
                 </p-multiSelect>
               </ng-template>
+              {{product | json}} 
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
                   {{ getStudentNames(product?.students ?? []) }}
