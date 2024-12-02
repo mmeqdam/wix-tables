@@ -72,6 +72,7 @@ export class AppComponent implements OnInit{
   constructor(private filterService:FilterService){}
   public Log = console.log;
   turningOff = false;
+  showSaveBtn = false;
   editedTitles:number[] = [];
   async ngOnInit() {
     this.filterService.register('containsStudent',(value:any[],filter:any[]):boolean => {
@@ -100,11 +101,12 @@ export class AppComponent implements OnInit{
   Save(){
     this.isLoading = true;
     console.log(this.projects);
-    
+    this.showSaveBtn = false;
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
     console.log(event?.index , "have been edited");
+    this.showSaveBtn = true;
     if(event?.index){
       this.editedTitles.push(event.index);
     }
