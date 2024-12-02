@@ -287,8 +287,9 @@
                 [readonly]="isStudent" 
                 [disabled]="isStudent" 
                 [options]="students"
-                
-                optionLabel="studentName"
+                [appendTo]="'body'" 
+                optionLabel="studentName" 
+                optionValue="studentName" 
                 [(ngModel)]="product.students">
                 </p-multiSelect>
               </ng-template>
