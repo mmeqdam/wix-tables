@@ -127,6 +127,15 @@ export class AppComponent implements OnInit{
       // Step 5: Append missing students to `project.students`
       project.students.push(...missingStudents.filter(student => student));
       
+      // Step 6: Ensure `students` only contains students from `studentsNames`
+      const updatedStudents = (project.studentsNames ?? []).map(name => {
+        // Find the student object by studentName from the global `students` array
+        return this.students.find(student => student.studentName === name);
+      }).filter(student => student !== undefined); // Remove any undefined students (if name doesn't match any student)
+
+      // Step 7: Overwrite `project.students` with the updated students list
+      project.students = updatedStudents;
+      console.log(`Updated project with title ${title}:`, project);
     });
 
     // After processing all projects
