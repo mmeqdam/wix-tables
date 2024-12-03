@@ -100,7 +100,7 @@ export class AppComponent implements OnInit{
   }
   Save(): void {
     this.isLoading = true;
-  
+    
     // Iterate over editedTitles and apply the logic for each project
     this.editedTitles.forEach(title => {
       // Step 1: Find the project by its title (title1)
@@ -137,7 +137,27 @@ export class AppComponent implements OnInit{
       project.students = updatedStudents;
       console.log(`Updated project with title ${title}:`, project);
     });
-  
+    this.projects.forEach(project => {
+      // Step 1: Ensure `studentsNames` exists and is initialized
+      if (!project.studentsNames) {
+        project.studentsNames = [];
+      }
+    
+      // Ensure `students` exists and is initialized
+      if (!project.students) {
+        project.students = [];
+      }
+    
+      // Step 2: Iterate over the `project.students` and add `studentName` to `studentsNames`
+      project.students.forEach(student => {
+        // Check if `studentName` exists and if it's not already in `studentsNames`
+        if (student.studentName && !(project.studentsNames ?? []).includes(student.studentName)) {
+          (project.studentsNames ?? []).push(student.studentName);
+        }
+      });
+    
+      console.log(`Updated project with title ${project.title1}:`, project);
+    });
     // After processing all projects
     this.postMessage({ action: 'save', data: this.projects, editedTitles: this.editedTitles });
   
