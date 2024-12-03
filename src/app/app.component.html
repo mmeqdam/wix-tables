@@ -292,6 +292,7 @@
                 optionValue="studentName" 
                 placeholder="Select Students" 
                 [(ngModel)]="product.studentsNames"
+                (onChange)="SelectEdited(product.title1)"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">

@@ -152,6 +152,13 @@ export class AppComponent implements OnInit{
       this.editedTitles.push(event.index);
     }
   }
+  SelectEdited(title1:number){
+    console.log("chnages");
+    
+    if(title1){
+      this.editedTitles.push(title1)
+    }
+  }
   AddEntry(){
    this.isLoading = true;
 
