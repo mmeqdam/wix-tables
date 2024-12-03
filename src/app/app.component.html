@@ -291,8 +291,8 @@
                 optionLabel="studentName"
                 optionValue="studentName" 
                 placeholder="Select Students" 
-                
-                [(ngModel)]="product.students"
+                (ngModelChange)="onSelectionChange(product)"
+                [(ngModel)]="product.studentsNames"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">

@@ -20,6 +20,7 @@ export class Project {
   companionship?: number = 0;
   progression_percentage?: number = 0;
   students?: any[] = [];
+  studentsNames?: string[] = [];
   teacherId?: string = '';
   _createdDate?: any = '';
   _id?: string = '';

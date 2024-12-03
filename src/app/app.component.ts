@@ -102,6 +102,7 @@ export class AppComponent implements OnInit{
     this.isLoading = true;
     console.log(this.projects);
     this.showSaveBtn = false;
+    this.editedTitles = [];
     this.postMessage({action:'save',data:this.projects,editedTitles:this.editedTitles})
   }
   Edited(event:TableEditCompleteEvent){
@@ -166,7 +167,40 @@ export class AppComponent implements OnInit{
     }
   }
 
+  // Update both arrays when selection changes
+  onSelectionChange(targetProject: any): void {
+    // Step 1: Find the target project in `this.projects`
+    const projectIndex = this.projects.findIndex(p => p === targetProject);
+  
+    if (projectIndex === -1) {
+      console.warn('Target project not found');
+      return;
+    }
+  
+    const project = this.projects[projectIndex];
+  
+    // Step 2: Initialize `students` if it is undefined
+    project.students = project.students ?? [];
 
+  
+    // Step 3: Find missing student names in `studentsNames`
+    const missingStudentNames = (project.studentsNames ?? []).filter(
+      name => !(project.students ?? []).some(student => student.studentName === name)
+    );
+
+  
+    // Step 4: Find missing student objects in the global `students` array
+    const missingStudents = missingStudentNames.map(name =>
+      this.students.find(student => student.studentName === name)
+    );
+  
+    // Step 5: Append missing students to `project.students`
+    project.students.push(...missingStudents.filter(student => student));
+  
+    console.log('Updated project:', project);
+  }
+  
+  
 
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
