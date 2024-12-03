@@ -177,7 +177,11 @@ export class AppComponent implements OnInit{
   getStudentNames(students: any[]): string {
     return students
       .map(x => {
-        
+        // Check if x is an object and has a studentName property
+        if (typeof x === 'object' && x !== null && 'studentName' in x) {
+          return x.studentName;
+        }
+        // If it's a string, return it directly
         return x;
       })
       .join(',');
