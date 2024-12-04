@@ -152,11 +152,12 @@ export class AppComponent implements OnInit{
       this.editedTitles.push(event.index);
     }
   }
-  SelectEdited(title1:number){
-    console.log("chnages");
-    
-    if(title1){
-      this.editedTitles.push(title1)
+  SomethingInTableChanged(title1: number) {
+    console.log("changes");
+  
+    // Check if title1 is already in the editedTitles array
+    if (title1 && !this.editedTitles.includes(title1)) {
+      this.editedTitles.push(title1);  // Only push if title1 is not already in the array
     }
   }
   AddEntry(){

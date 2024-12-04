@@ -36,7 +36,7 @@
         <p-button *ngIf="isAdmin" styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
+              <input  pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
           </span>
         </div>
       </div>
@@ -229,7 +229,7 @@
           <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title" *ngIf="IsSelected('title')"  pEditableColumnField="title">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.title" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.title" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.title }}
@@ -239,7 +239,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title1" *ngIf="IsSelected('title1')" pEditableColumnField="title1">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.title1" required />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.title1" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.title1 }}
@@ -292,7 +292,7 @@
                 optionValue="studentName" 
                 placeholder="Select Students" 
                 [(ngModel)]="product.studentsNames"
-                (onChange)="SelectEdited(product.title1)"
+                (onChange)="SomethingInTableChanged(product.title1)"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
@@ -305,7 +305,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" type="number" pInputText [(ngModel)]="product.class" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" type="number" pInputText [(ngModel)]="product.class" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.class }}
@@ -315,7 +315,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" *ngIf="IsSelected('startDate')" pEditableColumnField="startDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.startDate" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.startDate" />
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -326,7 +326,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" *ngIf="IsSelected('endDate')" pEditableColumnField="endDate">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.endDate" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.endDate" />
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -337,7 +337,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" *ngIf="IsSelected('date')" pEditableColumnField="date">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.date" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.date" />
                 <!-- <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -348,7 +348,7 @@
           <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.time" *ngIf="IsSelected('time')" pEditableColumnField="time">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="time" [(ngModel)]="product.time" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="time" [(ngModel)]="product.time" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.time?.toString()?.substring(0,5) }}
@@ -358,7 +358,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" *ngIf="IsSelected('progression_percentage')" pEditableColumnField="progression_percentage">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.progression_percentage" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.progression_percentage" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.progression_percentage + '%' }}
@@ -368,7 +368,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText [(ngModel)]="product.notes" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText [(ngModel)]="product.notes" />
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px;">
@@ -380,7 +380,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" *ngIf="IsSelected('presentation_clarity')" pEditableColumnField="presentation_clarity">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.presentation_clarity" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.presentation_clarity" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.presentation_clarity + '%' }}
@@ -391,7 +391,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" *ngIf="IsSelected('work_quality')" pEditableColumnField="work_quality">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.work_quality" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.work_quality" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.work_quality + '%' }}
@@ -402,7 +402,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.innovation" *ngIf="IsSelected('innovation')" pEditableColumnField="innovation">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.innovation" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.innovation" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ (product?.innovation || "0")+ '%' }}
@@ -413,7 +413,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" *ngIf="IsSelected('companionship')" pEditableColumnField="companionship">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.companionship" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)"  [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.companionship" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.companionship + '%' }}
@@ -423,7 +423,7 @@
           <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" *ngIf="IsSelected('rating')" pEditableColumnField="rating">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.rating" />
+                <input  (onChange)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.rating" />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.rating + '%' }}
