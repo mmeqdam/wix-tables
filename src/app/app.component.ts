@@ -101,6 +101,36 @@ export class AppComponent implements OnInit{
   Save(): void {
     this.isLoading = true;
     
+
+    // After processing all projects
+    this.postMessage({ action: 'save', data: this.projects, editedTitles: this.editedTitles });
+  
+    this.showSaveBtn = false;
+    this.editedTitles = [];
+  }
+  
+  Edited(event:TableEditCompleteEvent){
+    console.log(event?.index , "have been edited");
+    this.showSaveBtn = true;
+    if(event?.index){
+      this.editedTitles.push(event.index);
+    }
+  }
+  SomethingInTableChanged(title1: number) {
+    console.log("changes");
+  
+    // Check if title1 is already in the editedTitles array
+    if (title1 && !this.editedTitles.includes(title1)) {
+      this.editedTitles.push(title1);  // Only push if title1 is not already in the array
+    }
+  }
+  SomethingInTableChangedSelect(title1: number) {
+    console.log("changes");
+  
+    // Check if title1 is already in the editedTitles array
+    if (title1 && !this.editedTitles.includes(title1)) {
+      this.editedTitles.push(title1);  // Only push if title1 is not already in the array
+    }
     // Iterate over editedTitles and apply the logic for each project
     this.editedTitles.forEach(title => {
       // Step 1: Find the project by its title (title1)
@@ -137,28 +167,6 @@ export class AppComponent implements OnInit{
       project.students = updatedStudents;
       console.log(`Updated project with title ${title}:`, project);
     });
-
-    // After processing all projects
-    this.postMessage({ action: 'save', data: this.projects, editedTitles: this.editedTitles });
-  
-    this.showSaveBtn = false;
-    this.editedTitles = [];
-  }
-  
-  Edited(event:TableEditCompleteEvent){
-    console.log(event?.index , "have been edited");
-    this.showSaveBtn = true;
-    if(event?.index){
-      this.editedTitles.push(event.index);
-    }
-  }
-  SomethingInTableChanged(title1: number) {
-    console.log("changes");
-  
-    // Check if title1 is already in the editedTitles array
-    if (title1 && !this.editedTitles.includes(title1)) {
-      this.editedTitles.push(title1);  // Only push if title1 is not already in the array
-    }
   }
   AddEntry(){
    this.isLoading = true;
