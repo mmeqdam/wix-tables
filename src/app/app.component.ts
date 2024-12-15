@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   projects:Project[] = [];
   students:any[] = [];
   schools:School[] = [];
+  version:Number = 1;
   errorHappened:boolean = false;
   multipleroles:boolean = false;
   teachers:Teacher[] = [];
@@ -224,7 +225,13 @@ export class AppComponent implements OnInit{
   }
 
   
-  
+  SwitchVersion() {
+    if (this.version == 1) {
+      this.version = 2
+    } else {
+      this.version = 1
+    }
+  }
 
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){

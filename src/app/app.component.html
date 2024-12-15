@@ -5,7 +5,8 @@
 </div>
 
 <ng-template #mainContent>
-  <div class="bg-transparent">
+  <button (click)="SwitchVersion()">Switch to version {{ version === 1 ? 2 : 1 }}</button>
+  <div *ngIf="version == 1" class="bg-transparent">
     <p-table
     #dt
     [value]="projects"
@@ -445,5 +446,8 @@
         <div class="mx-auto"></div>
     </ng-template>
     </p-table>
+  </div>
+  <div *ngIf="version == 2" class="version2Holder">
+    <h1>Version 2 Getting ready !</h1>
   </div>
 </ng-template>
