@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit ,SimpleChanges} from '@angular/core';
 import { FilterService } from 'primeng/api';
 import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
 import { Observable, share, throttleTime } from 'rxjs';
@@ -20,6 +20,7 @@ interface column{
 export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
+  selectedProject :Project = {}
   projects:Project[] = [];
   students:any[] = [];
   schools:School[] = [];
@@ -84,7 +85,42 @@ export class AppComponent implements OnInit{
       }
       return value.some(val => filter.find(x => x._id == val._id));
     })
+    
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // Access the selectedProject change using bracket notation
+    if (changes['selectedProject'] && changes['selectedProject'].currentValue) {
+      this.updateProgressBar('progress1', this.selectedProject.progression_percentage ?? 0);
+    }
+  }
+  // Function to update the progress bar
+  updateProgressBar(id: string, progressVal: number, totalPercentageVal: number = 100) {
+    const strokeVal = (4.64 * 100) / totalPercentageVal;
+    const circle = document.querySelector(`#${id} .progress-circle-prog`) as HTMLElement;
+    circle.style.strokeDasharray = progressVal * strokeVal + ' 999';
+
+    const el = document.querySelector(`#${id} .progress-text`) as HTMLElement;
+    const from = parseFloat(el.getAttribute('data-progress') || '0');
+    el.setAttribute('data-progress', progressVal.toString());
+
+    const start = new Date().getTime();
+
+    setTimeout(function() {
+      const now = (new Date().getTime()) - start;
+      const progress = now / 700;
+      el.innerHTML = (progressVal / totalPercentageVal) * 100 + '%';
+      if (progress < 1) setTimeout(arguments.callee, 10);
+    }, 10);
+  }
+   // Get rotation for the first half (0 to 50%)
+  getFirstHalfRotation(percentage: number): number {
+    return percentage > 50 ? 180 : (percentage * 3.6); // Rotate up to 180deg (50%)
+  }
+
+  // Get rotation for the second half (50 to 100%)
+  getSecondHalfRotation(percentage: number): number {
+    return percentage > 50 ? (percentage - 50) * 3.6 : 0; // Rotate for the second half if > 50%
   }
   IsSelected(col:string):boolean{
     return this.selectedColumns.some(x => x.value == col);
@@ -177,6 +213,9 @@ export class AppComponent implements OnInit{
   postMessage(message:any){
     window.parent.postMessage(message,'*')
   }
+  isEmptyObject(obj:any) {
+    return (obj && (Object.keys(obj).length === 0));
+  }
   get isAdmin(){
    return this.roles?.some(role => this.allowedRoles.some(y => y == role?.title));
   }
@@ -233,10 +272,31 @@ export class AppComponent implements OnInit{
     }
   }
 
+  calculateTimeRemaining(endDate: string | undefined): string {
+    if (!endDate) {
+      return 'لم يتم توفير تاريخ الانتهاء';
+    }
+  
+    const now = new Date();
+    const end = new Date(endDate);
+    const diff = end.getTime() - now.getTime();
+  
+    if (diff <= 0) {
+      return 'انتهى الوقت';
+    }
+  
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  
+    return `${days} يوم ${hours} ساعة ${minutes} دقيقة متبقية`;
+  }
+  
+  
   @HostListener('window:message',['$event'])
   RecievedMessage(event:MessageEvent){
     let message = event.data;
-    console.log(message)
+    
 
     if(message.roles){
       this.roles = message.roles;
@@ -274,5 +334,8 @@ export class AppComponent implements OnInit{
     }
   }
 
+
+
+  // from prod to dev just chnage Hostline into Coment and loading into True
 
 }

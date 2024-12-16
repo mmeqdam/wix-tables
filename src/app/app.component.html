@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #mainContent>
-  <button (click)="SwitchVersion()">Switch to version {{ version === 1 ? 2 : 1 }}</button>
+  <button (click)="SwitchVersion()" class="switchBtn">التبديل إلى الإصدار <span>{{ version === 1 ? 2 : 1 }}</span></button>
   <div *ngIf="version == 1" class="bg-transparent">
     <p-table
     #dt
@@ -448,6 +448,88 @@
     </p-table>
   </div>
   <div *ngIf="version == 2" class="version2Holder">
-    <h1>Version 2 Getting ready !</h1>
+    <div *ngIf="projects.length === 0">
+      <p>No projects available.</p>
+    </div>
+    <div *ngIf="isEmptyObject(selectedProject) && projects.length > 0" class="projetsCardsHolder">
+      <div *ngFor="let project of projects" class="project-card" dir="rtl" (click)="selectedProject = project">
+        <h3>{{ project.title }}</h3>
+        <p class="teacherName"><strong> {{ getTeacherName(project.teacherid) }}</strong> </p>
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/010/871/113/small_2x/3d-avatar-teacher-png.png">    
+        <p class="projectNumber">رقم المشروع<span>{{ project.title1 }}</span></p>
+        <p class="remainingTime"><strong>الوقت المتبقي لنهاية المشروع</strong> <span [ngClass]="{ 'time-over': calculateTimeRemaining(project.endDate) === 'انتهى الوقت', 'time-remaining': calculateTimeRemaining(project.endDate) !== 'الوقت انتهى' }">{{ calculateTimeRemaining(project.endDate) }}</span></p>
+      </div>
+    </div>
+    <div *ngIf="!isEmptyObject(selectedProject)" class="projectDataHolder">
+        <div class="leftSide">
+          <div class="gobackbtnholder">
+            <button (click)="selectedProject = {}" class="gobacktohome"><img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/back-arrow-icon.png">جميع المشاريع</button>
+          </div>
+          <div class="banner">
+            <span>{{selectedProject.title}}</span>
+          </div>
+          <div class="selectedProjectAnalyse">
+            <div>
+                <span><img src="https://cdn-icons-png.flaticon.com/512/1522/1522150.png">نسبة الإنجاز</span>
+                <div>
+                  <span>50%</span>
+                  <span>75%</span>
+                  <span>0%</span>
+                  <span>25%</span>
+                  <div align="center">
+                    <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null" [showSubtitle]="false" [titleFontSize]="'56'" [title]="selectedProject.progression_percentage !== undefined && selectedProject.progression_percentage !== null ? selectedProject.progression_percentage.toString() + '%' : ''" [percent]="selectedProject.progression_percentage ?? 0"  [space]="-10" [radius]="100" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                      [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e5e4f4'" [animation]="true"
+                      [animationDuration]="1000"></circle-progress>
+                  </div>
+                </div>
+                <p class="remainingTime"><strong>الوقت المتبقي لنهاية المشروع</strong> <span [ngClass]="{ 'time-over': calculateTimeRemaining(selectedProject.endDate) === 'انتهى الوقت', 'time-remaining': calculateTimeRemaining(selectedProject.endDate) !== 'الوقت انتهى' }">{{ calculateTimeRemaining(selectedProject.endDate) }}</span></p>
+            </div>
+
+            <div>
+              <div class="section1percentages">
+                <div><circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.work_quality !== undefined && selectedProject.work_quality !== null ? selectedProject.work_quality.toString() + '%' : ''" [percent]="selectedProject.work_quality ?? 0"  [space]="-10" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10" [outerStrokeColor]="'#3eccc0'" [innerStrokeColor]="'#e5e4f4'" [animation]="true" 
+                  [animationDuration]="1000" [subtitle]="'جودة العمل'" [subtitleFontSize]="'17'" [subtitleColor]="'black'">
+            </circle-progress>
+
+            <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.presentation_clarity !== undefined && selectedProject.presentation_clarity !== null ? selectedProject.presentation_clarity.toString() + '%' : ''" [percent]="selectedProject.presentation_clarity ?? 0"  [space]="-10" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10" [outerStrokeColor]="'#3eccc0'" [innerStrokeColor]="'#e5e4f4'" [animation]="true" 
+                  [animationDuration]="1000" [subtitle]="'وضوح العرض'" [subtitleFontSize]="'17'" [subtitleColor]="'black'">
+            </circle-progress></div>
+
+                <div><circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.innovation !== undefined && selectedProject.innovation !== null ? selectedProject.innovation.toString() + '%' : '0%'" [percent]="selectedProject.innovation ?? 0"  [space]="-10" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10" [outerStrokeColor]="'#3eccc0'" [innerStrokeColor]="'#e5e4f4'" [animation]="true" 
+                  [animationDuration]="1000" [subtitle]="'الأصالة و الإبداع'" [subtitleFontSize]="'17'" [subtitleColor]="'black'">
+            </circle-progress>
+
+            <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.companionship !== undefined && selectedProject.companionship !== null ? selectedProject.companionship.toString() + '%' : ''" [percent]="selectedProject.companionship ?? 0"  [space]="-10" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10" [outerStrokeColor]="'#3eccc0'" [innerStrokeColor]="'#e5e4f4'" [animation]="true" 
+                  [animationDuration]="1000" [subtitle]="'الشراكة و التعاون'" [subtitleFontSize]="'17'" [subtitleColor]="'black'">
+            </circle-progress></div>
+              </div>
+              <div class="section2percentages">
+                <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.rating !== undefined && selectedProject.rating !== null ? selectedProject.rating.toString() + '%' : ''" [percent]="selectedProject.rating ?? 0"  [space]="-10" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10" [outerStrokeColor]="'#f59a16'" [outerStrokeGradientStopColor]="'#f59a16'" [backgroundColor]="'#ff345f'" [showBackground]="true" [innerStrokeColor]="'#e5e4f4'" [animation]="true" 
+                  [animationDuration]="1000" [subtitle]="'العلامة النهائية'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" [titleColor]="'white'">
+            </circle-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rightSide">
+          <label class="selectedProjectNumber">رقم المشروع :<span>{{ selectedProject.title1 }}</span></label>
+          <div class="seperator"></div>
+          <div class="selectedProjectStudents">
+            <label><img src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png">فريق المشروع</label>
+            <span *ngFor="let studentN of selectedProject?.studentsNames">
+                {{studentN}}
+            </span>
+          </div>
+          <div class="selectedProjectNote">
+            <label><img src="https://www.svgrepo.com/show/459903/create-note.svg">الملاحظات</label>
+            <p>{{selectedProject.notes}}</p>
+          </div>
+        </div>
+    </div>      
   </div>
 </ng-template>
