@@ -5,8 +5,8 @@
 </div>
 
 <ng-template #mainContent>
-  <button (click)="SwitchVersion()" class="switchBtn">التبديل إلى الإصدار <span>{{ version === 1 ? 2 : 1 }}</span></button>
-  <div *ngIf="version == 1" class="bg-transparent">
+  <button (click)="SwitchVersion()" class="switchBtn">{{version === 1 ? 'جدول المشاريع' : 'الرئيسية'}}</button>
+  <div *ngIf="version == 2" class="bg-transparent">
     <p-table
     #dt
     [value]="projects"
@@ -447,7 +447,7 @@
     </ng-template>
     </p-table>
   </div>
-  <div *ngIf="version == 2" class="version2Holder">
+  <div *ngIf="version == 1" class="version2Holder">
     <div *ngIf="projects.length === 0">
       <p>No projects available.</p>
     </div>
