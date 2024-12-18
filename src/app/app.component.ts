@@ -21,7 +21,6 @@ export class AppComponent implements OnInit{
   title = 'wix-tables';
   isLoading:boolean = true;
   selectedProject :Project = {};
-  
   projects:Project[] = [];
   students:any[] = [];
   schools:School[] = [];
@@ -146,7 +145,13 @@ export class AppComponent implements OnInit{
     this.showSaveBtn = false;
     this.editedTitles = [];
   }
-  
+  removeAfterLastSlash(url: string): string {
+    const lastSlashIndex = url.lastIndexOf('/');
+    if (lastSlashIndex !== -1) {
+      return url.substring(0, lastSlashIndex);
+    }
+    return url; // Return the original URL if no slash is found
+  }
   Edited(event:TableEditCompleteEvent){
     console.log(event?.index , "have been edited");
     this.showSaveBtn = true;

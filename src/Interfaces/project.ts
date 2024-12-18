@@ -21,6 +21,7 @@ export class Project {
   progression_percentage?: number = 0;
   students?: any[] = [];
   studentsNames?: string[] = [];
+  mediagallery?:any[] = [];
   teacherid?: string = '';
   _createdDate?: any = '';
   _id?: string = '';

@@ -23,11 +23,7 @@
             transform: scale(1.06);
         }
         img{
-            width: 90px;
-            height: 90px;
-            border: 1px solid black;
-            border-radius: 50%;
-            background-color: antiquewhite;
+            width: 100%;
             margin-top: 5px;
             margin-bottom: 10px;
         }
@@ -152,8 +148,13 @@
             font-size: 2em;
             font-weight: 700;
             padding-left: 2em;
+            justify-content: space-between;
             span{
                 font-size: 1.5em;
+            }
+            img{
+                width: 100%;
+                max-width: 230px;
             }
         }
         .selectedProjectAnalyse{
@@ -317,6 +318,14 @@
                 line-height: 25px;
                 font-weight: 500;
             }
+        }
+        .selectedProjectTeacher{
+            img{
+            width: 30px;
+            border-radius: 10px;
+            }
+            font-size: 1.3em;
+            font-weight: 700;
         }
     }
 }
