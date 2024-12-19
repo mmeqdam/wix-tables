@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #mainContent>
-  <button (click)="SwitchVersion()" class="switchBtn">{{version === 1 ? 'جدول المشاريع' : 'الرئيسية'}}</button>
+  <button (click)="SwitchVersion()" class="switchBtn">{{version === 1 ? 'الذهاب لجدول المشاريع' : 'الرئيسية'}}</button>
   <div *ngIf="version == 2" class="bg-transparent">
     <p-table
     #dt
@@ -479,9 +479,9 @@
                 <span><img src="https://cdn-icons-png.flaticon.com/512/1522/1522150.png">نسبة الإنجاز</span>
                 <div>
                   <span>50%</span>
-                  <span>75%</span>
-                  <span>0%</span>
                   <span>25%</span>
+                  <span>0%</span>
+                  <span>75%</span>
                   <div align="center">
                     <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null" [showSubtitle]="false" [titleFontSize]="'56'" [title]="selectedProject.progression_percentage !== undefined && selectedProject.progression_percentage !== null ? selectedProject.progression_percentage.toString() + '%' : ''" [percent]="selectedProject.progression_percentage ?? 0"  [space]="-10" [radius]="100" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
                       [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e5e4f4'" [animation]="true"
@@ -494,22 +494,22 @@
             <div>
               <div class="section1percentages">
                 <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.work_quality !== undefined && selectedProject.work_quality !== null ? selectedProject.work_quality.toString() + '%' : ''" [percent]="selectedProject.work_quality ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'"  [innerStrokeColor]="(selectedProject.work_quality ?? 0) > 0 ? '#6e66fd' : '#505050' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'"  [innerStrokeColor]="(selectedProject.work_quality ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'جودة العمل'" [subtitleFontSize]="'17'" [subtitleColor]="'white'">
             </circle-progress>
 
             <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.presentation_clarity !== undefined && selectedProject.presentation_clarity !== null ? selectedProject.presentation_clarity.toString() + '%' : ''" [percent]="selectedProject.presentation_clarity ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.presentation_clarity ?? 0) > 0 ? '#6e66fd' : '#505050' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.presentation_clarity ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'وضوح العرض'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress></div>
 
                 <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.innovation !== undefined && selectedProject.innovation !== null ? selectedProject.innovation.toString() + '%' : '0%'" [percent]="selectedProject.innovation ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.innovation ?? 0) > 0 ? '#6e66fd' : '#505050' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.innovation ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'الأصالة و الإبداع'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress>
 
             <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.companionship !== undefined && selectedProject.companionship !== null ? selectedProject.companionship.toString() + '%' : ''" [percent]="selectedProject.companionship ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.companionship ?? 0) > 0 ? '#6961fe' : '#505050' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.companionship ?? 0) > 0 ? '#6961fe' : '#6c6c6a' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'الشراكة و التعاون'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress></div>
               </div>
