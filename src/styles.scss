@@ -17,21 +17,21 @@ html{
 
 
 @font-face {
-    font-family: 'HaecnTunisia';
-    src: url('/assets/fonts/custom-font.ttf') format('truetype');
+    font-family: 'HacenTunisia';
+    src: url('./assets/font/HacenTunisia.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
   
   // Optionally, define a bold style if needed
   @font-face {
-    font-family: 'HaecnTunisia';
-    src: url('/assets/fonts/custom-font-bold.ttf') format('truetype');
+    font-family: 'HacenTunisia';
+    src: url('./assets/font/HacenTunisia.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
   }
   
   // Apply globally in styles.scss
   body {
-    font-family: 'HaecnTunisia', sans-serif;
+    font-family: 'HacenTunisia', sans-serif;
   }
