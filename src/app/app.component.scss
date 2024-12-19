@@ -286,6 +286,101 @@
         width: 450px;
         direction: rtl;
         padding: 2em;
+        @media screen and (max-width:500px){
+            display: none;
+        }
+        .selectedProjectNumber{
+            font-size: 1.5em;
+            display: flex;
+            font-weight: 700;
+            align-items: center;
+            column-gap: 5px;
+        }
+        .seperator{
+            border: 1px solid rgba(0, 0, 0, 0.579);
+            margin: 1em 0;
+            border-radius: 70px;
+        }
+        .selectedProjectStudents{
+            label{
+                display: flex;
+                align-items: center;
+                column-gap: 4px;
+                font-weight: 700;
+                font-size: 1.3em;
+                margin-bottom: .7em;
+                img{
+                    width: 30px;
+                    background-color: white;
+                    padding: .2em;
+                    border-radius: 10px;
+                    margin-top: .2em;
+                }
+            }
+            span{
+                display: block;
+                background-color: white;
+                padding: .5em 1em;
+                margin-bottom: .4em;
+                border-radius: 60px;
+                text-align: right;
+                font-weight: 600;
+                cursor: pointer;
+                border: 1px solid black;
+            }
+        }
+        .selectedProjectNote{
+            margin-top: 1em;
+            label{
+                display: flex;
+                align-items: center;
+                column-gap: 4px;
+                font-weight: 700;
+                font-size: 1.3em;
+                margin-bottom: .7em;
+                img{
+                    width: 30px;
+                    background-color: white;
+                    padding: .2em;
+                    border-radius: 10px;
+                    margin-top: .2em;
+                }
+            }
+            p{
+                background-image: url(https://img.freepik.com/premium-photo/notebook-paper-background-lined-notebook-paper-crumpled-paper-background_322958-5175.jpg);
+                background-size: cover;
+                background-repeat: no-repeat;
+                min-height: 300px;
+                padding: 1em;
+                padding-left: 2em ;
+                border-radius: 10px;
+                max-width: 100%;
+                line-height: 25px;
+                font-weight: 500;
+            }
+        }
+        .selectedProjectTeacher{
+            img{
+                width: 30px;
+                border-radius: 10px;
+                background-color: white;
+            }
+            font-size: 1.3em;
+            font-weight: 700;
+            display: block;
+            margin: .5em 0;
+        }
+    }
+    .rightSideMobile{
+        background-color: rgb(229 228 244);
+        width: 100%;
+        direction: rtl;
+        padding: 2em;
+        margin: .5em 0;
+        border-radius: 10px;
+        @media screen and (min-width:500px){
+            display: none;
+        }
         .selectedProjectNumber{
             font-size: 1.5em;
             display: flex;

@@ -19,7 +19,7 @@ interface column{
 })
 export class AppComponent implements OnInit{
   title = 'wix-tables';
-  isLoading:boolean = true;
+  isLoading:boolean = true ;
   selectedProject :Project = {};
   projects:Project[] = [];
   students:any[] = [];
