@@ -494,22 +494,22 @@
             <div>
               <div class="section1percentages">
                 <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.work_quality !== undefined && selectedProject.work_quality !== null ? selectedProject.work_quality.toString() + '%' : ''" [percent]="selectedProject.work_quality ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'"  [innerStrokeColor]="(selectedProject.work_quality ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'"  [innerStrokeColor]="(selectedProject.work_quality ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'جودة العمل'" [subtitleFontSize]="'17'" [subtitleColor]="'white'">
             </circle-progress>
 
             <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.presentation_clarity !== undefined && selectedProject.presentation_clarity !== null ? selectedProject.presentation_clarity.toString() + '%' : ''" [percent]="selectedProject.presentation_clarity ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.presentation_clarity ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.presentation_clarity ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'وضوح العرض'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress></div>
 
                 <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.innovation !== undefined && selectedProject.innovation !== null ? selectedProject.innovation.toString() + '%' : '0%'" [percent]="selectedProject.innovation ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.innovation ?? 0) > 0 ? '#6e66fd' : '#6c6c6a' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.innovation ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'الأصالة و الإبداع'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress>
 
             <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.companionship !== undefined && selectedProject.companionship !== null ? selectedProject.companionship.toString() + '%' : ''" [percent]="selectedProject.companionship ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.companionship ?? 0) > 0 ? '#6961fe' : '#6c6c6a' " [animation]="true" 
+                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.companionship ?? 0) > 0 ? '#6961fe' : '#D0D0D0' " [animation]="true" 
                   [animationDuration]="1000" [subtitle]="'الشراكة و التعاون'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
             </circle-progress></div>
               </div>
