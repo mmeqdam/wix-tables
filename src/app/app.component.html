@@ -452,14 +452,38 @@
       <p>No projects available.</p>
     </div>
     <div *ngIf="isEmptyObject(selectedProject) && projects.length > 0" class="projetsCardsHolder">
+
       <div *ngFor="let project of projects" class="project-card" dir="rtl" (click)="selectedProject = project">
-        <h3>{{ project.title }}</h3>
-        <p class="teacherName"><strong> {{ getTeacherName(project.teacherid) }}</strong> </p>
-        <img [src]="removeAfterLastSlash(project!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/'))"
-     alt="Project Media">    
-        <p class="projectNumber">رقم المشروع<span>{{ project.title1 }}</span></p>
-        <p class="remainingTime"><strong>الوقت المتبقي لنهاية المشروع</strong> <span [ngClass]="{ 'time-over': calculateTimeRemaining(project.endDate) === 'انتهى الوقت', 'time-remaining': calculateTimeRemaining(project.endDate) !== 'الوقت انتهى' }">{{ calculateTimeRemaining(project.endDate) }}</span></p>
+        <!-- Title -->
+        <h3>{{ project.title || 'هذا المشروع ليس له عنوان حتى الآن' }}</h3>
+      
+        <!-- Teacher Name -->
+        <p class="teacherName">
+          <strong>{{ getTeacherName(project.teacherid) }}</strong>
+        </p>
+      
+        <!-- Image -->
+        <img [src]="project?.mediagallery?.[0]?.src ? removeAfterLastSlash(project!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/')) : 'https://static.wixstatic.com/media/ed2e06_11aab74158aa46ce998181992c487122~mv2.jpg/v1/fill/w_496,h_231,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ed2e06_11aab74158aa46ce998181992c487122~mv2.jpg' " alt="Project Media">
+      
+        <!-- Project Number -->
+        <p class="projectNumber">
+          رقم المشروع
+          <span>{{ project.title1 || 'هذا المشروع ليس له رقم حتى الآن' }}</span>
+        </p>
+      
+        <!-- Remaining Time -->
+        <p class="remainingTime">
+          <strong>الوقت المتبقي لنهاية المشروع</strong>
+          <span
+            [ngClass]="{ 'time-over': calculateTimeRemaining(project.endDate) === 'انتهى الوقت', 
+                          'time-remaining': calculateTimeRemaining(project.endDate) !== 'انتهى الوقت' }"
+          >
+            {{ calculateTimeRemaining(project.endDate) || 'لم يتم تعيين الوقت حتى الآن' }}
+          </span>
+        </p>
       </div>
+      
+
     </div>
     <div *ngIf="!isEmptyObject(selectedProject)" class="projectDataHolder">
         <div class="leftSide">
