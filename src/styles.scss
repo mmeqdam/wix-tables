@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+html{
+  padding-bottom: 2em;
+}
+
+@font-face {
+    font-family: 'HacenTunisia';
+    src: url('./assets/font/HacenTunisia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  // Optionally, define a bold style if needed
+  @font-face {
+    font-family: 'HacenTunisia';
+    src: url('./assets/font/HacenTunisia.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  // Apply globally in styles.scss
+  body {
+    font-family: 'HacenTunisia', sans-serif;
+  }

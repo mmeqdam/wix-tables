@@ -1,0 +1,415 @@
+@font-face {
+  font-family: "hacen_tunisia";
+  src: url("alfont_com_hacen-tunisia-webfont.woff2") format("woff2"), url("alfont_com_hacen-tunisia-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: "hacen_tunisia", sans-serif;
+}
+
+.projetsCardsHolder {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 1em;
+}
+.projetsCardsHolder .project-card {
+  width: 100%;
+  max-width: 350px;
+  background-image: url(https://static.vecteezy.com/system/resources/previews/045/890/056/non_2x/landscape-illustration-of-arabian-sand-desert-with-dunes-free-vector.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 1.5em 1em;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.projetsCardsHolder .project-card:hover {
+  transform: scale(1.06);
+}
+.projetsCardsHolder .project-card img {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.projetsCardsHolder .project-card .teacherName {
+  font-size: 1.5em;
+  margin-bottom: 0;
+  margin-top: 1.4em;
+}
+.projetsCardsHolder .project-card .projectNumber {
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  row-gap: 4px;
+  font-weight: 600;
+  flex-direction: column;
+}
+.projetsCardsHolder .project-card .projectNumber span {
+  background-color: white;
+  padding: 0.1em 1em;
+  border-radius: 50px;
+  font-size: 0.85em;
+  text-align: center;
+}
+.projetsCardsHolder .project-card .remainingTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  margin-top: 2em;
+}
+.projetsCardsHolder .project-card .remainingTime strong {
+  font-size: 1.1em;
+  margin-bottom: 7px;
+  font-weight: 400;
+}
+.projetsCardsHolder .project-card .remainingTime span {
+  background-color: #0BDA51;
+  padding: 0.4em 1.5em;
+  border-radius: 50px;
+  font-weight: 600;
+}
+.projetsCardsHolder .project-card .remainingTime .time-over {
+  background-color: #C70039;
+  color: white;
+}
+
+.switchBtn {
+  display: block;
+  margin: 1em auto;
+  outline: none;
+  border: none;
+  background-color: rgb(255, 204, 42);
+  padding: 1em 2em;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  font-weight: 600;
+  background-image: url(https://static.vecteezy.com/system/resources/previews/045/890/056/non_2x/landscape-illustration-of-arabian-sand-desert-with-dunes-free-vector.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.switchBtn span {
+  background-color: white;
+  width: 25px;
+  border-radius: 50px;
+}
+
+.projectDataHolder {
+  width: 100%;
+  display: flex;
+  border-top: 2px solid rgb(229, 228, 244);
+  min-height: 100vh;
+}
+@media (max-width: 500px) {
+  .projectDataHolder {
+    flex-wrap: wrap;
+  }
+}
+.projectDataHolder .leftSide {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 1em;
+}
+.projectDataHolder .leftSide .gobackbtnholder {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.projectDataHolder .leftSide .gobacktohome {
+  width: 200px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(229, 228, 244);
+  border: 1px solid black;
+  border-radius: 40px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  padding: 0.6em 0;
+  transition: transform 0.3s ease;
+}
+.projectDataHolder .leftSide .gobacktohome:hover {
+  transform: scale(1.06);
+}
+.projectDataHolder .leftSide .gobacktohome img {
+  width: 16px;
+  margin-bottom: -0.1em;
+}
+.projectDataHolder .leftSide .banner {
+  background-image: url(https://static.vecteezy.com/system/resources/previews/045/890/056/non_2x/landscape-illustration-of-arabian-sand-desert-with-dunes-free-vector.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 250px;
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 1em;
+  display: flex;
+  font-size: 2em;
+  font-weight: 700;
+  padding-left: 2em;
+  justify-content: space-between;
+}
+.projectDataHolder .leftSide .banner span {
+  font-size: 1.5em;
+}
+.projectDataHolder .leftSide .banner img {
+  width: 100%;
+  max-width: 230px;
+}
+@media (max-width: 500px) {
+  .projectDataHolder .leftSide .banner {
+    flex-wrap: wrap;
+    padding: 1em;
+    height: auto;
+    justify-content: center;
+  }
+  .projectDataHolder .leftSide .banner span {
+    font-size: 1em;
+  }
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse {
+  display: flex;
+  width: 100%;
+  margin-top: 1em;
+}
+@media (max-width: 500px) {
+  .projectDataHolder .leftSide .selectedProjectAnalyse {
+    flex-wrap: wrap;
+  }
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) {
+  border: 2px solid rgb(229, 228, 244);
+  padding: 1em;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > span {
+  font-weight: 700;
+  font-size: 1.3em;
+  margin-bottom: 1.5em;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > span img {
+  width: 25px;
+  margin-right: 10px;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div {
+  position: relative;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div span {
+  position: absolute;
+  font-weight: 700;
+  color: rgb(191, 192, 227);
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div span:nth-child(1) {
+  bottom: -15px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div span:nth-child(3) {
+  top: -15px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div span:nth-child(2) {
+  left: 10px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) > div span:nth-child(4) {
+  right: 10px;
+  transform: translateY(-50%);
+  top: 50%;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) .remainingTime {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) .remainingTime strong {
+  font-size: 1.2em;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(1) .remainingTime span {
+  color: #C70039;
+  font-weight: 600;
+  direction: rtl;
+}
+@media (max-width: 500px) {
+  .projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(2) {
+    flex-wrap: wrap;
+    padding-top: 3em;
+  }
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(2) .section1percentages {
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  justify-content: center;
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(2) .section1percentages div {
+  display: flex;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+}
+@media (max-width: 500px) {
+  .projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(2) .section1percentages div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.projectDataHolder .leftSide .selectedProjectAnalyse > div:nth-child(2) .section2percentages {
+  display: flex;
+  justify-content: center;
+}
+.projectDataHolder .rightSide {
+  background-color: rgb(229, 228, 244);
+  width: 450px;
+  direction: rtl;
+  padding: 2em;
+}
+.projectDataHolder .rightSide .selectedProjectNumber {
+  font-size: 1.5em;
+  display: flex;
+  font-weight: 700;
+  align-items: center;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+}
+.projectDataHolder .rightSide .seperator {
+  border: 1px solid rgba(0, 0, 0, 0.579);
+  margin: 1em 0;
+  border-radius: 70px;
+}
+.projectDataHolder .rightSide .selectedProjectStudents label {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
+  font-weight: 700;
+  font-size: 1.3em;
+  margin-bottom: 0.7em;
+}
+.projectDataHolder .rightSide .selectedProjectStudents label img {
+  width: 30px;
+  background-color: white;
+  padding: 0.2em;
+  border-radius: 10px;
+  margin-top: 0.2em;
+}
+.projectDataHolder .rightSide .selectedProjectStudents span {
+  display: block;
+  background-color: white;
+  padding: 0.5em 1em;
+  margin-bottom: 0.4em;
+  border-radius: 60px;
+  text-align: right;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid black;
+}
+.projectDataHolder .rightSide .selectedProjectNote {
+  margin-top: 1em;
+}
+.projectDataHolder .rightSide .selectedProjectNote label {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
+  font-weight: 700;
+  font-size: 1.3em;
+  margin-bottom: 0.7em;
+}
+.projectDataHolder .rightSide .selectedProjectNote label img {
+  width: 30px;
+  background-color: white;
+  padding: 0.2em;
+  border-radius: 10px;
+  margin-top: 0.2em;
+}
+.projectDataHolder .rightSide .selectedProjectNote p {
+  background-image: url(https://img.freepik.com/premium-photo/notebook-paper-background-lined-notebook-paper-crumpled-paper-background_322958-5175.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 300px;
+  padding: 1em;
+  padding-left: 2em;
+  border-radius: 10px;
+  max-width: 100%;
+  line-height: 25px;
+  font-weight: 500;
+}
+.projectDataHolder .rightSide .selectedProjectTeacher {
+  font-size: 1.3em;
+  font-weight: 700;
+  display: block;
+  margin: 0.5em 0;
+}
+.projectDataHolder .rightSide .selectedProjectTeacher img {
+  width: 30px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.progress {
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  margin: -80px 0 0 -80px;
+}
+
+.progress-circle {
+  transform: rotate(-90deg);
+  margin-top: -40px;
+}
+
+.progress-circle-back {
+  fill: none;
+  stroke: #D2D2D2;
+  stroke-width: 10px;
+}
+
+.progress-circle-prog {
+  fill: none;
+  stroke: #7E3451;
+  stroke-width: 10px;
+  stroke-dasharray: 0 999;
+  stroke-dashoffset: 0px;
+  transition: stroke-dasharray 0.7s linear 0s;
+}
+
+.progress-text {
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  text-align: center;
+  font-size: 2em;
+}/*# sourceMappingURL=app.component.css.map */
