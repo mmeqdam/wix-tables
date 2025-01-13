@@ -1,88 +1,181 @@
-<div *ngIf="isLoading;else mainContent" class="d-flex justify-content-center w-100 " style="margin-top: 30vh;">
-  <div class="card" style="background-color: unset !important; border: unset !important;">
-       <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration="1s"></p-progressSpinner>
-   </div>
+<div
+  *ngIf="isLoading; else mainContent"
+  class="d-flex justify-content-center w-100"
+  style="margin-top: 30vh"
+>
+  <div
+    class="card"
+    style="background-color: unset !important; border: unset !important"
+  >
+    <p-progressSpinner
+      styleClass="w-4rem h-4rem"
+      strokeWidth="8"
+      fill="var(--surface-ground)"
+      animationDuration="1s"
+    ></p-progressSpinner>
+  </div>
 </div>
 
 <ng-template #mainContent>
-  <button (click)="SwitchVersion()" class="switchBtn">{{version === 1 ? 'الذهاب لجدول المشاريع' : 'الرئيسية'}}</button>
+  <button (click)="SwitchVersion()" class="switchBtn">
+    {{ version === 1 ? "الذهاب لجدول المشاريع" : "الرئيسية" }}
+  </button>
   <div *ngIf="version == 2" class="bg-transparent">
     <p-table
-    #dt
-    [value]="projects"
-    [columns]="selectedColumns"
-    [globalFilterFields]="['title','title1','summary','school','teacherid','students','class','startDate','endDate','date','time','progression_percentage','notes','presentation_clarity','work_quality','innovation','companionship','rating']"
-    dataKey="title1"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true"
-    [scrollable]="true"
-    scrollHeight="400px"
-    [rowHover]="true"
-    [rows]="5"
-    class="bg-transparent"
-    [tableStyle]="{'min-width':'50rem','background-color':'transparent'}"
-    styleClass="p-datatable-sm p-datatable-striped"
-    [paginator]="true"
-    [columnResizeMode]="''"
-    (onEditComplete)="Edited($event)"
-    [filterLocale]="'ar'"
+      #dt
+      [value]="projects"
+      [columns]="selectedColumns"
+      [globalFilterFields]="[
+        'title',
+        'title1',
+        'summary',
+        'school',
+        'teacherid',
+        'students',
+        'class',
+        'startDate',
+        'endDate',
+        'date',
+        'time',
+        'progression_percentage',
+        'notes',
+        'presentation_clarity',
+        'work_quality',
+        'innovation',
+        'companionship',
+        'rating'
+      ]"
+      dataKey="title1"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      [scrollable]="true"
+      scrollHeight="400px"
+      [rowHover]="true"
+      [rows]="5"
+      class="bg-transparent"
+      [tableStyle]="{ 'min-width': '50rem', 'background-color': 'transparent' }"
+      styleClass="p-datatable-sm p-datatable-striped"
+      [paginator]="true"
+      [columnResizeMode]="''"
+      (onEditComplete)="Edited($event)"
+      [filterLocale]="'ar'"
     >
-    <ng-template pTemplate="caption">
-      <div class="d-flex align-items-center gap-2 justify-content-between">
-        <p-multiSelect [options]="allColumns" [pTooltip]="'الأعمدة المرئية'" [(ngModel)]="selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0} اعمده محدده" [style]="{'min-width': '300px'}" (ngModelChange)="ColumnsChanged()"   placeholder="اختيار الأعمدة"></p-multiSelect>
-        <h3 *ngIf="errorHappened" class="text-danger">ليس لديك صلاحيه لتنفيذ الأمر</h3>
-        <h3 *ngIf="multipleroles" class="text-primary">لديك اكثر من role واحد</h3>
-        <div class="d-flex justify-content-center align-items-center gap-2">
-        <p-button *ngIf="isAdmin" styleClass="rounded rounded-4"severity="success" [icon]="'pi pi-save'"  [pTooltip]="'حفظ'" (onClick)="Save()"></p-button>
-          <span class="p-input-icon-left">
+      <ng-template pTemplate="caption">
+        <div
+          class="d-flex  gap-2  "
+        >
+        <p-button
+        *ngIf="isAdmin"
+          styleClass="rounded rounded-4"
+          severity="success"
+          [icon]="'pi pi-save'"
+          [pTooltip]="'حفظ'"
+          (onClick)="Save()"
+        ></p-button>
+          <div class="d-flex flex-column   gap-2">
+            <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input  pInputText type="text" (input)="filter($event,dt)" placeholder="Search..." />
-          </span>
+              <input
+              pInputText
+              type="text"
+              (input)="filter($event, dt)"
+              placeholder="Search..."
+              />
+            </span>
+            <p-multiSelect
+              [options]="allColumns"
+              [pTooltip]="'الأعمدة المرئية'"
+              [(ngModel)]="selectedColumns"
+              optionLabel="header"
+              selectedItemsLabel="{0} اعمده محدده"
+              [style]="{ 'min-width': '270px' }"
+              (ngModelChange)="ColumnsChanged()"
+              placeholder="اختيار الأعمدة"
+            ></p-multiSelect>
+          </div>
+          <h3 *ngIf="errorHappened" class="text-danger">
+            ليس لديك صلاحيه لتنفيذ الأمر
+          </h3>
+          <h3 *ngIf="multipleroles" class="text-primary">
+            لديك اكثر من role واحد
+          </h3>
         </div>
-      </div>
-    </ng-template>
-    
-    <ng-template pTemplate="header">
+      </ng-template>
+
+      <ng-template pTemplate="header">
         <tr>
           <th *ngIf="IsSelected('title')" pFrozenColumn>
             <div class="flex align-items-center">
               أسم المشروع
-                <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="text"
+                field="title"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
           <th *ngIf="IsSelected('title1')">
             <div class="flex align-items-center">
               رقم المشروع
-                <p-columnFilter type="text" field="title1" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="text"
+                field="title1"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
           <th *ngIf="IsSelected('summary')">
             <div class="flex align-items-center">
               تلخيص المشروع
-              <p-columnFilter type="text" field="summary" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="text"
+                field="summary"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th *ngIf="IsSelected('school') && !isSchool && !isTeacher && !isStudent">
+          <th
+            *ngIf="
+              IsSelected('school') && !isSchool && !isTeacher && !isStudent
+            "
+          >
             <div class="flex align-items-center">
               المدرسه
-              <p-columnFilter field="school" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+              <p-columnFilter
+                field="school"
+                matchMode="in"
+                display="menu"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+              >
                 <ng-template pTemplate="header">
-                    <div class="px-3 pt-3 pb-0">
-                        <span class="font-bold">اختيار المدرسه</span>
-                    </div>
+                  <div class="px-3 pt-3 pb-0">
+                    <span class="font-bold">اختيار المدرسه</span>
+                  </div>
                 </ng-template>
-                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                    <p-multiSelect [ngModel]="value" [options]="schools" placeholder="Any" (onChange)="filter($event.value)" optionValue="_id" optionLabel="schoolName">
-                        <ng-template let-option pTemplate="item">
-                            <div class="inline-block vertical-align-middle">
-                                <span class="ml-1 mt-1">{{ option.schoolName }}</span>
-                            </div>
-                        </ng-template>
-                    </p-multiSelect>
+                <ng-template
+                  pTemplate="filter"
+                  let-value
+                  let-filter="filterCallback"
+                >
+                  <p-multiSelect
+                    [ngModel]="value"
+                    [options]="schools"
+                    placeholder="Any"
+                    (onChange)="filter($event.value)"
+                    optionValue="_id"
+                    optionLabel="schoolName"
+                  >
+                    <ng-template let-option pTemplate="item">
+                      <div class="inline-block vertical-align-middle">
+                        <span class="ml-1 mt-1">{{ option.schoolName }}</span>
+                      </div>
+                    </ng-template>
+                  </p-multiSelect>
                 </ng-template>
               </p-columnFilter>
             </div>
@@ -91,232 +184,420 @@
           <th *ngIf="IsSelected('teacherid') && !isTeacher">
             <div class="flex align-items-center">
               المشرف
-              <p-columnFilter field="teacherid" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+              <p-columnFilter
+                field="teacherid"
+                matchMode="in"
+                display="menu"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+              >
                 <ng-template pTemplate="header">
-                    <div class="px-3 pt-3 pb-0">
-                        <span class="font-bold">اختيار المشرف</span>
-                    </div>
+                  <div class="px-3 pt-3 pb-0">
+                    <span class="font-bold">اختيار المشرف</span>
+                  </div>
                 </ng-template>
-                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                    <p-multiSelect [ngModel]="value" [options]="teachers" placeholder="Any" (onChange)="filter($event.value)" optionValue="teacherId" optionLabel="teacherName">
-                        <ng-template let-option pTemplate="item">
-                            <div class="inline-block vertical-align-middle">
-                                <span class="ml-1 mt-1">{{ option.teacherName }}</span>
-                            </div>
-                        </ng-template>
-                    </p-multiSelect>
+                <ng-template
+                  pTemplate="filter"
+                  let-value
+                  let-filter="filterCallback"
+                >
+                  <p-multiSelect
+                    [ngModel]="value"
+                    [options]="teachers"
+                    placeholder="Any"
+                    (onChange)="filter($event.value)"
+                    optionValue="teacherId"
+                    optionLabel="teacherName"
+                  >
+                    <ng-template let-option pTemplate="item">
+                      <div class="inline-block vertical-align-middle">
+                        <span class="ml-1 mt-1">{{ option.teacherName }}</span>
+                      </div>
+                    </ng-template>
+                  </p-multiSelect>
                 </ng-template>
-            </p-columnFilter>
+              </p-columnFilter>
             </div>
           </th>
 
           <th *ngIf="IsSelected('students')">
-          <div class="flex align-items-center">
-            الطلاب
-            <p-columnFilter field="students" matchMode="containsStudent" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-              <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+              الطلاب
+              <p-columnFilter
+                field="students"
+                matchMode="containsStudent"
+                display="menu"
+                [showMatchModes]="false"
+                [showOperator]="false"
+                [showAddButton]="false"
+              >
+                <ng-template pTemplate="header">
                   <div class="px-3 pt-3 pb-0">
-                      <span class="font-bold">اختيار الطلاب</span>
+                    <span class="font-bold">اختيار الطلاب</span>
                   </div>
-              </ng-template>
-              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                  <p-multiSelect [ngModel]="value" [options]="students" placeholder="Any" (onChange)="filter($event.value)" optionLabel="studentName">
-                      <ng-template let-option pTemplate="item">
-                          <div class="inline-block vertical-align-middle">
-                              <span class="ml-1 mt-1">{{ option.studentName }}</span>
-                          </div>
-                      </ng-template>
+                </ng-template>
+                <ng-template
+                  pTemplate="filter"
+                  let-value
+                  let-filter="filterCallback"
+                >
+                  <p-multiSelect
+                    [ngModel]="value"
+                    [options]="students"
+                    placeholder="Any"
+                    (onChange)="filter($event.value)"
+                    optionLabel="studentName"
+                  >
+                    <ng-template let-option pTemplate="item">
+                      <div class="inline-block vertical-align-middle">
+                        <span class="ml-1 mt-1">{{ option.studentName }}</span>
+                      </div>
+                    </ng-template>
                   </p-multiSelect>
-              </ng-template>
-          </p-columnFilter>
-          </div>
+                </ng-template>
+              </p-columnFilter>
+            </div>
           </th>
 
           <th *ngIf="IsSelected('class')">
-          <div class="flex align-items-center">
-            الصف
-              <p-columnFilter type="numeric" field="class" display="menu"></p-columnFilter>
-          </div>
+            <div class="flex align-items-center">
+              الصف
+              <p-columnFilter
+                type="numeric"
+                field="class"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
           <th *ngIf="IsSelected('startDate')">
-          <div class="flex align-items-center">
-            تاريخ البدء
-              <p-columnFilter type="text" field="startDate" display="menu"></p-columnFilter>
-          </div>
+            <div class="flex align-items-center">
+              تاريخ البدء
+              <p-columnFilter
+                type="text"
+                field="startDate"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
           <th *ngIf="IsSelected('endDate')">
-          <div class="flex align-items-center">
-            تاريخ النهايه
-              <p-columnFilter type="text" field="endDate" display="menu"></p-columnFilter>
-          </div>
+            <div class="flex align-items-center">
+              تاريخ النهايه
+              <p-columnFilter
+                type="text"
+                field="endDate"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
           <th *ngIf="IsSelected('date')">
-        <div class="flex align-items-center">
-          تاريخ العرض
-            <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
-        </div>
+            <div class="flex align-items-center">
+              تاريخ العرض
+              <p-columnFilter
+                type="text"
+                field="date"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
           <th *ngIf="IsSelected('time')">
             <div class="flex align-items-center">
               وقت العرض
-                <p-columnFilter type="text" field="time" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="text"
+                field="time"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('progression_percentage')">
+          <th
+            style="background-color: #effee3db"
+            *ngIf="IsSelected('progression_percentage')"
+          >
             <div class="flex align-items-center">
               نسبة الأنجاز
-              <p-columnFilter type="numeric" field="progression_percentage" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="numeric"
+                field="progression_percentage"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('notes')">
+          <th style="background-color: #effee3db" *ngIf="IsSelected('notes')">
             <div class="flex align-items-center">
               ملاحظات
-              <p-columnFilter type="text" field="notes" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="text"
+                field="notes"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('presentation_clarity')">
+          <th
+            style="background-color: #effee3db"
+            *ngIf="IsSelected('presentation_clarity')"
+          >
             <div class="flex align-items-center">
               وضوح العرض
-              <p-columnFilter type="numeric" field="presentation_clarity" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="numeric"
+                field="presentation_clarity"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('work_quality')">
+          <th
+            style="background-color: #effee3db"
+            *ngIf="IsSelected('work_quality')"
+          >
             <div class="flex align-items-center">
               جودة العمل
-              <p-columnFilter type="numeric" field="work_quality" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="numeric"
+                field="work_quality"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
-          
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('innovation')">
+
+          <th
+            style="background-color: #effee3db"
+            *ngIf="IsSelected('innovation')"
+          >
             <div class="flex align-items-center">
               الأصالة والإبداع
-              <p-columnFilter type="numeric" field="innovation" display="menu"></p-columnFilter>
+              <p-columnFilter
+                type="numeric"
+                field="innovation"
+                display="menu"
+              ></p-columnFilter>
             </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('companionship')">
-        <div class="flex align-items-center">
-          الشراكة والتعاون
-          <p-columnFilter type="numeric" field="companionship" display="menu"></p-columnFilter>
-        </div>
+          <th
+            style="background-color: #effee3db"
+            *ngIf="IsSelected('companionship')"
+          >
+            <div class="flex align-items-center">
+              الشراكة والتعاون
+              <p-columnFilter
+                type="numeric"
+                field="companionship"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
-          <th style="background-color: #effee3db;" *ngIf="IsSelected('rating')">
-        <div class="flex align-items-center">
-          العلامة النهائية
-          <p-columnFilter type="numeric" field="rating" display="menu"></p-columnFilter>
-        </div>
+          <th style="background-color: #effee3db" *ngIf="IsSelected('rating')">
+            <div class="flex align-items-center">
+              العلامة النهائية
+              <p-columnFilter
+                type="numeric"
+                field="rating"
+                display="menu"
+              ></p-columnFilter>
+            </div>
           </th>
 
           <th>
-            <div *ngIf="selectedColumns.length != 0 && isAdmin" class="d-flex justify-content-center px-1" style="width: fit-content;">
+            <div
+              *ngIf="selectedColumns.length != 0 && isAdmin"
+              class="d-flex justify-content-center px-1"
+              style="width: fit-content"
+            >
               الأوامر
             </div>
           </th>
-
         </tr>
-    </ng-template>
+      </ng-template>
 
-    <ng-template pTemplate="body" let-product let-editing="editing">
+      <ng-template pTemplate="body" let-product let-editing="editing">
         <tr>
-          <td pFrozenColumn [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title" *ngIf="IsSelected('title')"  pEditableColumnField="title">
+          <td
+            pFrozenColumn
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.title"
+            *ngIf="IsSelected('title')"
+            pEditableColumnField="title"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.title" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.title"
+                />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.title }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.title1" *ngIf="IsSelected('title1')" pEditableColumnField="title1">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.title1"
+            *ngIf="IsSelected('title1')"
+            pEditableColumnField="title1"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.title1" required />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.title1"
+                  required
+                />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.title1 }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.summary" *ngIf="IsSelected('summary')" pEditableColumnField="summary">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.summary"
+            *ngIf="IsSelected('summary')"
+            pEditableColumnField="summary"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <textarea [readonly]="!isAdmin" pInputTextarea [autoResize]="false"  [(ngModel)]="product.summary" required ></textarea>
+                <textarea
+                  [readonly]="!isAdmin"
+                  pInputTextarea
+                  [autoResize]="false"
+                  [(ngModel)]="product.summary"
+                  required
+                ></textarea>
               </ng-template>
               <ng-template pTemplate="output">
-                <p class="text-truncate" style="max-width: 150px;">
-
+                <p class="text-truncate" style="max-width: 150px">
                   {{ product?.summary }}
                 </p>
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.school" *ngIf="IsSelected('school') && !isSchool && !isTeacher && !isStudent" pEditableColumnField="school">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.school"
+            *ngIf="
+              IsSelected('school') && !isSchool && !isTeacher && !isStudent
+            "
+            pEditableColumnField="school"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown appendTo="body" [options]="schools" optionValue="_id" optionLabel="schoolName" [(ngModel)]="product.school"></p-dropdown>
+                <p-dropdown
+                  appendTo="body"
+                  [options]="schools"
+                  optionValue="_id"
+                  optionLabel="schoolName"
+                  [(ngModel)]="product.school"
+                ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{ getSchoolName(product?.school) }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.teacherid" *ngIf="IsSelected('teacherid') && !isTeacher" pEditableColumnField="teacherid">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.teacherid"
+            *ngIf="IsSelected('teacherid') && !isTeacher"
+            pEditableColumnField="teacherid"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown appendTo="body" [readonly]="isStudent" [disabled]="isStudent" [options]="teachers" optionValue="teacherId" optionLabel="teacherName" [(ngModel)]="product.teacherid"></p-dropdown>
+                <p-dropdown
+                  appendTo="body"
+                  [readonly]="isStudent"
+                  [disabled]="isStudent"
+                  [options]="teachers"
+                  optionValue="teacherId"
+                  optionLabel="teacherName"
+                  [(ngModel)]="product.teacherid"
+                ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{ getTeacherName(product?.teacherid) }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.students" *ngIf="IsSelected('students')" pEditableColumnField="students">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.students"
+            *ngIf="IsSelected('students')"
+            pEditableColumnField="students"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-multiSelect 
-                appendTo="body" 
-                [readonly]="isStudent" 
-                [disabled]="isStudent" 
-                [options]="students" 
-                [appendTo]="'body'" 
-                optionLabel="studentName"
-                optionValue="studentName" 
-                placeholder="Select Students" 
-                [(ngModel)]="product.studentsNames"
-                (onChange)="SomethingInTableChangedSelect(product.title1)"
+                <p-multiSelect
+                  appendTo="body"
+                  [readonly]="isStudent"
+                  [disabled]="isStudent"
+                  [options]="students"
+                  [appendTo]="'body'"
+                  optionLabel="studentName"
+                  optionValue="studentName"
+                  placeholder="Select Students"
+                  [(ngModel)]="product.studentsNames"
+                  (onChange)="SomethingInTableChangedSelect(product.title1)"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
-                <p class="text-truncate" style="max-width: 150px;">
+                <p class="text-truncate" style="max-width: 150px">
                   {{ getStudentNames(product?.students ?? []) }}
                 </p>
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.class" *ngIf="IsSelected('class')" pEditableColumnField="class">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.class"
+            *ngIf="IsSelected('class')"
+            pEditableColumnField="class"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" type="number" pInputText [(ngModel)]="product.class" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  type="number"
+                  pInputText
+                  [(ngModel)]="product.class"
+                />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ product?.class }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.startDate" *ngIf="IsSelected('startDate')" pEditableColumnField="startDate">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.startDate"
+            *ngIf="IsSelected('startDate')"
+            pEditableColumnField="startDate"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.startDate" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.startDate"
+                />
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'"  [(ngModel)]="product.startDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -324,10 +605,21 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.endDate" *ngIf="IsSelected('endDate')" pEditableColumnField="endDate">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.endDate"
+            *ngIf="IsSelected('endDate')"
+            pEditableColumnField="endDate"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.endDate" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.endDate"
+                />
                 <!-- <p-calendar [appendTo]="'body'" [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.endDate"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -335,10 +627,21 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.date" *ngIf="IsSelected('date')" pEditableColumnField="date">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.date"
+            *ngIf="IsSelected('date')"
+            pEditableColumnField="date"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="text" [(ngModel)]="product.date" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="product.date"
+                />
                 <!-- <p-calendar [appendTo]="'body'"  [dateFormat]="'yy-mm-dd'" [(ngModel)]="product.date"></p-calendar> -->
               </ng-template>
               <ng-template pTemplate="output">
@@ -346,260 +649,609 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.time" *ngIf="IsSelected('time')" pEditableColumnField="time">
+          <td
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.time"
+            *ngIf="IsSelected('time')"
+            pEditableColumnField="time"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="time" [(ngModel)]="product.time" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="time"
+                  [(ngModel)]="product.time"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.time?.toString()?.substring(0,5) }}
+                {{ product?.time?.toString()?.substring(0, 5) }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.progression_percentage" *ngIf="IsSelected('progression_percentage')" pEditableColumnField="progression_percentage">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.progression_percentage"
+            *ngIf="IsSelected('progression_percentage')"
+            pEditableColumnField="progression_percentage"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.progression_percentage" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.progression_percentage"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.progression_percentage + '%' }}
+                {{ product?.progression_percentage + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.notes" *ngIf="IsSelected('notes')" pEditableColumnField="notes">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.notes"
+            *ngIf="IsSelected('notes')"
+            pEditableColumnField="notes"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText [(ngModel)]="product.notes" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  [(ngModel)]="product.notes"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                <p class="text-truncate" style="max-width: 150px;">
+                <p class="text-truncate" style="max-width: 150px">
                   {{ product?.notes }}
                 </p>
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.presentation_clarity" *ngIf="IsSelected('presentation_clarity')" pEditableColumnField="presentation_clarity">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.presentation_clarity"
+            *ngIf="IsSelected('presentation_clarity')"
+            pEditableColumnField="presentation_clarity"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.presentation_clarity" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.presentation_clarity"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.presentation_clarity + '%' }}
+                {{ product?.presentation_clarity + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
 
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.work_quality" *ngIf="IsSelected('work_quality')" pEditableColumnField="work_quality">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.work_quality"
+            *ngIf="IsSelected('work_quality')"
+            pEditableColumnField="work_quality"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.work_quality" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.work_quality"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.work_quality + '%' }}
+                {{ product?.work_quality + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
 
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.innovation" *ngIf="IsSelected('innovation')" pEditableColumnField="innovation">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.innovation"
+            *ngIf="IsSelected('innovation')"
+            pEditableColumnField="innovation"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.innovation" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.innovation"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ (product?.innovation || "0")+ '%' }}
+                {{ (product?.innovation || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
 
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.companionship" *ngIf="IsSelected('companionship')" pEditableColumnField="companionship">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.companionship"
+            *ngIf="IsSelected('companionship')"
+            pEditableColumnField="companionship"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)"  [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.companionship" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.companionship"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.companionship + '%' }}
+                {{ product?.companionship + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td style="background-color: #effee3db;" [pEditableColumnRowIndex]="product.title1" [pEditableColumn]="product.rating" *ngIf="IsSelected('rating')" pEditableColumnField="rating">
+          <td
+            style="background-color: #effee3db"
+            [pEditableColumnRowIndex]="product.title1"
+            [pEditableColumn]="product.rating"
+            *ngIf="IsSelected('rating')"
+            pEditableColumnField="rating"
+          >
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input  (input)="SomethingInTableChanged(product.title1)" [readonly]="!isAdmin" pInputText type="number" [(ngModel)]="product.rating" />
+                <input
+                  (input)="SomethingInTableChanged(product.title1)"
+                  [readonly]="!isAdmin"
+                  pInputText
+                  type="number"
+                  [(ngModel)]="product.rating"
+                />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.rating + '%' }}
+                {{ product?.rating + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td *ngIf="selectedColumns.length != 0 && isAdmin" >
-            <div class="d-flex justify-content-center px-1" style="width: fit-content;"></div>
-            <p-button styleClass="rounded rounded-4"severity="danger" [icon]="'pi pi-trash'" size="small" [pTooltip]="'حذف'" (onClick)="Delete(product.title1)"></p-button>
+          <td *ngIf="selectedColumns.length != 0 && isAdmin">
+            <div
+              class="d-flex justify-content-center px-1"
+              style="width: fit-content"
+            ></div>
+            <p-button
+              styleClass="rounded rounded-4"
+              severity="danger"
+              [icon]="'pi pi-trash'"
+              size="small"
+              [pTooltip]="'حذف'"
+              (onClick)="Delete(product.title1)"
+            ></p-button>
           </td>
         </tr>
-    </ng-template>
+      </ng-template>
 
-    <ng-template pTemplate="paginatorright">
-          <p-button styleClass="rounded rounded-4" *ngIf="isAdmin" size="small" [icon]="'pi pi-plus'" [pTooltip]="'اضافة'" (onClick)="AddEntry()"></p-button>
-    </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button
+          styleClass="rounded rounded-4"
+          *ngIf="isAdmin"
+          size="small"
+          [icon]="'pi pi-plus'"
+          [pTooltip]="'اضافة'"
+          (onClick)="AddEntry()"
+        ></p-button>
+      </ng-template>
 
-    <ng-template pTemplate="paginatorleft">
+      <ng-template pTemplate="paginatorleft">
         <div class="mx-auto"></div>
-    </ng-template>
+      </ng-template>
     </p-table>
   </div>
   <div *ngIf="version == 1" class="version2Holder">
     <div *ngIf="projects.length === 0">
       <p>No projects available.</p>
     </div>
-    <div *ngIf="isEmptyObject(selectedProject) && projects.length > 0" class="projetsCardsHolder">
-
-      <div *ngFor="let project of projects" class="project-card" dir="rtl" (click)="selectedProject = project">
+    <div
+      *ngIf="isEmptyObject(selectedProject) && projects.length > 0"
+      class="projetsCardsHolder"
+    >
+      <div
+        *ngFor="let project of projects"
+        class="project-card"
+        dir="rtl"
+        (click)="selectedProject = project"
+      >
         <!-- Title -->
-        <h3>{{ project.title || 'هذا المشروع ليس له عنوان حتى الآن' }}</h3>
-      
+        <h3>{{ project.title || "هذا المشروع ليس له عنوان حتى الآن" }}</h3>
+
         <!-- Teacher Name -->
         <p class="teacherName">
           <strong>{{ getTeacherName(project.teacherid) }}</strong>
         </p>
-      
+
         <!-- Image -->
-        <img [src]="project?.mediagallery?.[0]?.src ? removeAfterLastSlash(project!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/')) : 'https://static.wixstatic.com/media/e09081_ae24ba5a1e5b4fca9512687fd707d6c6~mv2.png' " alt="Project Media">
-      
+        <img
+          [src]="project?.mediagallery?.[0]?.src ? removeAfterLastSlash(project!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/')) : 'https://static.wixstatic.com/media/e09081_ae24ba5a1e5b4fca9512687fd707d6c6~mv2.png' "
+          alt="Project Media"
+        />
+
         <!-- Project Number -->
         <p class="projectNumber">
           رقم المشروع
-          <span>{{ project.title1 || 'هذا المشروع ليس له رقم حتى الآن' }}</span>
+          <span>{{ project.title1 || "هذا المشروع ليس له رقم حتى الآن" }}</span>
         </p>
-      
+
         <!-- Remaining Time -->
         <p class="remainingTime">
           <strong>الوقت المتبقي لنهاية المشروع</strong>
           <span
-            [ngClass]="{ 'time-over': calculateTimeRemaining(project.endDate) === 'انتهى الوقت', 
-                          'time-remaining': calculateTimeRemaining(project.endDate) !== 'انتهى الوقت' }"
+            [ngClass]="{
+              'time-over':
+                calculateTimeRemaining(project.endDate) === 'انتهى الوقت',
+              'time-remaining':
+                calculateTimeRemaining(project.endDate) !== 'انتهى الوقت'
+            }"
           >
-            {{ calculateTimeRemaining(project.endDate) || 'لم يتم تعيين الوقت حتى الآن' }}
+            {{
+              calculateTimeRemaining(project.endDate) ||
+                "لم يتم تعيين الوقت حتى الآن"
+            }}
           </span>
         </p>
       </div>
-      
-
     </div>
     <div *ngIf="!isEmptyObject(selectedProject)" class="projectDataHolder">
-        <div class="leftSide">
-          <div class="gobackbtnholder">
-            <button (click)="selectedProject = {}" class="gobacktohome"><img src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/back-arrow-icon.png">جميع المشاريع</button>
-          </div>
-          <div class="banner">
-            <span>{{selectedProject.title}}</span>
-            <img [src]="removeAfterLastSlash(selectedProject!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/'))"
-     alt="Project Media">
-
-
-
-          </div>
-          <div class="rightSideMobile">
-            <label class="selectedProjectNumber">رقم المشروع :<span>{{ selectedProject.title1 }}</span></label>
-            <div class="seperator"></div>
-            <label class="selectedProjectTeacher">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s">
-              مشرف المشروع:
-              <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label>
-            <label class="selectedProjectTeacher">
-              <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png">
-              الصف الدراسي:
-              <span>{{ selectedProject.class }}</span></label>
-            
-            <div class="selectedProjectStudents">
-              <label><img src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png">فريق المشروع</label>
-              <span *ngFor="let studentN of selectedProject?.studentsNames">
-                  {{studentN}}
-              </span>
-            </div>
-            <label class="selectedProjectTeacher" style="margin-top: 1em;margin-bottom: 1em;">
-              
-              وصف مختصر:
-              <span style="font-size: .75em;">{{ selectedProject.description }}</span></label>
-            <div class="selectedProjectNote">
-              <label><img src="https://www.svgrepo.com/show/459903/create-note.svg">الملاحظات</label>
-              <p>{{selectedProject.notes}}</p>
-            </div>
-          </div>
-          <div class="selectedProjectAnalyse">
-            <div>
-                <span><img src="https://cdn-icons-png.flaticon.com/512/1522/1522150.png">نسبة الإنجاز</span>
-                <div>
-                  <span>50%</span>
-                  <span>25%</span>
-                  <span>0%</span>
-                  <span>75%</span>
-                  <div align="center">
-                    <circle-progress *ngIf="selectedProject" [key]="selectedProject ? selectedProject.title : null" [showSubtitle]="false" [titleFontSize]="'56'" [title]="selectedProject.progression_percentage !== undefined && selectedProject.progression_percentage !== null ? selectedProject.progression_percentage.toString() + '%' : ''" [percent]="selectedProject.progression_percentage ?? 0"  [space]="-10" [radius]="100" [titleFontWeight]="'800'" [outerStrokeWidth]="15"
-                      [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'" [innerStrokeColor]="'#e5e4f4'" [animation]="true"
-                      [animationDuration]="1000"></circle-progress>
-                  </div>
-                </div>
-                <p class="remainingTime"><strong>الوقت المتبقي لنهاية المشروع</strong> <span [ngClass]="{ 'time-over': calculateTimeRemaining(selectedProject.endDate) === 'انتهى الوقت', 'time-remaining': calculateTimeRemaining(selectedProject.endDate) !== 'الوقت انتهى' }">{{ calculateTimeRemaining(selectedProject.endDate) }}</span></p>
-            </div>
-
-            <div>
-              <div class="section1percentages">
-                <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.work_quality !== undefined && selectedProject.work_quality !== null ? selectedProject.work_quality.toString() + '%' : ''" [percent]="selectedProject.work_quality ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'"  [innerStrokeColor]="(selectedProject.work_quality ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
-                  [animationDuration]="1000" [subtitle]="'جودة العمل'" [subtitleFontSize]="'17'" [subtitleColor]="'white'">
-            </circle-progress>
-
-            <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.presentation_clarity !== undefined && selectedProject.presentation_clarity !== null ? selectedProject.presentation_clarity.toString() + '%' : ''" [percent]="selectedProject.presentation_clarity ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.presentation_clarity ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
-                  [animationDuration]="1000" [subtitle]="'وضوح العرض'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
-            </circle-progress></div>
-
-                <div><circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.innovation !== undefined && selectedProject.innovation !== null ? selectedProject.innovation.toString() + '%' : '0%'" [percent]="selectedProject.innovation ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.innovation ?? 0) > 0 ? '#6e66fd' : '#D0D0D0' " [animation]="true" 
-                  [animationDuration]="1000" [subtitle]="'الأصالة و الإبداع'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
-            </circle-progress>
-
-            <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.companionship !== undefined && selectedProject.companionship !== null ? selectedProject.companionship.toString() + '%' : ''" [percent]="selectedProject.companionship ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="18"
-                  [innerStrokeWidth]="100" [titleColor]="'white'" [outerStrokeColor]="'#40cfc0'" [innerStrokeColor]="(selectedProject.companionship ?? 0) > 0 ? '#6961fe' : '#D0D0D0' " [animation]="true" 
-                  [animationDuration]="1000" [subtitle]="'الشراكة و التعاون'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" >
-            </circle-progress></div>
-              </div>
-              <div class="section2percentages">
-                <circle-progress *ngIf="selectedProject" [outerStrokeLinecap]="'square'" [key]="selectedProject ? selectedProject.title : null"  [titleFontSize]="'30'" [title]="selectedProject.rating !== undefined && selectedProject.rating !== null ? selectedProject.rating.toString() + '%' : ''" [percent]="selectedProject.rating ?? 0"  [space]="0" [radius]="80" [titleFontWeight]="'800'" [outerStrokeWidth]="19"
-                  [innerStrokeWidth]="100" [outerStrokeColor]="'#f59a16'" [outerStrokeGradientStopColor]="'#f59a16'"  [showBackground]="true" [innerStrokeColor]="(selectedProject.rating ?? 0) > 0 ? '#ff345f' : '#D0D0D0' " [animation]="true" 
-                  [animationDuration]="1000" [subtitle]="'العلامة النهائية'" [subtitleFontSize]="'17'" [subtitleColor]="'white'" [titleColor]="'white'">
-            </circle-progress>
-              </div>
-            </div>
-          </div>
+      <div class="leftSide">
+        <div class="gobackbtnholder">
+          <button (click)="selectedProject = {}" class="gobacktohome">
+            <img
+              src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/back-arrow-icon.png"
+            />جميع المشاريع
+          </button>
         </div>
-        <div class="rightSide">
-          <label class="selectedProjectNumber">رقم المشروع :<span>{{ selectedProject.title1 }}</span></label>
+        <div class="banner">
+          <span>{{ selectedProject.title }}</span>
+          <img
+            [src]="
+              removeAfterLastSlash(
+                selectedProject!.mediagallery![0].src.replace(
+                  'wix:image://v1/',
+                  'https://static.wixstatic.com/media/'
+                )
+              )
+            "
+            alt="Project Media"
+          />
+        </div>
+        <div class="rightSideMobile">
+          <label class="selectedProjectNumber"
+            >رقم المشروع :<span>{{ selectedProject.title1 }}</span></label
+          >
           <div class="seperator"></div>
           <label class="selectedProjectTeacher">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
+            />
             مشرف المشروع:
-            <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label>
+            <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+          >
           <label class="selectedProjectTeacher">
-            <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png">
+            <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
             الصف الدراسي:
-            <span>{{ selectedProject.class }}</span></label>
-          
+            <span>{{ selectedProject.class }}</span></label
+          >
+
           <div class="selectedProjectStudents">
-            <label><img src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png">فريق المشروع</label>
+            <label
+              ><img
+                src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
+              />فريق المشروع</label
+            >
             <span *ngFor="let studentN of selectedProject?.studentsNames">
-                {{studentN}}
+              {{ studentN }}
             </span>
           </div>
-          <label class="selectedProjectTeacher" style="margin-top: 1em;margin-bottom: 1em;">
-            
+          <label
+            class="selectedProjectTeacher"
+            style="margin-top: 1em; margin-bottom: 1em"
+          >
             وصف مختصر:
-            <span style="font-size: .75em;">{{ selectedProject.description }}</span></label>
+            <span style="font-size: 0.75em">{{
+              selectedProject.description
+            }}</span></label
+          >
           <div class="selectedProjectNote">
-            <label><img src="https://www.svgrepo.com/show/459903/create-note.svg">الملاحظات</label>
-            <p>{{selectedProject.notes}}</p>
+            <label
+              ><img
+                src="https://www.svgrepo.com/show/459903/create-note.svg"
+              />الملاحظات</label
+            >
+            <p>{{ selectedProject.notes }}</p>
           </div>
         </div>
-    </div>      
+        <div class="selectedProjectAnalyse">
+          <div>
+            <span
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/1522/1522150.png"
+              />نسبة الإنجاز</span
+            >
+            <div>
+              <span>50%</span>
+              <span>25%</span>
+              <span>0%</span>
+              <span>75%</span>
+              <div align="center">
+                <circle-progress
+                  *ngIf="selectedProject"
+                  [key]="selectedProject ? selectedProject.title : null"
+                  [showSubtitle]="false"
+                  [titleFontSize]="'56'"
+                  [title]="
+                    selectedProject.progression_percentage !== undefined &&
+                    selectedProject.progression_percentage !== null
+                      ? selectedProject.progression_percentage.toString() + '%'
+                      : ''
+                  "
+                  [percent]="selectedProject.progression_percentage ?? 0"
+                  [space]="-10"
+                  [radius]="100"
+                  [titleFontWeight]="'800'"
+                  [outerStrokeWidth]="15"
+                  [innerStrokeWidth]="10"
+                  [outerStrokeColor]="'#4882c2'"
+                  [innerStrokeColor]="'#e5e4f4'"
+                  [animation]="true"
+                  [animationDuration]="1000"
+                ></circle-progress>
+              </div>
+            </div>
+            <p class="remainingTime">
+              <strong>الوقت المتبقي لنهاية المشروع</strong>
+              <span
+                [ngClass]="{
+                  'time-over':
+                    calculateTimeRemaining(selectedProject.endDate) ===
+                    'انتهى الوقت',
+                  'time-remaining':
+                    calculateTimeRemaining(selectedProject.endDate) !==
+                    'الوقت انتهى'
+                }"
+                >{{ calculateTimeRemaining(selectedProject.endDate) }}</span
+              >
+            </p>
+          </div>
+
+          <div>
+            <div class="section1percentages">
+              <div>
+                <circle-progress
+                  *ngIf="selectedProject"
+                  [outerStrokeLinecap]="'square'"
+                  [key]="selectedProject ? selectedProject.title : null"
+                  [titleFontSize]="'30'"
+                  [title]="
+                    selectedProject.work_quality !== undefined &&
+                    selectedProject.work_quality !== null
+                      ? selectedProject.work_quality.toString() + '%'
+                      : ''
+                  "
+                  [percent]="selectedProject.work_quality ?? 0"
+                  [space]="0"
+                  [radius]="80"
+                  [titleFontWeight]="'800'"
+                  [outerStrokeWidth]="18"
+                  [innerStrokeWidth]="100"
+                  [titleColor]="'white'"
+                  [outerStrokeColor]="'#40cfc0'"
+                  [innerStrokeColor]="
+                    (selectedProject.work_quality ?? 0) > 0
+                      ? '#6e66fd'
+                      : '#D0D0D0'
+                  "
+                  [animation]="true"
+                  [animationDuration]="1000"
+                  [subtitle]="'جودة العمل'"
+                  [subtitleFontSize]="'17'"
+                  [subtitleColor]="'white'"
+                >
+                </circle-progress>
+
+                <circle-progress
+                  *ngIf="selectedProject"
+                  [outerStrokeLinecap]="'square'"
+                  [key]="selectedProject ? selectedProject.title : null"
+                  [titleFontSize]="'30'"
+                  [title]="
+                    selectedProject.presentation_clarity !== undefined &&
+                    selectedProject.presentation_clarity !== null
+                      ? selectedProject.presentation_clarity.toString() + '%'
+                      : ''
+                  "
+                  [percent]="selectedProject.presentation_clarity ?? 0"
+                  [space]="0"
+                  [radius]="80"
+                  [titleFontWeight]="'800'"
+                  [outerStrokeWidth]="18"
+                  [innerStrokeWidth]="100"
+                  [titleColor]="'white'"
+                  [outerStrokeColor]="'#40cfc0'"
+                  [innerStrokeColor]="
+                    (selectedProject.presentation_clarity ?? 0) > 0
+                      ? '#6e66fd'
+                      : '#D0D0D0'
+                  "
+                  [animation]="true"
+                  [animationDuration]="1000"
+                  [subtitle]="'وضوح العرض'"
+                  [subtitleFontSize]="'17'"
+                  [subtitleColor]="'white'"
+                >
+                </circle-progress>
+              </div>
+
+              <div>
+                <circle-progress
+                  *ngIf="selectedProject"
+                  [outerStrokeLinecap]="'square'"
+                  [key]="selectedProject ? selectedProject.title : null"
+                  [titleFontSize]="'30'"
+                  [title]="
+                    selectedProject.innovation !== undefined &&
+                    selectedProject.innovation !== null
+                      ? selectedProject.innovation.toString() + '%'
+                      : '0%'
+                  "
+                  [percent]="selectedProject.innovation ?? 0"
+                  [space]="0"
+                  [radius]="80"
+                  [titleFontWeight]="'800'"
+                  [outerStrokeWidth]="18"
+                  [innerStrokeWidth]="100"
+                  [titleColor]="'white'"
+                  [outerStrokeColor]="'#40cfc0'"
+                  [innerStrokeColor]="
+                    (selectedProject.innovation ?? 0) > 0
+                      ? '#6e66fd'
+                      : '#D0D0D0'
+                  "
+                  [animation]="true"
+                  [animationDuration]="1000"
+                  [subtitle]="'الأصالة و الإبداع'"
+                  [subtitleFontSize]="'17'"
+                  [subtitleColor]="'white'"
+                >
+                </circle-progress>
+
+                <circle-progress
+                  *ngIf="selectedProject"
+                  [outerStrokeLinecap]="'square'"
+                  [key]="selectedProject ? selectedProject.title : null"
+                  [titleFontSize]="'30'"
+                  [title]="
+                    selectedProject.companionship !== undefined &&
+                    selectedProject.companionship !== null
+                      ? selectedProject.companionship.toString() + '%'
+                      : ''
+                  "
+                  [percent]="selectedProject.companionship ?? 0"
+                  [space]="0"
+                  [radius]="80"
+                  [titleFontWeight]="'800'"
+                  [outerStrokeWidth]="18"
+                  [innerStrokeWidth]="100"
+                  [titleColor]="'white'"
+                  [outerStrokeColor]="'#40cfc0'"
+                  [innerStrokeColor]="
+                    (selectedProject.companionship ?? 0) > 0
+                      ? '#6961fe'
+                      : '#D0D0D0'
+                  "
+                  [animation]="true"
+                  [animationDuration]="1000"
+                  [subtitle]="'الشراكة و التعاون'"
+                  [subtitleFontSize]="'17'"
+                  [subtitleColor]="'white'"
+                >
+                </circle-progress>
+              </div>
+            </div>
+            <div class="section2percentages">
+              <circle-progress
+                *ngIf="selectedProject"
+                [outerStrokeLinecap]="'square'"
+                [key]="selectedProject ? selectedProject.title : null"
+                [titleFontSize]="'30'"
+                [title]="
+                  selectedProject.rating !== undefined &&
+                  selectedProject.rating !== null
+                    ? selectedProject.rating.toString() + '%'
+                    : ''
+                "
+                [percent]="selectedProject.rating ?? 0"
+                [space]="0"
+                [radius]="80"
+                [titleFontWeight]="'800'"
+                [outerStrokeWidth]="19"
+                [innerStrokeWidth]="100"
+                [outerStrokeColor]="'#f59a16'"
+                [outerStrokeGradientStopColor]="'#f59a16'"
+                [showBackground]="true"
+                [innerStrokeColor]="
+                  (selectedProject.rating ?? 0) > 0 ? '#ff345f' : '#D0D0D0'
+                "
+                [animation]="true"
+                [animationDuration]="1000"
+                [subtitle]="'العلامة النهائية'"
+                [subtitleFontSize]="'17'"
+                [subtitleColor]="'white'"
+                [titleColor]="'white'"
+              >
+              </circle-progress>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rightSide">
+        <label class="selectedProjectNumber"
+          >رقم المشروع :<span>{{ selectedProject.title1 }}</span></label
+        >
+        <div class="seperator"></div>
+        <label class="selectedProjectTeacher">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
+          />
+          مشرف المشروع:
+          <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+        >
+        <label class="selectedProjectTeacher">
+          <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
+          الصف الدراسي:
+          <span>{{ selectedProject.class }}</span></label
+        >
+
+        <div class="selectedProjectStudents">
+          <label
+            ><img
+              src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
+            />فريق المشروع</label
+          >
+          <span *ngFor="let studentN of selectedProject?.studentsNames">
+            {{ studentN }}
+          </span>
+        </div>
+        <label
+          class="selectedProjectTeacher"
+          style="margin-top: 1em; margin-bottom: 1em"
+        >
+          وصف مختصر:
+          <span style="font-size: 0.75em">{{
+            selectedProject.description
+          }}</span></label
+        >
+        <div class="selectedProjectNote">
+          <label
+            ><img
+              src="https://www.svgrepo.com/show/459903/create-note.svg"
+            />الملاحظات</label
+          >
+          <p>{{ selectedProject.notes }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-template>
