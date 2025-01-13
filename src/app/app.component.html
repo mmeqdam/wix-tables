@@ -48,8 +48,7 @@
       dataKey="title1"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
-      [scrollable]="true"
-      scrollHeight="400px"
+     
       [rowHover]="true"
       [rows]="5"
       class="bg-transparent"
@@ -72,7 +71,6 @@
           [pTooltip]="'حفظ'"
           (onClick)="Save()"
         ></p-button>
-          <div class="d-flex flex-column   gap-2">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input
@@ -92,7 +90,6 @@
               (ngModelChange)="ColumnsChanged()"
               placeholder="اختيار الأعمدة"
             ></p-multiSelect>
-          </div>
           <h3 *ngIf="errorHappened" class="text-danger">
             ليس لديك صلاحيه لتنفيذ الأمر
           </h3>
