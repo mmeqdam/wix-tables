@@ -62,43 +62,43 @@
     >
       <ng-template pTemplate="caption">
         <div
-          class="d-flex align-items-center gap-2 justify-content-between dsdd"
-        >  <div class="d-flex justify-content-center align-items-center gap-2">
-            <p-button
-              *ngIf="isAdmin"
-              styleClass="rounded rounded-4"
-              severity="success"
-              [icon]="'pi pi-save'"
-              [pTooltip]="'حفظ'"
-              (onClick)="Save()" 
-            ></p-button>
+          class="d-flex  gap-2  "
+        >
+        <p-button
+        *ngIf="isAdmin"
+          styleClass="rounded rounded-4"
+          severity="success"
+          [icon]="'pi pi-save'"
+          [pTooltip]="'حفظ'"
+          (onClick)="Save()"
+        ></p-button>
+          <div class="d-flex flex-column   gap-2">
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input
-                pInputText
-                type="text"
-                (input)="filter($event, dt)"
-                placeholder="Search..."
+              pInputText
+              type="text"
+              (input)="filter($event, dt)"
+              placeholder="Search..."
               />
             </span>
+            <p-multiSelect
+              [options]="allColumns"
+              [pTooltip]="'الأعمدة المرئية'"
+              [(ngModel)]="selectedColumns"
+              optionLabel="header"
+              selectedItemsLabel="{0} اعمده محدده"
+              [style]="{ 'min-width': '270px' }"
+              (ngModelChange)="ColumnsChanged()"
+              placeholder="اختيار الأعمدة"
+            ></p-multiSelect>
           </div>
-          <p-multiSelect
-            [options]="allColumns"
-            [pTooltip]="'الأعمدة المرئية'"
-            [(ngModel)]="selectedColumns"
-            optionLabel="header"
-            selectedItemsLabel="{0} اعمده محدده"
-            [style]="{ 'min-width': '300px' }"
-            (ngModelChange)="ColumnsChanged()"
-            placeholder="اختيار الأعمدة"
-          ></p-multiSelect>
           <h3 *ngIf="errorHappened" class="text-danger">
             ليس لديك صلاحيه لتنفيذ الأمر
           </h3>
           <h3 *ngIf="multipleroles" class="text-primary">
             لديك اكثر من role واحد
           </h3>
-        
         </div>
       </ng-template>
 
@@ -147,7 +147,7 @@
               <p-columnFilter
                 field="school"
                 matchMode="in"
-                display="menu" 
+                display="menu"
                 [showMatchModes]="false"
                 [showOperator]="false"
                 [showAddButton]="false"

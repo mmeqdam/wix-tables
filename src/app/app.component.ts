@@ -1,11 +1,9 @@
-import { Component, HostListener, OnInit ,SimpleChanges} from '@angular/core';
+import { Component, HostListener, OnInit, SimpleChanges } from '@angular/core';
 import { FilterService } from 'primeng/api';
-import { Table, TableEditCompleteEvent, TableEditEvent } from 'primeng/table';
-import { Observable, share, throttleTime } from 'rxjs';
+import { Table, TableEditCompleteEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
-import { ApiService } from 'src/services/api.service';
 
 interface column{
   value:string,
@@ -29,10 +27,13 @@ export class AppComponent implements OnInit {
   multipleroles: boolean = false;
   teachers: Teacher[] = [];
   allowedRoles = ['Schools', 'Suber Admin', 'Teachers', 'Admin', 'Owner'];
+  
+  // this is the columns that will be shown in the table
   selectedColumns: column[] = [
     { value: 'title', header: 'اسم المشروع' },
     { value: 'title1', header: 'رقم المشروع' },
-    { value: 'summary', header: 'ملخص المشروع' },
+    // the doctor said he dont want it
+    // { value: 'summary', header: 'ملخص المشروع' },
     { value: 'school', header: 'المدرسة' },
     { value: 'teacherid', header: 'المعلم' },
     { value: 'class', header: 'الصف' },
