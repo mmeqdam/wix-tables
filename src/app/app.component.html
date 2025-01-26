@@ -48,7 +48,7 @@
       dataKey="title1"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
-     
+
       [rowHover]="true"
       [rows]="5"
       class="bg-transparent"
@@ -436,7 +436,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.title }}
+                {{ product?.title || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -458,7 +458,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.title1 }}
+                {{ product?.title1 || ""}}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -480,7 +480,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.summary }}
+                  {{ product?.summary || "" }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -504,7 +504,7 @@
                 ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getSchoolName(product?.school) }}
+                {{ getSchoolName(product?.school) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -527,7 +527,7 @@
                 ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product?.teacherid) }}
+                {{ getTeacherName(product?.teacherid) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -576,7 +576,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.class }}
+                {{ product?.class  }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -663,7 +663,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.time?.toString()?.substring(0, 5) }}
+                {{ product?.time?.toString()?.substring(0, 5) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -685,7 +685,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.progression_percentage + "%" }}
+                {{ (product?.progression_percentage || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -707,7 +707,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.notes }}
+                  {{ product?.notes || "" }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -730,7 +730,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.presentation_clarity + "%" }}
+                {{ (product?.presentation_clarity || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -753,7 +753,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.work_quality + "%" }}
+                {{ (product?.work_quality || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -799,7 +799,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.companionship + "%" }}
+                {{( product?.companionship || "0")+ "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -821,7 +821,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.rating + "%" }}
+                {{( product?.rating || "0")+ "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
