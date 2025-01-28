@@ -48,7 +48,6 @@
       dataKey="title1"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
-
       [rowHover]="true"
       [rows]="5"
       class="bg-transparent"
@@ -60,36 +59,35 @@
       [filterLocale]="'ar'"
     >
       <ng-template pTemplate="caption">
-        <div
-          class="d-flex  gap-2  "
-        >
-        <p-button
-        *ngIf="isAdmin"
-          styleClass="rounded rounded-4"
-          severity="success"
-          [icon]="'pi pi-save'"
-          [pTooltip]="'حفظ'"
-          (onClick)="Save()"
-        ></p-button>
-            <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input
+        <div class="d-flex gap-2">
+          <p-button
+          
+            *ngIf="isAdmin"
+            styleClass="rounded rounded-4"
+            severity="success"
+            [icon]="'pi pi-save'"
+            [pTooltip]="'حفظ'"
+            (onClick)="Save()"
+          ></p-button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
               pInputText
               type="text"
               (input)="filter($event, dt)"
               placeholder="Search..."
-              />
-            </span>
-            <p-multiSelect
-              [options]="allColumns"
-              [pTooltip]="'الأعمدة المرئية'"
-              [(ngModel)]="selectedColumns"
-              optionLabel="header"
-              selectedItemsLabel="{0} اعمده محدده"
-              [style]="{ 'min-width': '270px' }"
-              (ngModelChange)="ColumnsChanged()"
-              placeholder="اختيار الأعمدة"
-            ></p-multiSelect>
+            />
+          </span>
+          <p-multiSelect
+            [options]="allColumns"
+            [pTooltip]="'الأعمدة المرئية'"
+            [(ngModel)]="selectedColumns"
+            optionLabel="header"
+            selectedItemsLabel="{0} اعمده محدده"
+            [style]="{ 'min-width': '270px' }"
+            (ngModelChange)="ColumnsChanged()"
+            placeholder="اختيار الأعمدة"
+          ></p-multiSelect>
           <h3 *ngIf="errorHappened" class="text-danger">
             ليس لديك صلاحيه لتنفيذ الأمر
           </h3>
@@ -458,7 +456,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.title1 || ""}}
+                {{ product?.title1 || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -576,7 +574,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.class  }}
+                {{ product?.class }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -799,7 +797,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{( product?.companionship || "0")+ "%" }}
+                {{ (product?.companionship || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -821,7 +819,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{( product?.rating || "0")+ "%" }}
+                {{ (product?.rating || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
