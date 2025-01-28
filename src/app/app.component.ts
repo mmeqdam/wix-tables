@@ -188,47 +188,47 @@ export class AppComponent implements OnInit {
     if (title1 && !this.editedTitles.includes(title1)) {
       this.editedTitles.push(title1); // Only push if title1 is not already in the array
     }
-    // Iterate over editedTitles and apply the logic for each project
-    this.editedTitles.forEach((title) => {
-      // Step 1: Find the project by its title (title1)
-      const project = this.projects.find((p) => p.title1 === title);
+    // // Iterate over editedTitles and apply the logic for each project
+    // this.editedTitles.forEach((title) => {
+    //   // Step 1: Find the project by its title (title1)
+    //   const project = this.projects.find((p) => p.title1 === title);
 
-      if (!project) {
-        console.warn(`Project with title ${title} not found`);
-        return;
-      }
+    //   if (!project) {
+    //     console.warn(`Project with title ${title} not found`);
+    //     return;
+    //   }
 
-      // Step 2: Initialize `students` if it is undefined
-      project.students = project.students ?? [];
+    //   // Step 2: Initialize `students` if it is undefined
+    //   project.students = project.students ?? [];
 
-      // Step 3: Find missing student names in `studentsNames`
-      const missingStudentNames = (project.studentsNames ?? []).filter(
-        (name) =>
-          !(project.students ?? []).some(
-            (student) => student.studentName === name
-          )
-      );
+    //   // Step 3: Find missing student names in `studentsNames`
+    //   const missingStudentNames = (project.studentsNames ?? []).filter(
+    //     (name) =>
+    //       !(project.students ?? []).some(
+    //         (student) => student.studentName === name
+    //       )
+    //   );
 
-      // Step 4: Find missing student objects in the global `students` array
-      const missingStudents = missingStudentNames.map((name) =>
-        this.students.find((student) => student.studentName === name)
-      );
+    //   // Step 4: Find missing student objects in the global `students` array
+    //   const missingStudents = missingStudentNames.map((name) =>
+    //     this.students.find((student) => student.studentName === name)
+    //   );
 
-      // Step 5: Append missing students to `project.students`
-      project.students.push(...missingStudents.filter((student) => student));
+    //   // Step 5: Append missing students to `project.students`
+    //   project.students.push(...missingStudents.filter((student) => student));
 
-      // Step 6: Ensure `students` only contains students from `studentsNames`
-      const updatedStudents = (project.studentsNames ?? [])
-        .map((name) => {
-          // Find the student object by studentName from the global `students` array
-          return this.students.find((student) => student.studentName === name);
-        })
-        .filter((student) => student !== undefined); // Remove any undefined students (if name doesn't match any student)
+    //   // Step 6: Ensure `students` only contains students from `studentsNames`
+    //   const updatedStudents = (project.studentsNames ?? [])
+    //     .map((name) => {
+    //       // Find the student object by studentName from the global `students` array
+    //       return this.students.find((student) => student.studentName === name);
+    //     })
+    //     .filter((student) => student !== undefined); // Remove any undefined students (if name doesn't match any student)
 
-      // Step 7: Overwrite `project.students` with the updated students list
-      project.students = updatedStudents;
-      console.log(`Updated project with title ${title}:`, project);
-    });
+    //   // Step 7: Overwrite `project.students` with the updated students list
+    //   project.students = updatedStudents;
+      // console.log(`Updated project with title ${title}:`, project);
+    // });
   }
   AddEntry() {
     this.isLoading = true;
@@ -262,11 +262,10 @@ export class AppComponent implements OnInit {
     return students
       .map((x) => {
         // Check if x is an object and has a studentName property
-        if (typeof x === 'object' && x !== null && 'studentName' in x) {
           return x.studentName;
-        }
+
         // If it's a string, return it directly
-        return x;
+
       })
       .join(',');
   }
