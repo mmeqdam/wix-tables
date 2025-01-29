@@ -61,7 +61,7 @@
       <ng-template pTemplate="caption">
         <div class="d-flex gap-2">
           <p-button
-          
+
             *ngIf="isAdmin"
             styleClass="rounded rounded-4"
             severity="success"
@@ -478,7 +478,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.summary || "" }}
+                  {{ product?.summary || ""  }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -529,13 +529,13 @@
               </ng-template>
             </p-cellEditor>
           </td>
+          <!-- [pEditableColumnRowIndex]="product.title1"
+          [pEditableColumn]="product.studentsRef" -->
           <td
-            [pEditableColumnRowIndex]="product.title1"
-            [pEditableColumn]="product.students"
             *ngIf="IsSelected('students')"
-            pEditableColumnField="students"
-          >
-            <p-cellEditor>
+            >
+            <!-- pEditableColumnField="students" -->
+            <!-- <p-cellEditor>
               <ng-template pTemplate="input">
                 <p-multiSelect
                   appendTo="body"
@@ -546,16 +546,16 @@
                   optionLabel="studentName"
                   optionValue="studentName"
                   placeholder="Select Students"
-                  [(ngModel)]="product.studentsNames"
+                  [(ngModel)]="product.studentsRef"
                   (onChange)="SomethingInTableChangedSelect(product.title1)"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ getStudentNames(product?.students ?? []) }}
                 </p>
               </ng-template>
-            </p-cellEditor>
+            </p-cellEditor> -->
+            {{ getStudentNames(product?.studentsRef ?? []) }}
           </td>
           <td
             [pEditableColumnRowIndex]="product.title1"

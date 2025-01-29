@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   errorHappened: boolean = false;
   multipleroles: boolean = false;
   teachers: Teacher[] = [];
-  allowedRoles = ['Schools', 'Suber Admin', 'Teachers', 'Admin', 'Owner'];
+  allowedRoles = ['school', 'Suber Admin', 'teacher', 'Admin', 'students'];
 
   // this is the columns that will be shown in the table
   selectedColumns: column[] = [
@@ -174,7 +174,7 @@ export class AppComponent implements OnInit {
     }
   }
   SomethingInTableChanged(title1: number) {
-    console.log('changes');
+
 
     // Check if title1 is already in the editedTitles array
     if (title1 && !this.editedTitles.includes(title1)) {
@@ -182,7 +182,8 @@ export class AppComponent implements OnInit {
     }
   }
   SomethingInTableChangedSelect(title1: number) {
-    console.log('changes');
+    console.log('SomethingInTableChangedSelect ');
+    console.log('editedTitles ', this.editedTitles);
 
     // Check if title1 is already in the editedTitles array
     if (title1 && !this.editedTitles.includes(title1)) {
@@ -227,7 +228,7 @@ export class AppComponent implements OnInit {
 
     //   // Step 7: Overwrite `project.students` with the updated students list
     //   project.students = updatedStudents;
-      // console.log(`Updated project with title ${title}:`, project);
+    // console.log(`Updated project with title ${title}:`, project);
     // });
   }
   AddEntry() {
@@ -248,24 +249,24 @@ export class AppComponent implements OnInit {
     );
   }
   get isTeacher() {
-    return this.roles?.some((role) => role?.title == 'Teachers');
+    return this.roles?.some((role) => role?.title == 'teacher');
   }
 
   get isSchool() {
-    return this.roles?.some((role) => role?.title == 'Schools');
+    return this.roles?.some((role) => role?.title == 'school');
   }
   get isStudent() {
-    return this.roles?.some((role) => role?.title == 'Students');
+    return this.roles?.some((role) => role?.title == 'students');
   }
 
   getStudentNames(students: any[]): string {
+    console.log(students)
     return students
       .map((x) => {
         // Check if x is an object and has a studentName property
-          return x.studentName;
+        return x.studentName;
 
         // If it's a string, return it directly
-
       })
       .join(',');
   }
@@ -348,11 +349,12 @@ export class AppComponent implements OnInit {
     }
     if (message?.projects) {
       this.projects = message.projects;
+      this.students = message.projects.map((project: Project)=>project.studentsRef);
       this.isLoading = false;
     }
-    if (message?.students) {
-      this.students = message.students;
-    }
+    // if (message?.students) {
+    //   this.students = message.students;
+    // }
     if (message?.schools) {
       this.schools = message.schools;
     }
