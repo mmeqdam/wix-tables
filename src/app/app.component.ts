@@ -4,6 +4,7 @@ import { Table, TableEditCompleteEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
+import { PROJECTS, stydents } from 'src/libs/consatns';
 
 interface column {
   value: string;

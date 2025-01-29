@@ -875,7 +875,7 @@
 
         <!-- Teacher Name -->
         <p class="teacherName">
-          <strong>{{ getTeacherName(project.teacherid) }}</strong>
+          <strong *ngFor="let teacher of  project.TeachersTable_projects">{{ teacher.teacherName }}</strong>
         </p>
 
         <!-- Image -->
@@ -942,7 +942,7 @@
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
             />
             مشرف المشروع:
-            <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+            <span *ngFor="let teacher of selectedProject.TeachersTable_projects">{{ teacher.teacherName }}</span></label
           >
           <label class="selectedProjectTeacher">
             <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
@@ -956,8 +956,8 @@
                 src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
               />فريق المشروع</label
             >
-            <span *ngFor="let studentN of selectedProject?.studentsNames">
-              {{ studentN }}
+            <span *ngFor="let student of selectedProject?.studentsRef">
+              {{ student.studentName }}
             </span>
           </div>
           <label
@@ -1225,8 +1225,8 @@
               src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
             />فريق المشروع</label
           >
-          <span *ngFor="let studentN of selectedProject?.studentsNames">
-            {{ studentN }}
+          <span *ngFor="let studentN of selectedProject?.studentsRef">
+            {{ studentN.studentName }}
           </span>
         </div>
         <label
