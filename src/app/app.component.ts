@@ -18,10 +18,10 @@ interface column {
 })
 export class AppComponent implements OnInit {
   title = 'wix-tables';
-  isLoading: boolean = true;
+  isLoading: boolean =  false;
   selectedProject: Project = {};
-  projects: Project[] = [];
-  students: any[] = [];
+  projects: Project[] = PROJECTS;
+  students: any[] = stydents;
   schools: School[] = [];
   version: Number = 1;
   errorHappened: boolean = false;
@@ -160,7 +160,20 @@ export class AppComponent implements OnInit {
     this.showSaveBtn = false;
     this.editedTitles = [];
   }
-  removeAfterLastSlash(url: string): string {
+  removeAfterLastSlash(Project: Project): string {
+ 
+    if (!Project.mediagallery ) {
+      return '';
+    }
+    if ( Project.mediagallery.length === 0) {
+      return '';
+    }
+
+    const url = Project?.mediagallery[0].src?.replace(
+      'wix:image://v1/',
+      'https://static.wixstatic.com/media/'
+    );
+    if (!url) return url; // Return the original URL if it's falsy
     const lastSlashIndex = url.lastIndexOf('/');
     if (lastSlashIndex !== -1) {
       return url.substring(0, lastSlashIndex);

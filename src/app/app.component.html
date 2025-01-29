@@ -61,7 +61,6 @@
       <ng-template pTemplate="caption">
         <div class="d-flex gap-2">
           <p-button
-
             *ngIf="isAdmin"
             styleClass="rounded rounded-4"
             severity="success"
@@ -478,7 +477,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.summary || ""  }}
+                  {{ product?.summary || "" }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -531,9 +530,7 @@
           </td>
           <!-- [pEditableColumnRowIndex]="product.title1"
           [pEditableColumn]="product.studentsRef" -->
-          <td
-            *ngIf="IsSelected('students')"
-            >
+          <td *ngIf="IsSelected('students')">
             <!-- pEditableColumnField="students" -->
             <!-- <p-cellEditor>
               <ng-template pTemplate="input">
@@ -875,7 +872,9 @@
 
         <!-- Teacher Name -->
         <p class="teacherName">
-          <strong *ngFor="let teacher of  project.TeachersTable_projects">{{ teacher.teacherName }}</strong>
+          <strong *ngFor="let teacher of project.TeachersTable_projects">{{
+            teacher.teacherName
+          }}</strong>
         </p>
 
         <!-- Image -->
@@ -923,14 +922,12 @@
           <img
             [src]="
               removeAfterLastSlash(
-                selectedProject!.mediagallery![0].src.replace(
-                  'wix:image://v1/',
-                  'https://static.wixstatic.com/media/'
-                )
+                selectedProject
               )
-            "
-            alt="Project Media"
-          />
+              "
+              alt="Project Media"
+              />
+
         </div>
         <div class="rightSideMobile">
           <label class="selectedProjectNumber"
@@ -942,7 +939,10 @@
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
             />
             مشرف المشروع:
-            <span *ngFor="let teacher of selectedProject.TeachersTable_projects">{{ teacher.teacherName }}</span></label
+            <span
+              *ngFor="let teacher of selectedProject.TeachersTable_projects"
+              >{{ teacher.teacherName }}</span
+            ></label
           >
           <label class="selectedProjectTeacher">
             <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
@@ -1211,7 +1211,12 @@
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
           />
           مشرف المشروع:
-          <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+          <div   >
+            <span
+              *ngFor="let teacher of selectedProject.TeachersTable_projects"
+              >{{ teacher.teacherName }}</span
+            >
+          </div></label
         >
         <label class="selectedProjectTeacher">
           <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
@@ -1225,9 +1230,9 @@
               src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
             />فريق المشروع</label
           >
-          <span *ngFor="let studentN of selectedProject?.studentsRef">
-            {{ studentN.studentName }}
-          </span>
+           <span *ngFor="let student of selectedProject?.studentsRef">
+              {{ student.studentName }}
+            </span>
         </div>
         <label
           class="selectedProjectTeacher"
