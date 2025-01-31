@@ -18,10 +18,10 @@ interface column {
 })
 export class AppComponent implements OnInit {
   title = 'wix-tables';
-  isLoading: boolean =  false;
+  isLoading: boolean =  true;
   selectedProject: Project = {};
-  projects: Project[] = PROJECTS;
-  students: any[] = stydents;
+  projects: Project[] = [];
+  students: any[] = [];
   schools: School[] = [];
   version: Number = 1;
   errorHappened: boolean = false;
@@ -161,7 +161,7 @@ export class AppComponent implements OnInit {
     this.editedTitles = [];
   }
   removeAfterLastSlash(Project: Project): string {
- 
+
     if (!Project.mediagallery ) {
       return '';
     }
