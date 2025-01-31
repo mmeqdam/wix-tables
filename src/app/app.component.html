@@ -879,7 +879,7 @@
 
         <!-- Image -->
         <img
-          [src]="project?.mediagallery?.[0]?.src ? removeAfterLastSlash(project!.mediagallery![0].src.replace('wix:image://v1/', 'https://static.wixstatic.com/media/')) : 'https://static.wixstatic.com/media/e09081_ae24ba5a1e5b4fca9512687fd707d6c6~mv2.png' "
+          [src]=" removeAfterLastSlash(project) "
           alt="Project Media"
         />
 

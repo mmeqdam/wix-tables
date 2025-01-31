@@ -4,7 +4,6 @@ import { Table, TableEditCompleteEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
-
 interface column {
   value: string;
   header: string;
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
   title = 'wix-tables';
   isLoading: boolean =  true;
   selectedProject: Project = {};
-  projects: Project[] = [];
+  projects: Project[] = [] ;
   students: any[] = [];
   schools: School[] = [];
   version: Number = 1;
@@ -161,12 +160,9 @@ export class AppComponent implements OnInit {
   }
   removeAfterLastSlash(Project: Project): string {
 
-    if (!Project.mediagallery ) {
-      return '';
-    }
-    if ( Project.mediagallery.length === 0) {
-      return '';
-    }
+   if (!Project.mediagallery || Project.mediagallery.length === 0) {
+     return 'assets/einshtain.png';
+   }
 
     const url = Project?.mediagallery[0].src?.replace(
       'wix:image://v1/',
@@ -352,7 +348,6 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         this.errorHappened = false;
       }, 1000);
-      
     }
     if (message == 'loaded') {
       this.postMessage({ action: 'getteachers' });
