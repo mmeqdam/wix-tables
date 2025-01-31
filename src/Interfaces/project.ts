@@ -1,6 +1,6 @@
 export class Project {
   title?: string = '';
-  title1?: number | null = 0;
+  title1?: number = 0;
   summary?: string = '';
   description?: string = '';
   class?: number = 0;
@@ -8,7 +8,6 @@ export class Project {
   steps?: string = '';
   objectives?: string = '';
   evaluationCriteria?: string = '';
-  studentsRef?: any[] = [];
   materialsAndTools?: string = '';
   startDate?: string = '';
   endDate?: string = '';
@@ -21,10 +20,8 @@ export class Project {
   companionship?: number = 0;
   progression_percentage?: number = 0;
   students?: any[] = [];
-
   studentsNames?: string[] = [];
-  mediagallery?: any[] = [];
-  TeachersTable_projects?: any[];
+  mediagallery?:any[] = [];
   teacherid?: string = '';
   _createdDate?: any = '';
   _id?: string = '';
