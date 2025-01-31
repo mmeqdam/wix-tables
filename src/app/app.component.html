@@ -48,7 +48,6 @@
       dataKey="title1"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
-     
       [rowHover]="true"
       [rows]="5"
       class="bg-transparent"
@@ -60,36 +59,34 @@
       [filterLocale]="'ar'"
     >
       <ng-template pTemplate="caption">
-        <div
-          class="d-flex  gap-2  "
-        >
-        <p-button
-        *ngIf="isAdmin"
-          styleClass="rounded rounded-4"
-          severity="success"
-          [icon]="'pi pi-save'"
-          [pTooltip]="'حفظ'"
-          (onClick)="Save()"
-        ></p-button>
-            <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input
+        <div class="d-flex gap-2">
+          <p-button
+            *ngIf="isAdmin"
+            styleClass="rounded rounded-4"
+            severity="success"
+            [icon]="'pi pi-save'"
+            [pTooltip]="'حفظ'"
+            (onClick)="Save()"
+          ></p-button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
               pInputText
               type="text"
               (input)="filter($event, dt)"
               placeholder="Search..."
-              />
-            </span>
-            <p-multiSelect
-              [options]="allColumns"
-              [pTooltip]="'الأعمدة المرئية'"
-              [(ngModel)]="selectedColumns"
-              optionLabel="header"
-              selectedItemsLabel="{0} اعمده محدده"
-              [style]="{ 'min-width': '270px' }"
-              (ngModelChange)="ColumnsChanged()"
-              placeholder="اختيار الأعمدة"
-            ></p-multiSelect>
+            />
+          </span>
+          <p-multiSelect
+            [options]="allColumns"
+            [pTooltip]="'الأعمدة المرئية'"
+            [(ngModel)]="selectedColumns"
+            optionLabel="header"
+            selectedItemsLabel="{0} اعمده محدده"
+            [style]="{ 'min-width': '270px' }"
+            (ngModelChange)="ColumnsChanged()"
+            placeholder="اختيار الأعمدة"
+          ></p-multiSelect>
           <h3 *ngIf="errorHappened" class="text-danger">
             ليس لديك صلاحيه لتنفيذ الأمر
           </h3>
@@ -436,7 +433,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.title }}
+                {{ product?.title || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -458,7 +455,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.title1 }}
+                {{ product?.title1 || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -480,7 +477,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.summary }}
+                  {{ product?.summary || "" }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -504,7 +501,7 @@
                 ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getSchoolName(product?.school) }}
+                {{ getSchoolName(product?.school) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -527,17 +524,15 @@
                 ></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ getTeacherName(product?.teacherid) }}
+                {{ getTeacherName(product?.teacherid) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
-          <td
-            [pEditableColumnRowIndex]="product.title1"
-            [pEditableColumn]="product.students"
-            *ngIf="IsSelected('students')"
-            pEditableColumnField="students"
-          >
-            <p-cellEditor>
+          <!-- [pEditableColumnRowIndex]="product.title1"
+          [pEditableColumn]="product.studentsRef" -->
+          <td *ngIf="IsSelected('students')">
+            <!-- pEditableColumnField="students" -->
+            <!-- <p-cellEditor>
               <ng-template pTemplate="input">
                 <p-multiSelect
                   appendTo="body"
@@ -548,16 +543,16 @@
                   optionLabel="studentName"
                   optionValue="studentName"
                   placeholder="Select Students"
-                  [(ngModel)]="product.studentsNames"
+                  [(ngModel)]="product.studentsRef"
                   (onChange)="SomethingInTableChangedSelect(product.title1)"
                 ></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ getStudentNames(product?.students ?? []) }}
                 </p>
               </ng-template>
-            </p-cellEditor>
+            </p-cellEditor> -->
+            {{ getStudentNames(product?.studentsRef ?? []) }}
           </td>
           <td
             [pEditableColumnRowIndex]="product.title1"
@@ -663,7 +658,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.time?.toString()?.substring(0, 5) }}
+                {{ product?.time?.toString()?.substring(0, 5) || "" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -685,7 +680,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.progression_percentage + "%" }}
+                {{ (product?.progression_percentage || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -707,7 +702,7 @@
               </ng-template>
               <ng-template pTemplate="output">
                 <p class="text-truncate" style="max-width: 150px">
-                  {{ product?.notes }}
+                  {{ product?.notes || "" }}
                 </p>
               </ng-template>
             </p-cellEditor>
@@ -730,7 +725,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.presentation_clarity + "%" }}
+                {{ (product?.presentation_clarity || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -753,7 +748,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.work_quality + "%" }}
+                {{ (product?.work_quality || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -799,7 +794,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.companionship + "%" }}
+                {{ (product?.companionship || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -821,7 +816,7 @@
                 />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ product?.rating + "%" }}
+                {{ (product?.rating || "0") + "%" }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -877,7 +872,9 @@
 
         <!-- Teacher Name -->
         <p class="teacherName">
-          <strong>{{ getTeacherName(project.teacherid) }}</strong>
+          <strong *ngFor="let teacher of project.TeachersTable_projects">{{
+            teacher.teacherName
+          }}</strong>
         </p>
 
         <!-- Image -->
@@ -925,14 +922,12 @@
           <img
             [src]="
               removeAfterLastSlash(
-                selectedProject!.mediagallery![0].src.replace(
-                  'wix:image://v1/',
-                  'https://static.wixstatic.com/media/'
-                )
+                selectedProject
               )
-            "
-            alt="Project Media"
-          />
+              "
+              alt="Project Media"
+              />
+
         </div>
         <div class="rightSideMobile">
           <label class="selectedProjectNumber"
@@ -944,7 +939,10 @@
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
             />
             مشرف المشروع:
-            <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+            <span
+              *ngFor="let teacher of selectedProject.TeachersTable_projects"
+              >{{ teacher.teacherName }}</span
+            ></label
           >
           <label class="selectedProjectTeacher">
             <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
@@ -958,8 +956,8 @@
                 src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
               />فريق المشروع</label
             >
-            <span *ngFor="let studentN of selectedProject?.studentsNames">
-              {{ studentN }}
+            <span *ngFor="let student of selectedProject?.studentsRef">
+              {{ student.studentName }}
             </span>
           </div>
           <label
@@ -1213,7 +1211,12 @@
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ7TKHo1NrGHSRkso1dt1oE04qoPOGEKCiUA&s"
           />
           مشرف المشروع:
-          <span>{{ getTeacherName(selectedProject.teacherid) }}</span></label
+          <div   >
+            <span
+              *ngFor="let teacher of selectedProject.TeachersTable_projects"
+              >{{ teacher.teacherName }}</span
+            >
+          </div></label
         >
         <label class="selectedProjectTeacher">
           <img src="https://cdn-icons-png.flaticon.com/512/45/45962.png" />
@@ -1227,9 +1230,9 @@
               src="https://icons.veryicon.com/png/o/miscellaneous/site-icon-library/team-28.png"
             />فريق المشروع</label
           >
-          <span *ngFor="let studentN of selectedProject?.studentsNames">
-            {{ studentN }}
-          </span>
+           <span *ngFor="let student of selectedProject?.studentsRef">
+              {{ student.studentName }}
+            </span>
         </div>
         <label
           class="selectedProjectTeacher"
