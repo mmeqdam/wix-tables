@@ -4,7 +4,6 @@ import { Table, TableEditCompleteEvent } from 'primeng/table';
 import { Project } from 'src/Interfaces/project';
 import { School } from 'src/Interfaces/school';
 import { Teacher } from 'src/Interfaces/teacher';
-import { PROJECTS, stydents } from 'src/libs/consatns';
 
 interface column {
   value: string;
@@ -18,7 +17,7 @@ interface column {
 })
 export class AppComponent implements OnInit {
   title = 'wix-tables';
-  isLoading: boolean =  true;
+  isLoading: boolean = true;
   selectedProject: Project = {};
   projects: Project[] = [];
   students: any[] = [];
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit {
   errorHappened: boolean = false;
   multipleroles: boolean = false;
   teachers: Teacher[] = [];
-  allowedRoles = ['school', 'Suber Admin', 'teacher', 'Admin', 'students'];
+  allowedRoles = ['Schools', 'Suber Admin', 'Teachers', 'Admin', 'Owner'];
 
   // this is the columns that will be shown in the table
   selectedColumns: column[] = [
@@ -160,20 +159,7 @@ export class AppComponent implements OnInit {
     this.showSaveBtn = false;
     this.editedTitles = [];
   }
-  removeAfterLastSlash(Project: Project): string {
-
-    if (!Project.mediagallery ) {
-      return '';
-    }
-    if ( Project.mediagallery.length === 0) {
-      return '';
-    }
-
-    const url = Project?.mediagallery[0].src?.replace(
-      'wix:image://v1/',
-      'https://static.wixstatic.com/media/'
-    );
-    if (!url) return url; // Return the original URL if it's falsy
+  removeAfterLastSlash(url: string): string {
     const lastSlashIndex = url.lastIndexOf('/');
     if (lastSlashIndex !== -1) {
       return url.substring(0, lastSlashIndex);
@@ -188,7 +174,7 @@ export class AppComponent implements OnInit {
     }
   }
   SomethingInTableChanged(title1: number) {
-
+    console.log('changes');
 
     // Check if title1 is already in the editedTitles array
     if (title1 && !this.editedTitles.includes(title1)) {
@@ -196,54 +182,53 @@ export class AppComponent implements OnInit {
     }
   }
   SomethingInTableChangedSelect(title1: number) {
-    console.log('SomethingInTableChangedSelect ');
-    console.log('editedTitles ', this.editedTitles);
+    console.log('changes');
 
     // Check if title1 is already in the editedTitles array
     if (title1 && !this.editedTitles.includes(title1)) {
       this.editedTitles.push(title1); // Only push if title1 is not already in the array
     }
-    // // Iterate over editedTitles and apply the logic for each project
-    // this.editedTitles.forEach((title) => {
-    //   // Step 1: Find the project by its title (title1)
-    //   const project = this.projects.find((p) => p.title1 === title);
+    // Iterate over editedTitles and apply the logic for each project
+    this.editedTitles.forEach((title) => {
+      // Step 1: Find the project by its title (title1)
+      const project = this.projects.find((p) => p.title1 === title);
 
-    //   if (!project) {
-    //     console.warn(`Project with title ${title} not found`);
-    //     return;
-    //   }
+      if (!project) {
+        console.warn(`Project with title ${title} not found`);
+        return;
+      }
 
-    //   // Step 2: Initialize `students` if it is undefined
-    //   project.students = project.students ?? [];
+      // Step 2: Initialize `students` if it is undefined
+      project.students = project.students ?? [];
 
-    //   // Step 3: Find missing student names in `studentsNames`
-    //   const missingStudentNames = (project.studentsNames ?? []).filter(
-    //     (name) =>
-    //       !(project.students ?? []).some(
-    //         (student) => student.studentName === name
-    //       )
-    //   );
+      // Step 3: Find missing student names in `studentsNames`
+      const missingStudentNames = (project.studentsNames ?? []).filter(
+        (name) =>
+          !(project.students ?? []).some(
+            (student) => student.studentName === name
+          )
+      );
 
-    //   // Step 4: Find missing student objects in the global `students` array
-    //   const missingStudents = missingStudentNames.map((name) =>
-    //     this.students.find((student) => student.studentName === name)
-    //   );
+      // Step 4: Find missing student objects in the global `students` array
+      const missingStudents = missingStudentNames.map((name) =>
+        this.students.find((student) => student.studentName === name)
+      );
 
-    //   // Step 5: Append missing students to `project.students`
-    //   project.students.push(...missingStudents.filter((student) => student));
+      // Step 5: Append missing students to `project.students`
+      project.students.push(...missingStudents.filter((student) => student));
 
-    //   // Step 6: Ensure `students` only contains students from `studentsNames`
-    //   const updatedStudents = (project.studentsNames ?? [])
-    //     .map((name) => {
-    //       // Find the student object by studentName from the global `students` array
-    //       return this.students.find((student) => student.studentName === name);
-    //     })
-    //     .filter((student) => student !== undefined); // Remove any undefined students (if name doesn't match any student)
+      // Step 6: Ensure `students` only contains students from `studentsNames`
+      const updatedStudents = (project.studentsNames ?? [])
+        .map((name) => {
+          // Find the student object by studentName from the global `students` array
+          return this.students.find((student) => student.studentName === name);
+        })
+        .filter((student) => student !== undefined); // Remove any undefined students (if name doesn't match any student)
 
-    //   // Step 7: Overwrite `project.students` with the updated students list
-    //   project.students = updatedStudents;
-    // console.log(`Updated project with title ${title}:`, project);
-    // });
+      // Step 7: Overwrite `project.students` with the updated students list
+      project.students = updatedStudents;
+      console.log(`Updated project with title ${title}:`, project);
+    });
   }
   AddEntry() {
     this.isLoading = true;
@@ -263,24 +248,25 @@ export class AppComponent implements OnInit {
     );
   }
   get isTeacher() {
-    return this.roles?.some((role) => role?.title == 'teacher');
+    return this.roles?.some((role) => role?.title == 'Teachers');
   }
 
   get isSchool() {
-    return this.roles?.some((role) => role?.title == 'school');
+    return this.roles?.some((role) => role?.title == 'Schools');
   }
   get isStudent() {
-    return this.roles?.some((role) => role?.title == 'students');
+    return this.roles?.some((role) => role?.title == 'Students');
   }
 
   getStudentNames(students: any[]): string {
-    console.log(students)
     return students
       .map((x) => {
         // Check if x is an object and has a studentName property
-        return x.studentName;
-
+        if (typeof x === 'object' && x !== null && 'studentName' in x) {
+          return x.studentName;
+        }
         // If it's a string, return it directly
+        return x;
       })
       .join(',');
   }
@@ -363,12 +349,11 @@ export class AppComponent implements OnInit {
     }
     if (message?.projects) {
       this.projects = message.projects;
-      this.students = message.projects.map((project: Project)=>project.studentsRef);
       this.isLoading = false;
     }
-    // if (message?.students) {
-    //   this.students = message.students;
-    // }
+    if (message?.students) {
+      this.students = message.students;
+    }
     if (message?.schools) {
       this.schools = message.schools;
     }
