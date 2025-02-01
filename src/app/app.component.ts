@@ -303,7 +303,9 @@ export class AppComponent implements OnInit {
   SwitchVersion() {
     this.selectedProject = {};
     if (this.isStudent) {
-      return this.version = 1;
+      
+      this.version = 1;
+      return 
     }
     if (this.version == 1) {
       this.version = 2;
