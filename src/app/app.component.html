@@ -20,7 +20,7 @@
   <button (click)="SwitchVersion()" class="switchBtn">
     {{ version === 1 ? "الذهاب لجدول المشاريع" : "الرئيسية" }}
   </button>
-  <div *ngIf="version == 2" class="bg-transparent">
+  <div *ngIf="version == 2 && !isStudent" class="bg-transparent" >
     <p-table
       #dt
       [value]="projects"
